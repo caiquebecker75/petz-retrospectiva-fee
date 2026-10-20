@@ -1,4 +1,4 @@
-# Deck Petz · Retrospectiva e proposta de parceria em fee
+# Petz · Retrospectiva e proposta de parceria em fee
 
 Apresentação da 75 LAB publicada em https://projetos.75lab.com.br/petz-retrospectiva-fee/
 
