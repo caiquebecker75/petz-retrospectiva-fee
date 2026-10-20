@@ -1,6 +1,304 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-kit-deck data-cliente="Petz" data-logo-cliente="assets/01-logo-1791747187168.svg">
 <head>
+<style data-kit-deck-css="1.1.0">
+/* =====================================================================
+   KIT DE DECK 75 LAB · v1.1.0 (13/10/2026; 18/10/2026: transição, tela de peça e conceito)
+   Tirado do código dos decks feitos à mão que o Caique aprovou:
+   Parmalat Fit Hub (palco, corte de cinema, contador, abas, planta clicável,
+   cursor em dois tons, grão, lightbox) e Lactalis Food Service (cortina com
+   linha de varredura, cursor com rótulo, rota de capítulos).
+   O motor injeta este CSS no começo do <head> quando o deck tem
+   <html data-kit-deck>. Troque só os tokens --k-* pela marca do cliente.
+   Abaixo de 900 px quem manda é a base de celular da agência (deck-base).
+   ===================================================================== */
+:root{
+  --k-marca:#C0EE4E; --k-marca-2:#01A290; --k-marca-txt:#050505;
+  --k-tinta:#050505; --k-tinta-2:rgba(5,5,5,.62); --k-tinta-3:rgba(5,5,5,.38);
+  --k-papel:#F2F1E9; --k-papel-2:#E7E5DA; --k-escuro:#101013; --k-linha:rgba(5,5,5,.16);
+  --k-f-tit:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --k-f-txt:'Space Grotesk',system-ui,sans-serif;
+  --k-f-rot:'Space Mono',ui-monospace,Menlo,monospace;
+  --k-tit-caixa:uppercase; --k-raio:0px;
+  --k-e1:cubic-bezier(.19,1,.22,1); --k-e2:cubic-bezier(.76,0,.24,1); --k-e3:cubic-bezier(.34,1.56,.64,1);
+  --k-pad:88px;
+}
+*{box-sizing:border-box}
+html.k-js:not(.k-mob),html.k-js:not(.k-mob) body{height:100%;overflow:hidden;margin:0;background:#0b0b0d}
+body{margin:0;font-family:var(--k-f-txt);color:var(--k-tinta);-webkit-font-smoothing:antialiased}
+html.k-js:not(.k-mob) body.k-cur-on,html.k-js:not(.k-mob) body.k-cur-on button,html.k-js:not(.k-mob) body.k-cur-on a{cursor:none}
+img{max-width:100%}
+
+/* ---------- palco fixo 1600x900 (só a partir de 900 px) ---------- */
+html.k-js:not(.k-mob) #k-deck{position:fixed;inset:0;overflow:clip}
+html.k-js:not(.k-mob) #palco{position:absolute;left:50%;top:50%;width:1600px;height:900px;margin:-450px 0 0 -800px;transform-origin:center;overflow:clip;background:var(--k-papel)}
+html.k-js:not(.k-mob) .slide{position:absolute;inset:0;overflow:clip;visibility:hidden}
+html.k-js:not(.k-mob) .slide.on{visibility:visible;z-index:2}
+.slide{position:relative;padding:var(--k-pad) var(--k-pad) 96px;background:var(--k-papel);color:var(--k-tinta)}
+.slide.k-escuro{background:var(--k-escuro);color:var(--k-papel);--k-tinta-2:rgba(242,241,233,.72);--k-tinta-3:rgba(242,241,233,.45);--k-linha:rgba(242,241,233,.18)}
+.slide.k-cor{background:var(--k-marca);color:var(--k-marca-txt)}
+.slide.k-sangria{padding:0}
+
+/* transições (400 a 700 ms; cada tela escolhe com data-transicao) */
+html.k-js:not(.k-mob) .slide.k-sai{visibility:visible;z-index:1;animation:k-sai .62s var(--k-e2) forwards}
+@keyframes k-sai{to{transform:scale(.95);filter:blur(10px) brightness(.55);opacity:.15}}
+html.k-js:not(.k-mob) .slide.k-entra[data-transicao="corte"],html.k-js:not(.k-mob) .slide.k-entra:not([data-transicao]){animation:k-corte .7s var(--k-e2) both}
+@keyframes k-corte{from{clip-path:inset(0 0 100% 0);transform:scale(1.06)}to{clip-path:inset(0);transform:none}}
+html.k-js:not(.k-mob) .slide.k-entra[data-transicao="deslize"]{animation:k-deslize .6s var(--k-e1) both}
+html.k-js:not(.k-mob) .slide.k-entra.k-volta[data-transicao="deslize"]{animation-name:k-deslizeV}
+@keyframes k-deslize{from{opacity:0;transform:translate3d(60px,0,0)}to{opacity:1;transform:none}}
+@keyframes k-deslizeV{from{opacity:0;transform:translate3d(-60px,0,0)}to{opacity:1;transform:none}}
+html.k-js:not(.k-mob) .slide.k-entra[data-transicao="cortina"]{animation:k-cortina .7s var(--k-e2) both}
+html.k-js:not(.k-mob) .slide.k-entra.k-volta[data-transicao="cortina"]{animation-name:k-cortinaV}
+@keyframes k-cortina{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0)}}
+@keyframes k-cortinaV{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+html.k-js:not(.k-mob) .slide.k-entra[data-transicao="zoom"]{animation:k-zoom .65s var(--k-e1) both}
+@keyframes k-zoom{from{opacity:0;transform:scale(1.12);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+#k-varre{position:absolute;top:0;bottom:0;width:4px;left:100%;background:var(--k-marca);z-index:58;opacity:0;pointer-events:none}
+#k-varre.vai{animation:k-varre .7s var(--k-e2)}
+#k-varre.vai.volta{animation-name:k-varreV}
+@keyframes k-varre{0%{left:100%;opacity:1}99%{opacity:1}100%{left:0;opacity:0}}
+@keyframes k-varreV{0%{left:0;opacity:1}99%{opacity:1}100%{left:100%;opacity:0}}
+.k-cine{position:absolute;left:0;right:0;height:0;background:#050505;z-index:57;pointer-events:none;transition:height .32s var(--k-e2)}
+#k-cineT{top:0}#k-cineB{bottom:0}
+#palco.k-cortando .k-cine{height:78px}
+
+/* entrada dos elementos em sequência (stagger): data-a="" sobe, "e" esquerda, "d" direita, "z" escala */
+html.k-js:not(.k-mob) .slide [data-a]{opacity:0;transform:translateY(22px);filter:blur(4px);transition:opacity .6s var(--k-e1),transform .7s var(--k-e1),filter .6s var(--k-e1);transition-delay:calc(var(--d,0) * 70ms + 90ms)}
+html.k-js:not(.k-mob) .slide [data-a="e"]{transform:translateX(-30px)}
+html.k-js:not(.k-mob) .slide [data-a="d"]{transform:translateX(30px)}
+html.k-js:not(.k-mob) .slide [data-a="z"]{transform:scale(.92)}
+html.k-js:not(.k-mob) .slide.in [data-a]{opacity:1;transform:none;filter:none}
+.k-linha{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.k-linha>span{display:inline-block}
+html.k-js:not(.k-mob) .slide .k-linha>span{transform:translateY(110%);transition:transform .75s var(--k-e1);transition-delay:calc(var(--d,0) * 90ms + 60ms)}
+html.k-js:not(.k-mob) .slide.in .k-linha>span{transform:none}
+.k-traco{stroke-dasharray:var(--L,1400);stroke-dashoffset:var(--L,1400);transition:stroke-dashoffset 1.6s var(--k-e1)}
+.slide.in .k-traco,html.k-mob .k-traco{stroke-dashoffset:0}
+.k-kb{animation:k-kb 18s ease-out forwards;animation-play-state:paused;transform-origin:var(--o,50% 50%)}
+.slide.in .k-kb{animation-play-state:running}
+@keyframes k-kb{from{transform:scale(1.14)}to{transform:scale(1.01)}}
+
+/* ---------- tipografia ---------- */
+.k-rotulo{font-family:var(--k-f-rot);font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--k-tinta-2);display:flex;align-items:center;gap:12px;margin:0 0 18px}
+.k-rotulo b{color:var(--k-marca-2);font-weight:700}
+.k-escuro .k-rotulo b{color:var(--k-marca)}
+.k-rotulo i{width:34px;height:2px;background:currentColor;display:block}
+.k-mega,.k-titulo,.k-sub{font-family:var(--k-f-tit);font-weight:900;text-transform:var(--k-tit-caixa);letter-spacing:-.025em;line-height:1.04;margin:0}
+.k-mega{font-size:112px;line-height:.98}
+.k-titulo{font-size:76px}
+.k-sub{font-size:44px}
+.k-mega em,.k-titulo em,.k-sub em{font-style:normal;color:var(--k-marca-2)}
+.k-escuro .k-mega em,.k-escuro .k-titulo em,.k-escuro .k-sub em,.k-capa .k-mega em{color:var(--k-marca)}
+.k-mega s,.k-titulo s{text-decoration:none;opacity:.38}
+.k-apoio{font-size:20px;line-height:1.5;color:var(--k-tinta-2);max-width:560px;margin:22px 0 0}
+.k-num{font-family:var(--k-f-tit);font-weight:900;font-size:168px;line-height:.86;letter-spacing:-.04em;font-variant-numeric:tabular-nums;display:inline-block}
+.k-num small{font-size:.38em;letter-spacing:0;margin-left:.06em}
+.k-num-leg{font-size:18px;line-height:1.45;color:var(--k-tinta-2);max-width:360px;margin-top:10px}
+.k-fonte{position:absolute;left:var(--k-pad);right:var(--k-pad);bottom:44px;font-family:var(--k-f-rot);font-size:11px;letter-spacing:.06em;color:var(--k-tinta-3);margin:0}
+.k-dados{display:grid;grid-template-columns:auto 1fr;gap:10px 22px;margin:0;font-size:15px}
+.k-dados dt{font-family:var(--k-f-rot);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--k-tinta-3)}
+.k-dados dd{margin:0}
+
+/* botões (cantos retos, borda 2px, seta) */
+.k-btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 26px;border:2px solid currentColor;border-radius:var(--k-raio);font-family:var(--k-f-rot);font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:inherit;background:none;text-decoration:none;transition:transform .25s var(--k-e1),background .25s,color .25s}
+.k-btn:hover{transform:translate(-2px,-2px)}
+.k-btn.k-cheio{background:var(--k-marca);border-color:var(--k-marca);color:var(--k-marca-txt)}
+.k-btn.k-zap{background:#25D366;border-color:#25D366;color:#06301a}
+.k-btn::after{content:"→";font-family:var(--k-f-txt);font-size:18px}
+
+/* ---------- chrome: cabeçalho com 2 logos, rodapé com capítulo, contador, progresso ---------- */
+.k-ui{position:absolute;z-index:50;display:flex;align-items:center;gap:16px;color:var(--k-tinta);transition:color .4s}
+#palco.k-ui-claro .k-ui{color:#fff}
+#k-topo{left:44px;right:44px;top:26px;height:40px}
+#k-topo img{height:30px;width:auto;display:block}
+#k-topo .k-x{width:1px;height:24px;background:currentColor;opacity:.3}
+#k-topo .k-sp{flex:1}
+#palco.k-na-capa #k-topo{opacity:0;pointer-events:none}
+#k-topo .k-cap{font-family:var(--k-f-rot);font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+#k-pe{left:44px;right:40px;bottom:22px;height:40px}
+#k-pe .k-sp{flex:1}
+#k-cont{font-family:var(--k-f-rot);font-weight:700;font-size:13px;letter-spacing:.14em;min-width:70px;text-align:center}
+#k-cont b{color:inherit}
+.k-nb{width:44px;height:44px;display:grid;place-items:center;border:2px solid currentColor;border-radius:var(--k-raio);background:none;color:inherit;opacity:.5;transition:opacity .2s,background .2s,transform .2s}
+.k-nb:hover{opacity:1;background:var(--k-marca);color:var(--k-marca-txt);border-color:var(--k-marca);transform:translate(-2px,-2px)}
+.k-nb svg{width:15px;height:15px;stroke:currentColor;stroke-width:2.4;fill:none}
+#k-prog{position:absolute;left:0;top:0;height:4px;background:var(--k-marca);z-index:59;transition:width .6s var(--k-e1)}
+#k-trilha{display:flex;gap:4px}
+#k-trilha button{width:22px;height:44px;display:grid;place-items:center;background:none;border:0;color:inherit;padding:0}
+#k-trilha i{display:block;width:100%;height:2px;background:currentColor;opacity:.22;transition:opacity .3s}
+#k-trilha button.on i{opacity:1;height:3px;background:var(--k-marca-2)}
+#palco.k-ui-claro #k-trilha button.on i{background:var(--k-marca)}
+
+/* índice (tecla M) */
+#k-indice{position:absolute;inset:0;z-index:70;background:rgba(10,10,12,.97);color:#fff;opacity:0;pointer-events:none;transition:opacity .35s;padding:80px 72px;display:flex;flex-direction:column;gap:24px}
+#k-indice.on{opacity:1;pointer-events:auto}
+#k-indice ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+#k-indice button{width:100%;min-height:84px;text-align:left;padding:14px 16px;background:#17171c;border:0;color:#fff;display:flex;flex-direction:column;gap:8px;font:600 15px var(--k-f-txt)}
+#k-indice button em{font:700 12px var(--k-f-rot);font-style:normal;color:var(--k-marca)}
+#k-indice button.on{background:var(--k-marca);color:var(--k-marca-txt)}
+#k-indice button.on em{color:inherit}
+
+/* grão de filme */
+#k-grao{position:absolute;inset:-40%;z-index:56;pointer-events:none;opacity:.06;mix-blend-mode:multiply;animation:k-grao 1.1s steps(6) infinite;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+#palco.k-ui-claro #k-grao{mix-blend-mode:screen;filter:invert(1);opacity:.07}
+@keyframes k-grao{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-5%,-1%)}80%{transform:translate(4%,3%)}100%{transform:translate(0,0)}}
+
+/* cursor em dois tons (anel escuro + contorno claro, ponto com halo) com rótulo */
+#k-cur,#k-dot{position:fixed;left:0;top:0;pointer-events:none;z-index:9999;border-radius:50%;opacity:0;transition:opacity .3s}
+body.k-cur-on #k-cur,body.k-cur-on #k-dot{opacity:1}
+#k-cur{width:36px;height:36px;margin:-18px 0 0 -18px;border:2px solid var(--k-tinta);box-shadow:0 0 0 1.5px rgba(255,255,255,.92),inset 0 0 0 1.5px rgba(255,255,255,.92);display:grid;place-items:center;transition:width .3s var(--k-e1),height .3s var(--k-e1),margin .3s var(--k-e1),background .3s,opacity .3s}
+#k-cur span{font:700 9px var(--k-f-rot);letter-spacing:.14em;text-transform:uppercase;color:var(--k-marca-txt);opacity:0;transition:opacity .2s}
+#k-dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--k-marca-2);box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 0 3.5px rgba(5,5,5,.5)}
+body.k-hov #k-cur{width:62px;height:62px;margin:-31px 0 0 -31px;background:color-mix(in srgb,var(--k-marca) 88%,transparent);border-color:var(--k-tinta)}
+body.k-hov.k-rot #k-cur{width:88px;height:88px;margin:-44px 0 0 -44px}
+body.k-hov.k-rot #k-cur span{opacity:1}
+@media (hover:none),(pointer:coarse){#k-cur,#k-dot{display:none}}
+
+/* lightbox: toda imagem de conteúdo amplia */
+#k-lb{position:fixed;inset:0;z-index:9000;background:rgba(6,6,8,.95);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
+#k-lb.on{opacity:1;pointer-events:auto}
+#k-lb img{max-width:92vw;max-height:86vh;transform:scale(.95);transition:transform .6s var(--k-e1)}
+#k-lb.on img{transform:none}
+#k-lb button{position:fixed;width:52px;height:52px;display:grid;place-items:center;border:2px solid rgba(255,255,255,.35);background:none;color:#fff;font-size:22px}
+#k-lbX{right:28px;top:28px}#k-lbP{left:28px;top:50%}#k-lbN{right:28px;top:50%}
+
+/* ---------- COMPONENTES ---------- */
+/* capa com 2 logos e KV */
+.slide.k-capa{padding:0;color:#fff;background:#0b0b0d}
+.k-capa .k-capa-kv{position:absolute;inset:0;overflow:hidden}
+.k-capa .k-capa-kv img,.k-capa .k-capa-kv video{width:100%;height:100%;object-fit:cover;display:block}
+.k-capa .k-capa-kv::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(5,5,5,.78) 0%,rgba(5,5,5,.45) 46%,rgba(5,5,5,0) 74%)}
+.k-capa .k-capa-txt{position:absolute;left:var(--k-pad);bottom:120px;max-width:820px;z-index:2}
+.k-capa .k-capa-logos{position:absolute;left:var(--k-pad);top:72px;display:flex;align-items:center;gap:22px;z-index:2}
+.k-capa .k-capa-logos img{height:54px;width:auto;display:block}
+.k-capa .k-capa-logos i{width:2px;height:40px;background:rgba(255,255,255,.5)}
+.k-capa .k-apoio{color:rgba(255,255,255,.82)}
+.k-capa .k-rotulo{color:rgba(255,255,255,.7)}
+
+/* número herói */
+.k-heroi-num{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:end}
+
+/* gráfico com abas */
+.k-grafico{display:flex;flex-direction:column;gap:26px}
+.k-abas{display:flex;gap:0;border:2px solid var(--k-linha);align-self:flex-start}
+.k-abas button{min-height:46px;padding:0 22px;border:0;background:none;color:inherit;font:700 13px var(--k-f-rot);letter-spacing:.14em;text-transform:uppercase;opacity:.6;transition:background .25s,opacity .25s}
+.k-abas button.on{background:var(--k-tinta);color:var(--k-papel);opacity:1}
+.k-escuro .k-abas button.on{background:var(--k-marca);color:var(--k-marca-txt)}
+.k-barras{display:flex;flex-direction:column;gap:16px}
+.k-barra{display:grid;grid-template-columns:220px 1fr 96px;align-items:center;gap:18px}
+.k-barra .k-b-rot{font-size:17px;font-weight:600}
+.k-barra .k-b-trilho{height:34px;background:var(--k-papel-2);position:relative;overflow:hidden}
+.k-escuro .k-barra .k-b-trilho{background:rgba(255,255,255,.08)}
+.k-barra .k-b-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--k-marca-2);transition:width 1s var(--k-e1)}
+.k-barra.k-dest .k-b-fill{background:var(--k-marca)}
+.k-barra .k-b-val{font-family:var(--k-f-tit);font-weight:900;font-size:40px;text-align:right;font-variant-numeric:tabular-nums}
+.k-grafico .k-g-nota{font-size:18px;line-height:1.5;color:var(--k-tinta-2);max-width:620px;margin:0;transition:opacity .3s}
+.k-grafico .k-g-nota.h{opacity:0}
+
+/* imagem com pontos clicáveis (hotspots) */
+.k-pontos{position:relative}
+.k-pontos>img{display:block;width:100%;height:100%;object-fit:contain}
+.k-ponto{position:absolute;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:0;background:var(--k-marca);color:var(--k-marca-txt);font:700 15px var(--k-f-rot);display:grid;place-items:center;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 8px 20px rgba(0,0,0,.25);z-index:3}
+.k-ponto::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--k-marca);animation:k-pulso 2.2s ease-out infinite}
+.k-ponto.on{background:var(--k-tinta);color:#fff}
+@keyframes k-pulso{0%{transform:scale(.7);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+.k-pontos-info{transition:opacity .3s}
+.k-pontos-info.h{opacity:0}
+.k-pontos-info h3{font-family:var(--k-f-tit);font-weight:900;text-transform:var(--k-tit-caixa);font-size:44px;line-height:1.02;margin:0 0 12px}
+.k-pontos-info p{font-size:18px;line-height:1.5;color:var(--k-tinta-2);margin:0}
+.k-pontos-lista{display:flex;flex-direction:column;gap:8px;margin-top:22px}
+.k-pontos-lista button{display:flex;gap:14px;align-items:center;min-height:44px;padding:0 14px;border:2px solid var(--k-linha);background:none;color:inherit;font:600 15px var(--k-f-txt);text-align:left}
+.k-pontos-lista button b{font:700 12px var(--k-f-rot);color:var(--k-marca-2)}
+.k-pontos-lista button.on{border-color:var(--k-tinta);background:var(--k-tinta);color:var(--k-papel)}
+.k-pontos-lista button.on b{color:var(--k-marca)}
+
+/* antes e depois arrastável */
+.k-ad{position:relative;overflow:hidden;--pos:50%;user-select:none;touch-action:pan-y}
+.k-ad img{display:block;width:100%;height:100%;object-fit:cover}
+.k-ad .k-ad-depois{position:absolute;inset:0;clip-path:inset(0 0 0 var(--pos))}
+.k-ad .k-ad-linha{position:absolute;top:0;bottom:0;left:var(--pos);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.2);pointer-events:none;z-index:2}
+.k-ad .k-ad-linha::after{content:"⟷";position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:var(--k-marca);color:var(--k-marca-txt);display:grid;place-items:center;font-size:22px;box-shadow:0 0 0 3px #fff}
+.k-ad input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;z-index:3}
+.k-ad-rotulos{display:flex;justify-content:space-between;margin-top:12px;font:700 12px var(--k-f-rot);letter-spacing:.16em;text-transform:uppercase;color:var(--k-tinta-2)}
+
+/* encerramento com QR e WhatsApp */
+.k-fim{display:grid;grid-template-columns:1.15fr .85fr;gap:72px;align-items:center}
+.k-fim .k-qr{width:220px;height:220px;background:#fff;padding:14px;display:grid;place-items:center}
+.k-fim .k-qr svg,.k-fim .k-qr img{width:100%;height:100%;display:block}
+.k-fim .k-qr-leg{font:700 12px var(--k-f-rot);letter-spacing:.14em;text-transform:uppercase;color:var(--k-tinta-2);margin-top:12px}
+.k-fim .k-fim-logos{display:flex;align-items:center;gap:22px;margin-bottom:34px}
+.k-fim .k-fim-logos img{height:44px;width:auto}
+
+/* utilidades de composição */
+.k-grade{display:grid;gap:48px;height:100%}
+.k-2col{grid-template-columns:1fr 1fr}
+.k-60{grid-template-columns:1.35fr 1fr}
+.k-40{grid-template-columns:1fr 1.35fr}
+.k-centro{align-items:center}
+.k-sangria-img{position:absolute;top:0;bottom:0;right:0;width:54%;overflow:hidden}
+.k-sangria-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* tela de transição: divisor de capítulo (Caique, 18/10/2026: "considere tela de transição nas apresentações") */
+.slide.k-divisor{display:flex;flex-direction:column;justify-content:center;background:var(--k-marca);color:var(--k-marca-txt)}
+.slide.k-divisor.k-escuro{background:var(--k-escuro);color:var(--k-papel)}
+.slide.k-divisor.k-papel{background:var(--k-papel);color:var(--k-tinta)}
+.k-divisor .k-div-num{position:absolute;right:var(--k-pad);bottom:64px;font-family:var(--k-f-tit);font-weight:900;font-size:300px;line-height:.8;letter-spacing:-.05em;opacity:.16;font-variant-numeric:tabular-nums}
+.k-divisor .k-div-cap{display:flex;align-items:center;gap:14px;margin:0 0 24px;font-family:var(--k-f-rot);font-weight:700;font-size:14px;letter-spacing:.24em;text-transform:uppercase}
+.k-divisor .k-div-cap i{display:block;width:56px;height:2px;background:currentColor}
+.k-divisor .k-mega{max-width:1120px}
+.k-divisor .k-div-ponte{max-width:780px;margin:28px 0 0;font-size:24px;line-height:1.45;opacity:.82}
+.k-divisor .k-div-trilha{display:flex;flex-wrap:wrap;gap:10px;margin-top:56px}
+.k-divisor .k-div-trilha span{padding:10px 14px;border:2px solid currentColor;font:700 12px var(--k-f-rot);letter-spacing:.16em;text-transform:uppercase;opacity:.38}
+.k-divisor .k-div-trilha span.on{opacity:1;border-width:3px}
+
+/* tela de peça: uma por peça sugerida, foto na vida real + recorte em fundo neutro + o que é, como funciona, racional e
+   benefícios com ícones (Caique, 18/10/2026) */
+.k-peca{display:grid;grid-template-columns:1.08fr .92fr;gap:44px;height:100%;align-items:stretch}
+.k-peca-fotos{display:grid;grid-template-columns:1.55fr 1fr;gap:14px;min-height:0}
+.k-peca-fotos figure{position:relative;margin:0;overflow:hidden;background:var(--k-papel-2)}
+.k-peca-fotos img{display:block;width:100%;height:100%;object-fit:cover}
+.k-peca-fotos .k-peca-recorte{display:grid;place-items:center;background:#fff}
+.k-peca-fotos .k-peca-recorte img{object-fit:contain;padding:18px}
+.k-peca-txt{display:flex;flex-direction:column;gap:10px;min-height:0}
+.k-peca-txt .k-sub{margin:0 0 6px}
+.k-peca-bloco{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;padding:12px 0 0;border-top:2px solid var(--k-linha)}
+.k-peca-bloco svg{width:32px;height:32px;fill:none;stroke:var(--k-marca-2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.k-escuro .k-peca-bloco svg{stroke:var(--k-marca)}
+.k-peca-bloco h4{margin:0 0 4px;font:700 12px var(--k-f-rot);letter-spacing:.18em;text-transform:uppercase;color:var(--k-tinta-2)}
+.k-peca-bloco p{margin:0;font-size:16px;line-height:1.45}
+.k-peca-benef{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.k-peca-benef div{padding:10px 12px;background:var(--k-papel-2)}
+.k-escuro .k-peca-benef div{background:rgba(255,255,255,.07)}
+.k-peca-benef b{display:block;margin-bottom:4px;font:700 11px var(--k-f-rot);letter-spacing:.16em;text-transform:uppercase;color:var(--k-marca-2)}
+.k-peca-benef span{font-size:14px;line-height:1.4}
+
+/* conceito explicado (One Shot, On Timing, Códice, ClickLab...): o que é, como funciona e benefício, com fluxo de ícones */
+.k-conceito{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.k-conceito>div{padding:22px 22px 24px;border-top:4px solid var(--k-marca-2)}
+.k-escuro .k-conceito>div{border-top-color:var(--k-marca)}
+.k-conceito h4{margin:0 0 8px;font:700 12px var(--k-f-rot);letter-spacing:.18em;text-transform:uppercase;color:var(--k-tinta-2)}
+.k-conceito p{margin:0;font-size:17px;line-height:1.45}
+.k-fluxo{display:flex;align-items:center;gap:0;margin:26px 0 0}
+.k-fluxo>span{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:120px;font:700 11px var(--k-f-rot);letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.k-fluxo>span svg{width:46px;height:46px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.k-fluxo>i{flex:1;height:2px;min-width:40px;background:currentColor;opacity:.35;position:relative}
+.k-fluxo>i::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left-color:currentColor}
+
+@media (prefers-reduced-motion:reduce){
+  html.k-js .slide [data-a],html.k-js .slide .k-linha>span{transition:none!important;opacity:1!important;transform:none!important;filter:none!important}
+  .slide,.k-kb,#k-grao,.k-ponto::before{animation:none!important}
+}
+@media print{
+  html,body{height:auto!important;overflow:visible!important}
+  #k-deck,#palco{position:static!important;transform:none!important;margin:0!important;height:auto!important}
+  .slide{position:relative!important;visibility:visible!important;width:1600px;height:900px;page-break-after:always;animation:none!important}
+  .slide [data-a],.slide .k-linha>span{opacity:1!important;transform:none!important;filter:none!important}
+  .k-ui,#k-prog,#k-cur,#k-dot,#k-grao,#k-indice,#k-lb,.k-cine,#k-varre{display:none!important}
+}
+</style>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>75 LAB × Petz · Retrospectiva e proposta de parceria</title>
@@ -545,9 +843,8 @@ body.mob .n8{padding-right:22px}body.mob .n8 h2{font-size:32px!important}
 body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 .n12 .gt .row{margin-top:18px}.n12 .mk{margin-top:36px}
 
-.n4 .lgo .nm{display:none}body.mob .n4 .lgo .nm{display:block}
-
 </style>
+<style id="v11fix">@media (min-width:901px){#k-ind,#k-ant,#k-prox{display:none!important}#nav{display:flex!important;flex-direction:column;left:auto;right:8px;top:50%;bottom:auto;transform:translateY(-50%);border-radius:22px;padding:8px 6px;gap:6px}#nav .rt{display:none}}.s9 .fonte,.s12 .fonte{display:none}</style>
 </head>
 <body>
 <div id="pg"></div>
@@ -556,8 +853,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 
 <!-- 1 CAPA -->
 <section class="slide s1 dk on" data-t="Capa">
- <div class="bgimg"><img src="assets/01-1792504687039-imagem.png" data-img="kv" alt="Cliente e atendente conversam em corredor amplo de uma loja pet, com um golden retriever" data-zoom></div>
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Retrospectiva e parceria</span></div>
+ <div class="bgimg"><img src="assets/02-1792504687039-imagem.png" data-img="kv" alt="Cliente e atendente conversam em corredor amplo de uma loja pet, com um golden retriever" data-zoom></div>
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Retrospectiva e parceria</span></div>
  <div class="pan">
   <span class="k rv" style="--i:0;color:var(--yellow)">Petz × 75 LAB</span>
   <h1 class="rv" style="--i:1">O maior varejo pet do Brasil precisa de <em>execução do mesmo tamanho.</em></h1>
@@ -568,8 +865,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 2 QUEM SOMOS -->
-<section data-molde="metade-foto-cheia" class="slide k-sangria k-2col k-40 s2 n2" data-t="Quem somos">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
+<section data-molde="metade-foto-cheia" class="slide s2 n2" data-t="Quem somos">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
 
  <div class="l">
   <span class="k rv" style="--i:0">Quem somos</span>
@@ -588,8 +885,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 3 DIFERENCIAL -->
-<section data-molde="faixa-logos-pilares" class="slide k-grade s3 n3" data-t="Diferencial">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
+<section data-molde="faixa-logos-pilares" class="slide s3 n3" data-t="Diferencial">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
 
  <span class="k rv" style="--i:0">Nosso diferencial</span>
  <h2 class="rv k-titulo" style="--i:1">Quem desenha a peça já aprovou, instalou e cobrou peça igual.</h2>
@@ -618,8 +915,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 4 PET -->
-<section data-molde="abas-verticais-numero" class="slide k-grafico s4 n4" data-t="Pet">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
+<section data-molde="abas-verticais-numero" class="slide s4 n4" data-t="Pet">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
 
  <span class="k rv" style="--i:0">Presença no pet</span>
  <h2 class="rv k-titulo" style="--i:1">No pet a gente já tem casa: ração, petisco, saúde animal e varejo.</h2>
@@ -638,7 +935,7 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 
 <!-- DIV 1 -->
 <section class="slide k-divisor dv blue dk" data-titulo="Nossa história com a Petz" data-capitulo="2" data-t="Capítulo 2">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 02</span></div>
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 02</span></div>
  <div class="big">02</div>
  <span class="k rv" style="--i:0">Capítulo 02</span>
  <h2 class="rv" style="--i:1">Nossa história com a Petz.</h2>
@@ -648,8 +945,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 5 HISTÓRIA -->
-<section data-molde="foto-alta-esquerda-lista" class="slide k-sangria k-40 s5 n5" data-t="Projetos">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">02 · História juntos</span></div>
+<section data-molde="foto-alta-esquerda-lista" class="slide s5 n5" data-t="Projetos">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">02 · História juntos</span></div>
 
  <div class="ph"><img data-img="foto" src="assets/11-foto-outra-1-1792504453077.jpg" alt="Fachada amarela de uma loja Petz com letreiro azul" data-zoom><div class="num k-mega rv" style="--i:0"><span data-conta="8">8</span></div></div>
  <div class="rt">
@@ -662,8 +959,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 6 VIDAS -->
-<section data-molde="tela-cheia-titulo-sobreposto" class="slide k-cheio k-escuro s6 n6 dk" data-t="Projeto Vidas">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">02 · História juntos</span></div>
+<section data-molde="tela-cheia-titulo-sobreposto" class="slide s6 n6 dk" data-t="Projeto Vidas">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">02 · História juntos</span></div>
 
  <img data-img="foto" class="fullbg" src="assets/12-foto-outra-7-1792504461146.jpg" alt="Loja Petz com fachada azul e amarela e rampa de acesso" data-zoom>
  <div class="veil"></div>
@@ -682,7 +979,7 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 
 <!-- DIV 2 -->
 <section class="slide k-divisor dv yel" data-titulo="O momento da Petz" data-capitulo="3" data-t="Capítulo 3">
- <div class="hdr"><div class="lg"><img src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 03</span></div>
+ <div class="hdr"><div class="lg"><img src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 03</span></div>
  <div class="big">03</div>
  <span class="k rv" style="--i:0;color:var(--navy)">Capítulo 03</span>
  <h2 class="rv" style="--i:1">O momento da Petz.</h2>
@@ -692,8 +989,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 7 MOMENTO -->
-<section data-molde="numero-heroi-gigante" class="slide k-heroi-num s7 n7" data-t="Momento">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">03 · Momento</span></div>
+<section data-molde="numero-heroi-gigante" class="slide s7 n7" data-t="Momento">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">03 · Momento</span></div>
 
  <div class="hero">
   <span class="k rv" style="--i:0">Cliente estratégico</span>
@@ -711,8 +1008,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 8 LEITURA -->
-<section data-molde="antes-depois" class="slide k-ad s8 n8" data-t="Leitura">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">03 · Momento</span></div>
+<section data-molde="antes-depois" class="slide s8 n8" data-t="Leitura">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">03 · Momento</span></div>
 
  <img data-img="foto" class="rim8" src="assets/14-foto-outra-6-1792504459797.jpg" alt="Entrada de loja Petz com arco azul e fachada amarela" data-zoom>
  <span class="k rv" style="--i:0">Nossa leitura</span>
@@ -726,7 +1023,7 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 
 <!-- DIV 3 -->
 <section class="slide k-divisor dv blue dk" data-titulo="A parceria em fee" data-capitulo="4" data-t="Capítulo 4">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 04</span></div>
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 04</span></div>
  <div class="big">04</div>
  <span class="k rv" style="--i:0">Capítulo 04</span>
  <h2 class="rv" style="--i:1">A parceria em fee.</h2>
@@ -736,8 +1033,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 9 FEE -->
-<section data-molde="grafico-abas" class="slide k-grafico s9 n9" data-t="Valor em fee">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+<section data-molde="grafico-abas" class="slide s9 n9" data-t="Valor em fee">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
  <span class="k rv" style="--i:0">Como o valor vira fee</span>
  <h2 class="rv k-titulo" style="--i:1">R$ 72.517,50 podem virar 6 meses de time 75 LAB dentro da Petz.</h2>
  <div class="tabs" data-k="grafico" style="margin-top:22px"><button class="on" data-tab="1">Valor mês a mês</button><button data-tab="2">O que chega</button></div>
@@ -776,8 +1073,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 10 ESCOPO -->
-<section data-molde="foto-alta-esquerda-comparativo" class="slide k-sangria k-60 s10 n10" data-t="Escopo">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+<section data-molde="foto-alta-esquerda-comparativo" class="slide s10 n10" data-t="Escopo">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
 
  <div class="ph2"><img data-img="foto" src="assets/15-foto-outra-4-1792504457218.jpg" alt="Loja Petz com fachada amarela e estrutura azul" data-zoom></div>
  <div class="rt2">
@@ -801,8 +1098,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 11 RASTREAMENTO -->
-<section data-molde="fluxo-horizontal-abas" class="slide k-conceito k-fluxo s11 n11" data-t="Rastreamento">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+<section data-molde="fluxo-horizontal-abas" class="slide s11 n11" data-t="Rastreamento">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
 
  <span class="k rv" style="--i:0">Plano de rastreamento 75 LAB</span>
  <h2 class="rv k-titulo" style="--i:1">Cada peça com prova de instalação e acompanhamento ao vivo.</h2>
@@ -829,8 +1126,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 12 CRONOGRAMA -->
-<section data-molde="linha-do-tempo" class="slide k-linha s12 n12" data-t="Cronograma">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+<section data-molde="linha-do-tempo" class="slide s12 n12" data-t="Cronograma">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
  <span class="k rv" style="--i:0">Cronograma de 6 meses</span>
  <h2 class="rv k-titulo" style="--i:1">Em 30 dias a Petz já tem calendário, pauta e as primeiras lojas de prova.</h2>
  <div class="gt">
@@ -847,8 +1144,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 13 KPIs -->
-<section data-molde="numero-heroi-lista" class="slide k-heroi-num k-pontos s13 n13" data-t="Indicadores">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+<section data-molde="numero-heroi-lista" class="slide s13 n13" data-t="Indicadores">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
 
  <div class="khero"><div class="num k-mega rv" style="--i:0"><span data-conta="5">5</span></div><span class="k rv" style="--i:1">indicadores</span><div class="kn rv" style="--i:2">Metas: a combinar até o fim do mês 1.</div></div>
  <div class="klist" data-k="pontos">
@@ -860,8 +1157,8 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 </section>
 
 <!-- 14 PRÓXIMOS -->
-<section data-molde="foto-direita-trilha" class="slide k-cheio k-cor s14 n14" data-t="Próximos passos">
- <div class="hdr"><div class="lg"><img src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+<section data-molde="foto-direita-trilha" class="slide s14 n14" data-t="Próximos passos">
+ <div class="hdr"><div class="lg"><img src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
 
  <img data-img="foto" class="rfull" src="assets/16-foto-outra-8-1792504462443.jpg" alt="Loja Petz com cobertura amarela e painel vazado" data-zoom>
  <div class="lc">
@@ -878,7 +1175,7 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 
 <!-- 15 INSTITUCIONAL -->
 <section class="slide s15 dk" data-t="Institucional">
- <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Fale com a gente</span></div>
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/01-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Fale com a gente</span></div>
  <div class="cols">
   <div>
    <span class="k rv" style="--i:0">Ideia boa é a que acontece</span>
@@ -935,7 +1232,311 @@ if(mob()){var io=new IntersectionObserver(function(es){es.forEach(function(e){if
 <div id="painel-roteiro" data-modo-apresentador hidden style="position:fixed;left:16px;right:16px;bottom:16px;max-height:38vh;overflow:auto;z-index:99999;background:rgba(17,17,17,.94);color:#f4f4f0;font:16px/1.5 'Space Grotesk',Arial,sans-serif;padding:16px 20px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.35)"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:6px"><b id="painel-roteiro-t" style="font:700 13px 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#C0EE4E">Roteiro</b><button type="button" onclick="document.getElementById('painel-roteiro').hidden=true" aria-label="Fechar roteiro" style="min-width:44px;min-height:44px;background:none;border:1px solid #555;color:#fff;border-radius:8px;cursor:pointer">×</button></div><div id="painel-roteiro-x"></div></div>
 <button type="button" id="botao-roteiro" aria-label="Abrir o roteiro de fala" style="position:fixed;right:16px;top:16px;z-index:99998;min-width:44px;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid rgba(0,0,0,.15);background:rgba(255,255,255,.85);font:600 13px 'Space Grotesk',Arial,sans-serif;cursor:pointer;opacity:.55">Roteiro</button>
 <script>(function(){var P=document.getElementById('painel-roteiro'),X=document.getElementById('painel-roteiro-x'),T=document.getElementById('painel-roteiro-t');function atual(){var s=[].slice.call(document.querySelectorAll('.slide, section.tela, [data-slide]'));var v=s.filter(function(e){var c=getComputedStyle(e),r=e.getBoundingClientRect();return c.display!=='none'&&c.visibility!=='hidden'&&parseFloat(c.opacity||'1')>.3&&r.bottom>0&&r.top<innerHeight})[0];return {s:v,i:s.indexOf(v)}}function abrir(){var a=atual();if(!a.s)return;var r=a.s.querySelector('.roteiro');X.textContent=r?r.textContent.replace(/\s+/g,' ').trim():'Sem roteiro nesta tela.';T.textContent='Roteiro · tela '+(a.i+1);P.hidden=false}document.getElementById('botao-roteiro').onclick=function(){P.hidden?abrir():P.hidden=true};addEventListener('keydown',function(e){if((e.key==='r'||e.key==='R')&&!e.metaKey&&!e.ctrlKey){P.hidden?abrir():P.hidden=true}else if(!P.hidden&&/Arrow|Page| /.test(e.key)){setTimeout(abrir,60)}});})();</script>
-<script>(function(){[].forEach.call(document.querySelectorAll('[data-tg]'),function(e){e.addEventListener('click',function(ev){if(ev.target.closest('a,img'))return;e.classList.toggle('open')})})})();</script><style data-base-deck="1.0.0">
+<script>(function(){[].forEach.call(document.querySelectorAll('[data-tg]'),function(e){e.addEventListener('click',function(ev){if(ev.target.closest('a,img'))return;e.classList.toggle('open')})})})();</script><script data-kit-deck-js="1.1.0">
+/* =====================================================================
+   KIT DE DECK 75 LAB · v1.0.0 (13/10/2026) · motor + componentes
+   Origem: código dos decks Parmalat Fit Hub e Lactalis Food Service.
+   O motor da agência injeta este arquivo antes do </body> quando o deck tem
+   <html data-kit-deck>. O designer escreve só a marcação (ver README.md).
+   Abaixo de 900 px o kit não escala nem prende a rolagem: a base de celular
+   (deck-base) assume. API: window.KIT.ir(n), KIT.atual, KIT.aoEntrar(n, fn).
+   ===================================================================== */
+(function () {
+  'use strict';
+  if (window.KIT) return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  var H = document.documentElement;
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MOB = Math.min(innerWidth, screen.width || innerWidth) < 900 || H.classList.contains('mob') || (document.body && document.body.classList.contains('mob'));
+  H.classList.add('k-js');
+  if (MOB) H.classList.add('k-mob');
+
+  var slides = $$('.slide');
+  var N = slides.length;
+  if (!N) return;
+
+  /* ---------- palco ---------- */
+  var palco = $('#palco');
+  if (!palco) { palco = slides[0].parentElement; palco.id = 'palco'; }
+  if (!$('#k-deck')) { var dk = document.createElement('div'); dk.id = 'k-deck'; palco.parentNode.insertBefore(dk, palco); dk.appendChild(palco); }
+  function fit() {
+    if (MOB) { palco.style.transform = ''; return; }
+    var k = Math.min(innerWidth / 1600, innerHeight / 900);
+    palco.style.transform = 'scale(' + (k > 0 ? k : 1) + ')';
+  }
+  addEventListener('resize', function () {
+    var m = Math.min(innerWidth, screen.width || innerWidth) < 900;
+    if (m !== MOB) { location.reload(); return; }
+    fit();
+  });
+  fit();
+
+  /* ---------- chrome (cabeçalho com 2 logos, rodapé, progresso, índice, grão, cinema) ---------- */
+  var cliente = H.getAttribute('data-cliente') || '';
+  var LOGO = {
+    cli: H.getAttribute('data-logo-cliente'), cliE: H.getAttribute('data-logo-cliente-escuro'),
+    lab: H.getAttribute('data-logo-75lab') || 'https://75lab.com.br/img/logo-wordmark-black.png',
+    labE: H.getAttribute('data-logo-75lab-escuro') || 'https://75lab.com.br/img/logo-wordmark-lime.png'
+  };
+  var SETA = '<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var SETAV = '<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+  function el(tag, attrs, html) { var e = document.createElement(tag); for (var a in attrs) e.setAttribute(a, attrs[a]); if (html) e.innerHTML = html; return e; }
+  if (!MOB) {
+    palco.appendChild(el('div', { id: 'k-prog', 'aria-hidden': 'true' }));
+    palco.appendChild(el('div', { id: 'k-grao', 'aria-hidden': 'true' }));
+    palco.appendChild(el('div', { id: 'k-cineT', class: 'k-cine', 'aria-hidden': 'true' }));
+    palco.appendChild(el('div', { id: 'k-cineB', class: 'k-cine', 'aria-hidden': 'true' }));
+    palco.appendChild(el('div', { id: 'k-varre', 'aria-hidden': 'true' }));
+    if (LOGO.cli || H.hasAttribute('data-logo-75lab')) {
+      palco.appendChild(el('header', { id: 'k-topo', class: 'k-ui' },
+        (LOGO.cli ? '<img id="k-lcli" src="' + LOGO.cli + '" alt="Logo ' + cliente + '"><span class="k-x"></span>' : '') +
+        '<img id="k-llab" src="' + LOGO.lab + '" alt="Logo 75 LAB"><span class="k-sp"></span><span class="k-cap" id="k-cap"></span>'));
+    }
+    palco.appendChild(el('nav', { id: 'k-pe', class: 'k-ui', 'aria-label': 'Navegação' },
+      '<div id="k-trilha"></div><span class="k-sp"></span>' +
+      '<button class="k-nb" id="k-ind" aria-label="Índice (tecla M)"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>' +
+      '<button class="k-nb" id="k-ant" aria-label="Tela anterior">' + SETAV + '</button><span id="k-cont"></span>' +
+      '<button class="k-nb" id="k-prox" aria-label="Próxima tela">' + SETA + '</button>'));
+    var ind = el('div', { id: 'k-indice', role: 'dialog', 'aria-label': 'Índice' }, '<div class="k-rotulo" style="color:#fff">Índice <b>M</b> abre e fecha</div><ol></ol>');
+    palco.appendChild(ind);
+    slides.forEach(function (s, i) {
+      var t = s.getAttribute('data-titulo') || ('Tela ' + (i + 1));
+      $('#k-trilha').appendChild(el('button', { 'data-ir': i + 1, 'aria-label': t, title: t }, '<i></i>'));
+      $('ol', ind).appendChild(el('li', {}, '<button data-ir="' + (i + 1) + '"><em>' + String(i + 1).padStart(2, '0') + '</em>' + t + '</button>'));
+    });
+  }
+
+  /* ---------- números animados ---------- */
+  function fmt(v, dec) { return v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
+  function contar(e, atraso) {
+    var alvo = parseFloat(String(e.getAttribute('data-conta')).replace(',', '.'));
+    if (isNaN(alvo)) return;
+    var dec = +(e.getAttribute('data-dec') || 0), pre = e.getAttribute('data-pre') || '', suf = e.getAttribute('data-suf') || '';
+    var small = e.querySelector('small'); var sufHtml = small ? small.outerHTML : '';
+    function pinta(v) { e.innerHTML = pre + fmt(v, dec) + suf + sufHtml; }
+    if (RM || MOB) { pinta(alvo); return; }
+    clearTimeout(e._kt); cancelAnimationFrame(e._kr); pinta(0);
+    e._kt = setTimeout(function () {
+      var t0 = performance.now(), D = +(e.getAttribute('data-dur') || 1100);
+      (function passo(t) { var p = Math.min(1, (t - t0) / D), q = 1 - Math.pow(1 - p, 3); pinta(alvo * q); if (p < 1) e._kr = requestAnimationFrame(passo); })(t0);
+    }, atraso || 0);
+  }
+
+  /* ---------- navegação ---------- */
+  var cur = -1, ocupado = false, entrar = {}, sair = {};
+  function claro(s) { return s.classList.contains('k-escuro') || s.classList.contains('k-capa') || s.getAttribute('data-ui') === 'claro'; }
+  function chrome(n) {
+    if (MOB) return;
+    var s = slides[n], c = claro(s);
+    palco.classList.toggle('k-ui-claro', c);
+    palco.classList.toggle('k-na-capa', s.classList.contains('k-capa'));
+    var lc = $('#k-lcli'), ll = $('#k-llab');
+    if (lc && LOGO.cliE) lc.src = c ? LOGO.cliE : LOGO.cli;
+    if (ll) ll.src = c ? LOGO.labE : LOGO.lab;
+    $('#k-cont').innerHTML = '<b>' + String(n + 1).padStart(2, '0') + '</b> / ' + String(N).padStart(2, '0');
+    $('#k-prog').style.width = ((n + 1) / N * 100) + '%';
+    var cap = $('#k-cap'); if (cap) cap.textContent = s.getAttribute('data-capitulo') || '';
+    $$('#k-trilha button').forEach(function (b, i) { b.classList.toggle('on', i === n); });
+    $$('#k-indice button').forEach(function (b, i) { b.classList.toggle('on', i === n); });
+  }
+  function aoEntrar(s, n) {
+    s.classList.remove('in'); void s.offsetWidth;
+    setTimeout(function () { s.classList.add('in'); }, 30);
+    $$('[data-conta]', s).forEach(function (e, i) { contar(e, 200 + i * 90); });
+    $$('[data-k]', s).forEach(function (c) { c._kEntrar && c._kEntrar(); });
+    (entrar[n] || []).forEach(function (f) { try { f(s); } catch (e) {} });
+    try { history.replaceState(null, '', '#' + (n + 1)); } catch (e) {}
+  }
+  function ir(n, dir) {
+    n = Math.max(0, Math.min(N - 1, n));
+    if (n === cur || ocupado) return;
+    var ind = $('#k-indice'); if (ind) ind.classList.remove('on');
+    var ant = slides[cur], prox = slides[n];
+    dir = dir || (n > cur ? 1 : -1);
+    if (ant) { $$('[data-k]', ant).forEach(function (c) { c._kSair && c._kSair(); }); (sair[cur] || []).forEach(function (f) { try { f(ant); } catch (e) {} }); }
+    if (!ant || RM) {
+      if (ant) ant.classList.remove('on', 'in');
+      prox.classList.add('on'); cur = n; chrome(n); aoEntrar(prox, n); return;
+    }
+    ocupado = true;
+    var tr = prox.getAttribute('data-transicao') || 'corte';
+    ant.classList.add('k-sai'); ant.classList.remove('on');
+    prox.classList.add('on', 'k-entra'); prox.classList.toggle('k-volta', dir < 0);
+    if (tr === 'corte') { palco.classList.add('k-cortando'); setTimeout(function () { palco.classList.remove('k-cortando'); }, 520); }
+    if (tr === 'cortina') { var v = $('#k-varre'); v.classList.remove('vai', 'volta'); void v.offsetWidth; v.classList.add('vai'); v.classList.toggle('volta', dir < 0); }
+    cur = n; chrome(n); aoEntrar(prox, n);
+    setTimeout(function () { ant.classList.remove('k-sai', 'in'); prox.classList.remove('k-entra', 'k-volta'); ocupado = false; }, 720);
+  }
+  window.KIT = { ir: function (n) { ir(n - 1); }, get atual() { return cur + 1; }, aoEntrar: function (n, f) { (entrar[n - 1] = entrar[n - 1] || []).push(f); }, aoSair: function (n, f) { (sair[n - 1] = sair[n - 1] || []).push(f); }, contar: contar };
+
+  if (!MOB) {
+    addEventListener('keydown', function (e) {
+      if (/INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) return;
+      if ($('#k-lb') && $('#k-lb').classList.contains('on')) { if (e.key === 'Escape') fecharLb(); else if (e.key === 'ArrowRight') passoLb(1); else if (e.key === 'ArrowLeft') passoLb(-1); return; }
+      if (['ArrowRight', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { e.preventDefault(); ir(cur + 1, 1); }
+      else if (['ArrowLeft', 'PageUp', 'Backspace'].indexOf(e.key) >= 0) { e.preventDefault(); ir(cur - 1, -1); }
+      else if (e.key === 'Home') ir(0); else if (e.key === 'End') ir(N - 1);
+      else if (e.key === 'm' || e.key === 'M') $('#k-indice').classList.toggle('on');
+      else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : (H.requestFullscreen && H.requestFullscreen()); }
+      else if (e.key === 'Escape') $('#k-indice').classList.remove('on');
+    });
+    var tr0 = 0;
+    addEventListener('wheel', function (e) {
+      if (e.target.closest && e.target.closest('iframe, .k-rola')) return;
+      var t = Date.now(); if (t - tr0 < 900 || Math.abs(e.deltaY) < 20) return; tr0 = t; ir(cur + (e.deltaY > 0 ? 1 : -1));
+    }, { passive: true });
+    var tx = null, ty = 0;
+    addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+    addEventListener('touchend', function (e) {
+      if (tx === null) return; var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+      if (e.target.closest && e.target.closest('.k-ad')) return;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) ir(cur + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+    $('#k-ant').onclick = function () { ir(cur - 1, -1); };
+    $('#k-prox').onclick = function () { ir(cur + 1, 1); };
+    $('#k-ind').onclick = function () { $('#k-indice').classList.toggle('on'); };
+  }
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-ir], [data-go]');
+    if (g && !g.closest('.k-pontos, .k-grafico')) {
+      var n = g.hasAttribute('data-ir') ? +g.getAttribute('data-ir') - 1 : +g.getAttribute('data-go');
+      if (MOB) { var alvo = slides[n]; if (alvo) alvo.scrollIntoView({ behavior: 'smooth' }); } else ir(n);
+      return;
+    }
+    var im = e.target.closest('img.k-zoom');
+    if (im) abrirLb(im);
+  });
+
+  /* ---------- lightbox: toda imagem de conteúdo amplia ---------- */
+  var lb = el('div', { id: 'k-lb', role: 'dialog', 'aria-label': 'Imagem ampliada' }, '<img alt=""><button id="k-lbX" aria-label="Fechar">×</button><button id="k-lbP" aria-label="Anterior">‹</button><button id="k-lbN" aria-label="Próxima">›</button>');
+  document.body.appendChild(lb);
+  var lbL = [], lbI = 0;
+  $$('.slide img').forEach(function (im) {
+    if (im.closest('#k-topo, .k-capa-logos, .k-fim-logos, .k-pontos, .k-ad, .k-qr, [class*=logo]') || /logo/i.test((im.getAttribute('src') || '') + ' ' + im.className + ' ' + (im.alt || '')) || im.classList.contains('k-sem-zoom')) return;
+    im.classList.add('k-zoom'); if (!im.hasAttribute('data-cursor')) im.setAttribute('data-cursor', 'Ampliar');
+  });
+  function abrirLb(im) { lbL = $$('img.k-zoom', im.closest('.slide') || document); lbI = Math.max(0, lbL.indexOf(im)); pintaLb(); lb.classList.add('on'); }
+  function pintaLb() { var im = lbL[lbI]; $('img', lb).src = im.getAttribute('data-grande') || im.currentSrc || im.src; $('img', lb).alt = im.alt || ''; $('#k-lbP').style.display = $('#k-lbN').style.display = lbL.length > 1 ? '' : 'none'; }
+  function passoLb(d) { if (lbL.length < 2) return; lbI = (lbI + d + lbL.length) % lbL.length; pintaLb(); }
+  function fecharLb() { lb.classList.remove('on'); }
+  $('#k-lbX').onclick = fecharLb; $('#k-lbP').onclick = function (e) { e.stopPropagation(); passoLb(-1); }; $('#k-lbN').onclick = function (e) { e.stopPropagation(); passoLb(1); };
+  lb.addEventListener('click', function (e) { if (e.target === lb) fecharLb(); });
+
+  /* ---------- cursor em dois tons com rótulo ---------- */
+  if (!MOB && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    var cu = el('div', { id: 'k-cur', 'aria-hidden': 'true' }, '<span></span>'), dt = el('div', { id: 'k-dot', 'aria-hidden': 'true' });
+    document.body.appendChild(cu); document.body.appendChild(dt);
+    var mx = -100, my = -100, cx = -100, cy = -100;
+    addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY; document.body.classList.add('k-cur-on');
+      dt.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      var t = e.target.closest && e.target.closest('button, a, input, label, [data-ir], [data-go], img.k-zoom, .k-ad, model-viewer, [data-cursor]');
+      document.body.classList.toggle('k-hov', !!t);
+      var L = t ? (t.getAttribute('data-cursor') || (t.matches('.k-ad') ? 'Arraste' : t.matches('model-viewer') ? 'Girar' : '')) : '';
+      $('span', cu).textContent = L; document.body.classList.toggle('k-rot', !!L);
+    });
+    document.addEventListener('mouseleave', function () { document.body.classList.remove('k-cur-on'); });
+    (function loop() { cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2; cu.style.transform = 'translate(' + cx + 'px,' + cy + 'px)'; requestAnimationFrame(loop); })();
+  }
+
+  /* ---------- COMPONENTES ---------- */
+  function ativa(c) { var s = c.closest('.slide'); return MOB || (s && s.classList.contains('on')); }
+
+  // gráfico com abas: .k-barra data-rotulo + data-valores="34,41" (um valor por aba), nota com data-textos="a|b"
+  $$('[data-k="grafico"]').forEach(function (g) {
+    g.setAttribute('data-bc-manter', ''); // a base de celular mantém as barras como estão
+    var abas = $$('.k-abas button', g), barras = $$('.k-barra', g), nota = $('.k-g-nota', g);
+    var suf = g.getAttribute('data-suf') || '', dec = +(g.getAttribute('data-dec') || 0);
+    var vals = barras.map(function (b) { return String(b.getAttribute('data-valores') || '0').split(',').map(function (x) { return parseFloat(x.replace(',', '.')) || 0; }); });
+    var max = +(g.getAttribute('data-max') || 0) || Math.max.apply(null, [].concat.apply([], vals)) * 1.08 || 1;
+    var textos = nota ? String(nota.getAttribute('data-textos') || '').split('|') : [];
+    barras.forEach(function (b) {
+      if (!b.querySelector('.k-b-trilho')) b.innerHTML = '<span class="k-b-rot">' + (b.getAttribute('data-rotulo') || '') + '</span><span class="k-b-trilho"><span class="k-b-fill"></span></span><span class="k-b-val" data-conta="0" data-dec="' + dec + '" data-suf="' + suf + '">0</span>';
+    });
+    var atual = 0, tocou = false, it = null;
+    function mostra(i) {
+      atual = i;
+      abas.forEach(function (a, k) { a.classList.toggle('on', k === i); a.setAttribute('aria-selected', k === i); });
+      barras.forEach(function (b, k) { var v = vals[k][i] != null ? vals[k][i] : vals[k][0]; $('.k-b-fill', b).style.width = Math.min(100, v / max * 100) + '%'; var e = $('.k-b-val', b); e.setAttribute('data-conta', v); contar(e, k * 60); });
+      if (nota && textos[i]) { nota.classList.add('h'); setTimeout(function () { nota.textContent = textos[i]; nota.classList.remove('h'); }, 260); }
+    }
+    abas.forEach(function (a, k) { a.setAttribute('role', 'tab'); a.addEventListener('click', function () { tocou = true; clearInterval(it); mostra(k); }); });
+    g._kEntrar = function () { tocou = false; mostra(0); clearInterval(it); if (abas.length > 1 && !RM) it = setInterval(function () { if (tocou || !ativa(g)) return clearInterval(it); mostra((atual + 1) % abas.length); }, 4200); };
+    g._kSair = function () { clearInterval(it); };
+    if (MOB) mostra(0);
+  });
+
+  // imagem com pontos clicáveis: .k-ponto (left/top em %) com data-titulo e data-texto; info em .k-pontos-info da tela
+  $$('[data-k="pontos"]').forEach(function (c) {
+    var pts = $$('.k-ponto', c), s = c.closest('.slide') || document, info = $('.k-pontos-info', s), lista = $('.k-pontos-lista', s);
+    if (lista && !lista.children.length) pts.forEach(function (p, i) { lista.appendChild(el('button', { type: 'button', 'data-p': i }, '<b>' + String(i + 1).padStart(2, '0') + '</b>' + (p.getAttribute('data-titulo') || ''))); });
+    var bts = lista ? $$('button', lista) : [];
+    pts.forEach(function (p, i) { if (!p.textContent.trim()) p.textContent = i + 1; p.setAttribute('aria-label', p.getAttribute('data-titulo') || ('Ponto ' + (i + 1))); });
+    var atual = 0, tocou = false, it = null;
+    function mostra(i) {
+      atual = i;
+      pts.forEach(function (p, k) { p.classList.toggle('on', k === i); });
+      bts.forEach(function (b, k) { b.classList.toggle('on', k === i); });
+      if (info) { info.classList.add('h'); setTimeout(function () { var h = $('h3', info), t = $('p', info); if (h) h.textContent = pts[i].getAttribute('data-titulo') || ''; if (t) t.textContent = pts[i].getAttribute('data-texto') || ''; info.classList.remove('h'); }, 220); }
+    }
+    pts.forEach(function (p, k) { p.addEventListener('click', function () { tocou = true; clearInterval(it); mostra(k); }); });
+    bts.forEach(function (b, k) { b.addEventListener('click', function () { tocou = true; clearInterval(it); mostra(k); }); });
+    c._kEntrar = function () { tocou = false; mostra(0); clearInterval(it); if (!RM) it = setInterval(function () { if (tocou || !ativa(c)) return clearInterval(it); mostra((atual + 1) % pts.length); }, 3600); };
+    c._kSair = function () { clearInterval(it); };
+    if (pts.length) mostra(0);
+  });
+
+  // antes e depois arrastável: .k-ad-antes + .k-ad-depois + input range
+  $$('[data-k="antes-depois"]').forEach(function (c) {
+    if (!$('.k-ad-linha', c)) c.appendChild(el('span', { class: 'k-ad-linha', 'aria-hidden': 'true' }));
+    var r = $('input[type=range]', c);
+    if (!r) { r = el('input', { type: 'range', min: '0', max: '100', value: '50', 'aria-label': 'Arraste para comparar' }); c.appendChild(r); }
+    function pos(v) { c.style.setProperty('--pos', v + '%'); r.value = v; }
+    var tocou = false, raf = 0;
+    r.addEventListener('input', function () { tocou = true; cancelAnimationFrame(raf); pos(+r.value); });
+    c._kEntrar = function () {
+      tocou = false; if (RM) { pos(50); return; }
+      var t0 = performance.now();
+      (function anima(t) { if (tocou) return; var p = Math.min(1, (t - t0) / 2600); pos(50 + Math.sin(p * Math.PI * 2) * 32 * (1 - p)); if (p < 1) raf = requestAnimationFrame(anima); })(t0);
+    };
+    pos(50);
+  });
+
+  // QR code (wa.me, página de AR, página do produto): data-url
+  var qrs = $$('[data-k="qr"]');
+  if (qrs.length) {
+    var sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+    sc.onload = function () {
+      qrs.forEach(function (q) {
+        try { var c = window.qrcode(0, 'M'); c.addData(q.getAttribute('data-url') || location.href); c.make(); q.innerHTML = c.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); var sv = q.querySelector('svg'); if (sv) sv.setAttribute('aria-label', 'QR code'); }
+        catch (e) { q.innerHTML = '<a href="' + q.getAttribute('data-url') + '">' + q.getAttribute('data-url') + '</a>'; }
+      });
+    };
+    sc.onerror = function () { qrs.forEach(function (q) { q.innerHTML = '<a href="' + q.getAttribute('data-url') + '" style="font-size:12px;word-break:break-all">' + q.getAttribute('data-url') + '</a>'; }); };
+    document.head.appendChild(sc);
+  }
+
+  // 3D e AR: <model-viewer> carrega a biblioteca só se existir no deck
+  if ($('model-viewer') && !customElements.get('model-viewer')) {
+    var mv = document.createElement('script'); mv.type = 'module';
+    mv.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js';
+    document.head.appendChild(mv);
+  }
+
+  /* ---------- partida ---------- */
+  if (MOB) {
+    slides.forEach(function (s) { s.classList.add('on', 'in'); });
+    $$('[data-conta]').forEach(function (e) { contar(e, 0); });
+    return;
+  }
+  var h = parseInt((location.hash || '').slice(1), 10);
+  ir(h > 0 && h <= N ? h - 1 : 0);
+  addEventListener('hashchange', function () { var x = parseInt(location.hash.slice(1), 10); if (x > 0 && x <= N && x - 1 !== cur) ir(x - 1); });
+})();
+</script>
+<style data-base-deck="1.0.0">
 /* Base de deck da agência 75 LAB: modo celular (html.bc-cel). No computador nada muda: todas as regras ficam presas a
    html.bc-cel, ligado pelo deck-base.cliente.js só abaixo de 900 px de largura (ou quando o próprio deck entrou no modo
    celular dele). No celular cada tela vira uma seção empilhada, fundo claro, tipografia por papel e navegação na margem. */
