@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>75 LAB × Petz · Retrospectiva e proposta de parceria</title>
+<meta name="description" content="Retrospectiva dos projetos da 75 LAB com a Petz e proposta de parceria em fee.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#175EA8;--navy:#123F6D;--sky:#00A1E4;--yellow:#FFC62B;--paper:#F6F3EA;--ink:#0E1B2B;--lime:#C0EE4E;--mut:#4B5B6E}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#E9E5D8;font-family:'Outfit',system-ui,sans-serif;color:var(--ink);overflow:hidden}
+body.mob{overflow-x:hidden;overflow-y:auto;height:auto}
+#stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;transform-origin:center center;transform:translate(-50%,-50%);overflow:hidden;background:var(--paper)}
+.slide{position:absolute;inset:0;padding:110px 72px 70px;background:var(--paper);opacity:0;visibility:hidden;transform:translateX(48px);transition:opacity .55s ease,transform .55s ease,visibility 0s .55s;overflow:hidden}
+.slide.on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.slide.out{transform:translateX(-48px)}
+.hdr{position:absolute;top:28px;left:72px;right:72px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.hdr .lg{display:flex;align-items:center;gap:22px}
+.hdr img{height:34px;width:auto;display:block}
+.hdr .x{font-family:'Space Mono',monospace;font-size:16px;color:var(--mut)}
+.hdr .ch{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.dk{color:#fff}.dk .hdr .x,.dk .hdr .ch{color:#cfe0f3}
+.dk .hdr .pz{filter:brightness(0) invert(1)}
+h1,h2{font-weight:800;line-height:1.02;letter-spacing:-.02em}
+h1{font-size:88px}h2{font-size:60px;max-width:1280px}
+.k{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:18px;display:block}
+.dk .k{color:var(--yellow)}
+p.ap{font-size:28px;line-height:1.32;color:var(--mut);margin-top:22px;max-width:980px;font-weight:400}
+.dk p.ap{color:#dbe8f6}
+.fonte{position:absolute;left:72px;right:72px;bottom:26px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.4;color:#6b7788;z-index:4}
+.dk .fonte{color:#b9cde4}
+.num{font-weight:800;letter-spacing:-.03em;line-height:.95;font-variant-numeric:tabular-nums}
+.rv{opacity:0}
+.on .rv{animation:rv .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0)*110ms + 150ms)}
+@keyframes rv{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.ico{width:56px;height:56px;fill:none;stroke:var(--blue);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.dk .ico{stroke:var(--yellow)}
+.ico *{stroke-dasharray:140;stroke-dashoffset:140}
+.on .ico *{animation:dr 1.3s .3s ease forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.pulse{animation:pl 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pl{50%{transform:scale(1.12)}}
+img[data-zoom]{cursor:zoom-in}
+/* capa */
+.s1{padding:0;background:#0b1e33}
+.s1 .bgimg{position:absolute;inset:0;background-size:cover;background-position:62% 50%}
+.s1 .bgimg img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;animation:kb 26s ease-in-out infinite alternate;display:block}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.1)}}
+.s1 .pan{position:absolute;left:0;top:0;bottom:0;width:800px;background:var(--blue);padding:130px 60px 70px 72px;display:flex;flex-direction:column;justify-content:center;color:#fff}
+.s1 h1{font-size:82px}.s1 h1 em{font-style:normal;color:var(--yellow)}
+.s1 .sub{font-size:28px;margin-top:30px;color:#dbe8f6;max-width:640px;line-height:1.3}
+.s1 .dt{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.14em;margin-top:34px;color:var(--yellow)}
+.s1 .hdr{color:#fff}.s1 .hdr .pz{filter:brightness(0) invert(1)}
+/* s2 */
+.s2{padding:0;display:grid;grid-template-columns:1fr 1fr}
+.s2 .l{background:var(--yellow);padding:130px 64px 70px 72px;display:flex;flex-direction:column;justify-content:center}
+.s2 .r{padding:130px 72px 70px 56px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.s2 .l h2{font-size:76px}
+.pc{background:#fff;border-radius:20px;padding:24px 28px;display:flex;gap:22px;align-items:flex-start;border:2px solid #E3DDCB}
+.pc b{font-size:30px;display:block;margin-bottom:4px}.pc span{font-size:22px;color:var(--mut);line-height:1.3}
+.s2 .tags{display:flex;gap:12px;flex-wrap:wrap}.tag{font-family:'Space Mono',monospace;font-size:14px;padding:9px 16px;border-radius:30px;background:var(--blue);color:#fff}
+/* s3 */
+.s3 .cols{display:grid;grid-template-columns:560px 1fr;gap:56px;margin-top:34px}
+.s3 .pil{display:grid;gap:18px}
+.s3 .pil div{display:flex;gap:18px;align-items:center;font-size:25px;line-height:1.2;font-weight:600}
+.s3 .pil .ico{width:46px;height:46px;flex:none}
+.wall{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.wall div{background:#fff;border:2px solid #E3DDCB;border-radius:16px;height:118px;display:flex;align-items:center;justify-content:center;padding:14px}
+.wall img{max-width:100%;max-height:72px;object-fit:contain}
+.wall .nm{font-weight:800;font-size:26px;color:var(--navy);text-align:center;line-height:1.05}
+.wall .pet{border-color:var(--yellow);background:#FFF8E2}
+/* s4 */
+.s4 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:34px}
+.cs{background:#fff;border-radius:22px;padding:26px;border:2px solid #E3DDCB;min-height:420px;display:flex;flex-direction:column}
+.cs .lgo{height:64px;display:flex;align-items:center;margin-bottom:18px}.cs .lgo img{max-height:56px;max-width:180px}
+.cs .lgo .nm{font-weight:800;font-size:34px;color:var(--navy)}
+.cs .n{font-size:84px;color:var(--blue)}.cs .u{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:16px}
+.cs p{font-size:22px;line-height:1.3;color:var(--ink)}
+/* divisor */
+.dv{padding:0;display:flex;flex-direction:column;justify-content:center;padding:120px 96px 70px}
+.dv .big{font-size:240px;line-height:.8;font-weight:800;opacity:.18;position:absolute;right:60px;top:90px}
+.dv h2{font-size:92px;max-width:1100px}
+.dv.blue{background:var(--blue);color:#fff}.dv.yel{background:var(--yellow);color:var(--ink)}
+.dv .trl{display:flex;gap:14px;margin-top:48px;flex-wrap:wrap}
+.dv .trl span{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.1em;padding:10px 18px;border-radius:30px;border:2px solid currentColor;opacity:.55;text-transform:uppercase}
+.dv .trl span.a{opacity:1;background:#fff;color:var(--navy);border-color:#fff}
+.dv.yel .trl span.a{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dv p.ap{color:inherit;opacity:.9}
+/* s5 jornada */
+.jr{position:relative;margin-top:44px;display:grid;grid-template-columns:repeat(9,1fr);gap:8px}
+.jr:before{content:"";position:absolute;left:4%;right:4%;top:27px;height:4px;background:var(--blue);transform-origin:left;transform:scaleX(0)}
+.on .jr:before{animation:ln 1.6s .4s ease forwards}
+@keyframes ln{to{transform:scaleX(1)}}
+.jr .st{position:relative;text-align:center;font-size:19px;line-height:1.2;font-weight:600}
+.jr .st i{display:flex;width:56px;height:56px;margin:0 auto 14px;border-radius:50%;background:var(--yellow);border:4px solid var(--blue);align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:22px;color:var(--navy)}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+.strip img{width:100%;height:190px;object-fit:cover;border-radius:16px;display:block}
+/* s6 tese */
+.s6{background:var(--blue);color:#fff}
+.s6 .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px}
+.s6 .tri .num{font-size:128px;color:var(--yellow)}.s6 .tri .num small{font-size:50px}
+.s6 .tri div>span{display:block;font-size:26px;margin-top:14px;color:#dbe8f6;line-height:1.25}
+/* s7 */
+.s7 .cols{display:grid;grid-template-columns:560px 1fr;gap:48px;margin-top:30px;align-items:start}
+.s7 .st3 div{border-left:8px solid var(--yellow);padding:6px 0 6px 24px;margin-bottom:26px}
+.s7 .st3 .num{font-size:104px;color:var(--blue)}.s7 .st3 span{font-size:24px;color:var(--mut);display:block;margin-top:4px}
+.mos{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:218px;gap:14px}
+.mos img{width:100%;height:100%;object-fit:cover;border-radius:16px;display:block}
+.mos .w2{grid-column:span 2}.mos .w3{grid-column:span 3}
+/* s8 */
+.flow{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:stretch;margin-top:40px}
+.bx{background:#fff;border:2px solid #E3DDCB;border-radius:20px;padding:26px;font-size:23px;line-height:1.3}
+.bx b{font-size:32px;display:block;margin:12px 0 6px;color:var(--navy)}
+.bx.hot{background:var(--navy);color:#fff;border-color:var(--navy)}.bx.hot b{color:var(--yellow)}.bx.hot .ico{stroke:var(--yellow)}
+.arw{display:flex;align-items:center;justify-content:center}.arw svg{width:60px;height:30px;fill:none;stroke:var(--blue);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.arw svg *{stroke-dasharray:80;stroke-dashoffset:80}.on .arw svg *{animation:dr 1s .6s forwards}
+.opp{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
+.opp div{background:var(--yellow);border-radius:18px;padding:20px 24px;font-size:23px;line-height:1.25;font-weight:600}
+.opp span{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;display:block;margin-bottom:8px}
+/* s9 */
+.s9 .cols{display:grid;grid-template-columns:1fr 520px;gap:56px;margin-top:24px;align-items:end}
+.bars{display:flex;gap:14px;align-items:flex-end;height:430px;border-bottom:4px solid var(--ink);padding-bottom:0}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;text-align:center}
+.bar i{display:block;background:var(--blue);border-radius:10px 10px 0 0;height:0;transition:height 1s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i)*140ms + 300ms)}
+.on .bar i{height:var(--h)}
+.bar.z i{background:var(--yellow)}
+.bar b{font-size:21px;margin-bottom:8px;font-weight:600}
+.lbl{display:flex;gap:14px;margin-top:10px}.lbl span{flex:1;text-align:center;font-family:'Space Mono',monospace;font-size:13px;color:var(--mut)}
+.s9 .big1{background:var(--navy);color:#fff;border-radius:24px;padding:34px}
+.s9 .big1 .num{font-size:96px;color:var(--yellow)}.s9 .big1 span{font-size:24px;display:block;margin-top:8px;color:#dbe8f6;line-height:1.3}
+.s9 .big1 hr{border:0;border-top:2px solid #2b5d93;margin:24px 0}
+/* s10 */
+.fr{display:flex;gap:14px;margin-top:26px}.fr span{flex:1;background:var(--navy);color:#fff;border-radius:14px;padding:16px 20px;font-size:24px;font-weight:600}
+.fr span.o{background:#fff;color:var(--ink);border:2px dashed var(--blue)}
+.m6{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+.m6 div{background:#fff;border:2px solid #E3DDCB;border-radius:18px;padding:20px 22px;font-size:21px;line-height:1.28;position:relative}
+.m6 div b{display:block;font-size:28px;color:var(--navy);margin:2px 0 4px}
+.m6 div em{font-style:normal;font-family:'Space Mono',monospace;font-size:14px;color:var(--blue);font-weight:700}
+.mensal{display:flex;gap:30px;margin-top:20px;font-size:23px;font-weight:600;color:var(--navy)}
+/* s11 */
+.s11 .cols{display:grid;grid-template-columns:420px 1fr;gap:44px;margin-top:24px}
+.vf{display:grid;gap:8px}
+.vf div{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid #E3DDCB;border-radius:12px;padding:9px 16px;font-size:21px;font-weight:600}
+.vf div i{font-style:normal;font-family:'Space Mono',monospace;font-size:13px;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.vf .dn{margin:-4px 0 -4px 26px;height:12px;background:none;border:0;padding:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.tw{background:#fff;border:2px solid #E3DDCB;border-radius:20px;padding:26px;font-size:21px;line-height:1.3}
+.tw.y{background:#FFF3CC;border-color:var(--yellow)}
+.tw h3{font-size:42px;color:var(--navy);margin:8px 0 12px}
+.tw p{margin-bottom:10px}.tw p b{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:block}
+/* s12 */
+.gt{margin-top:30px}
+.gt .hd,.gt .row{display:grid;grid-template-columns:260px repeat(6,1fr);gap:8px;align-items:center}
+.gt .hd span{font-family:'Space Mono',monospace;font-size:14px;color:var(--mut);text-align:center;letter-spacing:.08em}
+.gt .row{margin-top:12px}.gt .row>b{font-size:24px;font-weight:600}
+.gt .bar2{height:46px;border-radius:12px;background:var(--blue);transform-origin:left;transform:scaleX(0);display:flex;align-items:center;padding-left:14px;color:#fff;font-size:17px;font-weight:600;white-space:nowrap}
+.on .bar2{animation:ln 1s calc(var(--i)*160ms + 300ms) ease forwards}
+.bar2.y{background:var(--yellow);color:var(--ink)}.bar2.n{background:var(--navy)}
+.mk{display:flex;gap:26px;margin-top:34px;font-size:22px;font-weight:600;color:var(--navy);flex-wrap:wrap}
+.mk span:before{content:"◆";color:var(--yellow);margin-right:10px}
+/* s13 */
+.kp{margin-top:26px;width:100%;border-collapse:separate;border-spacing:0 10px}
+.kp th{font-family:'Space Mono',monospace;font-size:14px;text-align:left;letter-spacing:.1em;color:var(--mut);padding:0 18px;text-transform:uppercase}
+.kp td{background:#fff;padding:16px 18px;font-size:23px;border-top:2px solid #E3DDCB;border-bottom:2px solid #E3DDCB;line-height:1.2}
+.kp td:first-child{border-left:2px solid #E3DDCB;border-radius:16px 0 0 16px;font-weight:600;color:var(--navy)}
+.kp td:last-child{border-right:2px solid #E3DDCB;border-radius:0 16px 16px 0}
+.kp .ac{color:var(--blue);font-weight:600}
+/* s14 */
+.s14{background:var(--yellow)}
+.s14 h1{font-size:92px;max-width:1380px}
+.s14 .st{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:46px}
+.s14 .st div{background:#fff;border-radius:20px;padding:24px 26px;font-size:24px;line-height:1.25;font-weight:600}
+.s14 .st span{font-family:'Space Mono',monospace;font-size:14px;color:var(--blue);display:block;margin-bottom:8px;letter-spacing:.1em}
+/* s15 */
+.s15{background:var(--navy);color:#fff}
+.s15 .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;margin-top:20px}
+.s15 h2{font-size:64px}
+.s15 dl{display:grid;grid-template-columns:150px 1fr;gap:10px 18px;font-size:22px;line-height:1.3;margin-top:22px}
+.s15 dt{font-family:'Space Mono',monospace;font-size:13px;color:var(--yellow);letter-spacing:.1em;text-transform:uppercase;padding-top:5px}
+.wa{display:inline-flex;align-items:center;gap:14px;background:var(--lime);color:#0b0b0b;font-weight:800;font-size:30px;padding:22px 36px;border-radius:60px;text-decoration:none;margin-top:30px;min-height:64px}
+.wa:hover{transform:translateY(-3px)}
+.s15 .pre{font-size:26px;line-height:1.35;color:#dbe8f6;margin-top:18px}
+/* nav */
+#nav{position:fixed;left:50%;bottom:10px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:50;background:rgba(14,27,43,.88);color:#fff;border-radius:40px;padding:4px 8px;font-family:'Space Mono',monospace;font-size:13px}
+#nav button{min-width:44px;min-height:44px;border:0;background:transparent;color:#fff;font-size:20px;cursor:pointer;border-radius:30px;font-family:inherit}
+#nav button:hover{background:#2a4a6d}
+#nav .rt{font-size:12px;letter-spacing:.08em;padding:0 14px}
+#pg{position:fixed;left:0;top:0;height:5px;background:var(--yellow);z-index:60;width:0;transition:width .5s}
+#lb{position:fixed;inset:0;background:rgba(8,16,28,.9);display:none;align-items:center;justify-content:center;z-index:100;cursor:zoom-out}
+#lb.on{display:flex}#lb img{max-width:92vw;max-height:90vh;border-radius:12px;animation:rv .4s forwards}
+#rot{position:fixed;left:0;right:0;bottom:0;background:#0E1B2B;color:#fff;padding:22px 40px 70px;z-index:70;display:none;font-size:20px;line-height:1.45;max-height:45vh;overflow:auto}
+#rot.on{display:block}#rot b{font-family:'Space Mono',monospace;color:var(--yellow);font-size:13px;letter-spacing:.1em;display:block;margin-bottom:8px}
+#cur{position:fixed;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--navy);pointer-events:none;z-index:200;transform:translate(-50%,-50%);mix-blend-mode:normal}
+#cur2{position:fixed;left:0;top:0;width:44px;height:44px;border-radius:50%;border:3px solid var(--yellow);pointer-events:none;z-index:199;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--ink)}
+#cur2.z{width:92px;height:92px;background:var(--yellow)}
+@media (hover:none),(pointer:coarse){#cur,#cur2{display:none}}
+@media (hover:hover) and (pointer:fine){html,body,a,button,img{cursor:none}}
+/* mobile */
+body.mob #stage{position:static;width:100%;height:auto;transform:none!important;overflow:visible;background:var(--paper)}
+body.mob .slide{position:relative;opacity:1;visibility:visible;transform:none;padding:84px 22px 56px;min-height:0;overflow:visible;transition:none}
+body.mob .rv{opacity:1;animation:none}
+body.mob .ico *{stroke-dashoffset:0;animation:none}
+body.mob .arw svg *,body.mob .jr:before,body.mob .bar2{animation:none;transform:none;stroke-dashoffset:0}
+body.mob .bar i{height:var(--h);transition:none}
+body.mob .hdr{left:22px;right:22px;top:20px}.body.mob .hdr img{height:26px}
+body.mob .hdr .ch,body.mob .hdr .x{display:none}
+body.mob .hdr img{height:26px}
+body.mob h1{font-size:38px!important;line-height:1.05}body.mob h2{font-size:32px!important;line-height:1.08}
+body.mob p.ap{font-size:18px}body.mob .fonte{position:static;margin-top:26px;font-size:11px}
+body.mob .s1{padding:0;min-height:0}body.mob .s1 .bgimg{position:relative;height:260px;inset:auto}
+body.mob .s1 .pan{position:relative;width:100%;padding:84px 22px 34px}
+body.mob .s1 .hdr{position:absolute;z-index:6}
+body.mob .s1 .sub{font-size:18px}
+body.mob .s2{display:block;padding:0}body.mob .s2 .l{padding:84px 22px 30px}body.mob .s2 .r{padding:24px 22px 40px}
+body.mob .s2 .l h2{font-size:34px!important}
+body.mob .pc b{font-size:22px}body.mob .pc span{font-size:17px}
+body.mob .s3 .cols,body.mob .s7 .cols,body.mob .s9 .cols,body.mob .s11 .cols,body.mob .s15 .cols,body.mob .two,body.mob .flow,body.mob .opp,body.mob .s14 .st,body.mob .s6 .tri,body.mob .m6{grid-template-columns:1fr;gap:16px}
+body.mob .s3 .pil div{font-size:18px}
+body.mob .wall{grid-template-columns:repeat(3,1fr)}body.mob .wall div{height:84px}body.mob .wall .nm{font-size:16px}
+body.mob .s4 .grid{grid-template-columns:1fr}body.mob .cs{min-height:0}body.mob .cs p{font-size:17px}
+body.mob .dv{padding:90px 22px 50px;min-height:70vh}body.mob .dv h2{font-size:38px!important}body.mob .dv .big{font-size:110px;top:70px;right:16px}
+body.mob .jr{grid-template-columns:1fr;gap:14px;margin-top:24px}body.mob .jr:before{display:none}
+body.mob .jr .st{display:flex;align-items:center;gap:14px;text-align:left;font-size:18px}body.mob .jr .st i{margin:0;flex:none;width:44px;height:44px;font-size:18px}
+body.mob .strip{grid-template-columns:repeat(2,1fr)}body.mob .strip img{height:120px}
+body.mob .s6 .tri .num{font-size:64px}body.mob .s6 .tri div>span{font-size:18px}
+body.mob .s7 .st3 .num{font-size:60px}body.mob .s7 .st3 span{font-size:17px}
+body.mob .mos{grid-auto-rows:120px;grid-template-columns:repeat(2,1fr)}body.mob .mos .w2,body.mob .mos .w3{grid-column:span 2}.mos .w3{grid-column:span 3}
+body.mob .arw{transform:rotate(90deg);height:40px}
+body.mob .bx{font-size:17px}body.mob .bx b{font-size:24px}body.mob .opp div{font-size:18px}
+body.mob .bars{height:300px;gap:6px}body.mob .bar b{font-size:12px}body.mob .lbl{gap:6px}body.mob .lbl span{font-size:10px}
+body.mob .s9 .big1 .num{font-size:52px}body.mob .s9 .big1 span{font-size:17px}
+body.mob .fr{flex-direction:column}body.mob .fr span{font-size:18px}
+body.mob .m6 div{font-size:17px}body.mob .m6 div b{font-size:22px}body.mob .mensal{flex-direction:column;gap:8px;font-size:18px}
+body.mob .vf div{font-size:17px}body.mob .tw{font-size:17px}body.mob .tw h3{font-size:30px}
+body.mob .gt .hd{display:none}body.mob .gt .row{grid-template-columns:1fr;gap:6px;margin-top:16px}
+body.mob .gt .row>b{font-size:19px}
+body.mob .gt .bar2{height:auto;min-height:40px;padding:8px 12px;white-space:normal;font-size:16px;margin-left:var(--ml,0)}
+body.mob .gt .mm{display:none}
+body.mob .mk{font-size:17px;gap:10px;flex-direction:column}
+body.mob .kp,body.mob .kp tbody,body.mob .kp tr,body.mob .kp td{display:block}body.mob .kp thead{display:none}
+body.mob .kp tr{margin-bottom:14px;background:#fff;border:2px solid #E3DDCB;border-radius:16px;padding:6px 0}
+body.mob .kp td{border:0!important;border-radius:0!important;font-size:17px;padding:6px 16px}
+body.mob .s14 h1{font-size:36px!important}body.mob .s14 .st div{font-size:18px}
+body.mob .s15 h2{font-size:34px!important}body.mob .s15 dl{grid-template-columns:1fr;font-size:18px;gap:2px}body.mob .s15 dt{margin-top:10px}
+body.mob .wa{font-size:21px;padding:18px 26px;width:100%;justify-content:center}
+body.mob #nav{display:none}body.mob .cs .n{font-size:60px}
+
+.tabs{display:flex;gap:12px;margin-bottom:18px}
+.tabs button{min-height:48px;padding:0 26px;border-radius:30px;border:2px solid var(--blue);background:#fff;color:var(--blue);font-family:'Space Mono',monospace;font-size:15px;font-weight:700;letter-spacing:.06em;cursor:pointer}
+.tabs button.on{background:var(--blue);color:#fff}
+.tp{display:none}.tp.on{display:block}
+.two.one{grid-template-columns:1fr}
+#stage:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.08;z-index:30;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+body.mob #stage:after{display:none}
+.s2 .r{position:relative;justify-content:flex-end}.s2 .bgp{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}.s2 .r>*:not(.bgp){position:relative;z-index:1}
+.s2 .r .tag{background:var(--navy)}
+.s6 .rimg{position:absolute;right:0;top:0;width:36%;height:100%;object-fit:cover;z-index:1}
+.s6 h2{max-width:900px}.s6 .tri{grid-template-columns:1fr;gap:6px;margin-top:26px;max-width:880px}
+.s6 .tri>div{display:flex;align-items:baseline;gap:28px}.s6 .tri .num{font-size:92px;min-width:420px}.s6 .tri div>span{margin-top:0;font-size:25px}
+.s14 h1{font-size:78px}.s14 .st{margin-top:30px}.s14 .band{position:absolute;left:72px;right:72px;bottom:56px;height:190px;width:calc(100% - 144px);object-fit:cover;object-position:50% 60%;border-radius:20px}
+.s9 .sm{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:10px}
+.s9 .sm div{background:#fff;border:2px solid #E3DDCB;border-radius:20px;padding:28px;font-size:26px;line-height:1.25;font-weight:600;color:var(--navy)}
+.s9 .sm b{display:block;font-family:'Space Mono',monospace;font-size:14px;color:var(--blue);margin-bottom:10px;letter-spacing:.1em}
+.s9 .sm p{font-size:22px;font-weight:400;color:var(--mut);margin-top:8px}
+.kn{font-size:30px;font-weight:600;color:var(--navy);margin-top:20px;border-left:8px solid var(--yellow);padding-left:20px}
+body.mob .tabs{display:none}body.mob .tp{display:block;margin-bottom:14px}
+body.mob .s6 .rimg{position:relative;width:100%;height:200px;margin-top:20px}
+body.mob .s6 .tri>div{display:block}body.mob .s6 .tri .num{min-width:0;font-size:56px}
+body.mob .s14 .band{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:140px;margin-top:20px}
+body.mob .s9 .sm{grid-template-columns:1fr}body.mob .s2 .bgp{position:relative;height:200px;margin-bottom:14px}
+body.mob .kn{font-size:19px}
+@media (prefers-reduced-motion:reduce){.s1 .bgimg img{animation:none}.on .rv{animation:none;opacity:1}.rv{opacity:1}.on .ico *,.ico *{animation:none;stroke-dashoffset:0}.pulse{animation:none}.bar i{transition:none;height:var(--h)}.bar2,.jr:before{animation:none!important;transform:none}.arw svg *{animation:none;stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<div id="pg"></div>
+<div id="cur"></div><div id="cur2"></div>
+<main id="stage">
+
+<!-- 1 CAPA -->
+<section class="slide s1 dk on" data-t="Capa">
+ <div class="bgimg"><img src="assets/01-1792504687039-imagem.png" data-img="kv" alt="Cliente e atendente conversam em corredor amplo de uma loja pet, com um golden retriever" data-zoom></div>
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Retrospectiva e parceria</span></div>
+ <div class="pan">
+  <span class="k rv" style="--i:0;color:var(--yellow)">Petz × 75 LAB</span>
+  <h1 class="rv" style="--i:1">O maior varejo pet do Brasil precisa de <em>execução do mesmo tamanho.</em></h1>
+  <p class="sub rv" style="--i:2">O que já fizemos juntos e como seguir, com o saldo que a Petz tem com a 75 LAB.</p>
+  <div class="dt rv" style="--i:3">OUTUBRO DE 2026</div>
+ </div>
+ <aside class="roteiro" hidden>Bom dia. Antes de qualquer proposta, queremos agradecer: a Petz é uma das contas em que mais aprendemos sobre o varejo pet por dentro. Esta conversa tem três partes. Primeiro, quem somos e o que já fizemos no segmento pet. Depois, tudo o que construímos juntos com a Petz. Por fim, uma proposta simples para seguir juntos agora que a fusão com a Cobasi foi aprovada, usando o saldo que já existe entre as duas empresas.</aside>
+</section>
+
+<!-- 2 QUEM SOMOS -->
+<section class="slide s2" data-t="Quem somos">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
+ <div class="l">
+  <span class="k rv" style="--i:0">Quem somos</span>
+  <h2 class="rv" style="--i:1">Dois lados do balcão, sentados à mesma mesa.</h2>
+  <p class="ap rv" style="--i:2">Mais de 15 anos vividos entre a intenção da marca e o que acontece na loja.</p>
+ </div>
+ <div class="r"><img class="bgp" src="assets/05-foto-outra-5-1792504458485.jpg" alt="Loja Petz de esquina com totem azul e fachada amarela" data-zoom>
+  <div class="pc rv" style="--i:2"><svg class="ico" viewBox="0 0 56 56"><path d="M8 24l20-14 20 14v22H8z"/><path d="M22 46V32h12v14"/></svg><div><b>Caique Becker · Varejo</b><span>Conhece o PDV por quem opera a loja: layout, execução e a régua de aprovação.</span></div></div>
+  <div class="pc rv" style="--i:3"><svg class="ico" viewBox="0 0 56 56"><path d="M6 46V22l14 8V22l14 8V14h14v32z"/><path d="M14 46v-6M26 46v-6M38 46v-6"/></svg><div><b>Daniel Coimbra · Indústria</b><span>Pensa a marca pelo resultado: lançamento, categoria e venda na ponta.</span></div></div>
+  <div class="tags rv" style="--i:4"><span class="tag">Estratégia de PDV</span><span class="tag">Design e protótipo</span><span class="tag">Produção</span><span class="tag">Instalação</span><span class="tag">Rastreio por QR</span></div>
+ </div>
+ <aside class="roteiro" hidden>A 75 LAB nasceu da soma de dois lados que quase nunca se sentam juntos. O Caique veio do varejo e sabe o que a loja aprova e o que ela descarta. O Daniel veio da indústria e pensa a marca pelo resultado. Juntos, são mais de quinze anos vividos na distância entre a intenção comercial e o que acontece no canal. Fazemos estratégia, design, produção, instalação e rastreio, de ponta a ponta. Na próxima tela, o que nos diferencia e quem já confia na gente.</aside>
+</section>
+
+<!-- 3 DIFERENCIAL -->
+<section class="slide s3" data-t="Diferencial">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
+ <span class="k rv" style="--i:0">Nosso diferencial</span>
+ <h2 class="rv" style="--i:1">Quem desenha a peça já aprovou, instalou e cobrou peça igual.</h2>
+ <div class="cols">
+  <div class="pil">
+   <div class="rv" style="--i:2"><svg class="ico" viewBox="0 0 56 56"><circle cx="28" cy="28" r="18"/><path d="M28 16v12l8 6"/></svg>Vivemos o trade, não só estudamos</div>
+   <div class="rv" style="--i:3"><svg class="ico" viewBox="0 0 56 56"><path d="M10 40l12-12 8 8 16-18"/><path d="M36 18h10v10"/></svg>Falamos margem, giro e positivação</div>
+   <div class="rv" style="--i:4"><svg class="ico" viewBox="0 0 56 56"><rect x="10" y="10" width="14" height="14" rx="2"/><path d="M32 12h14M32 20h14M10 34h36M10 44h24"/></svg>Escopo fechado, em ondas, que vira ativo</div>
+   <div class="rv" style="--i:5"><svg class="ico" viewBox="0 0 56 56"><path d="M28 8a14 14 0 0 1 14 14c0 10-14 26-14 26S14 32 14 22A14 14 0 0 1 28 8z"/><circle cx="28" cy="22" r="5" class="pulse"/></svg>PDV mensurável: One Shot e On Timing</div>
+  </div>
+  <div class="wall rv" style="--i:3">
+   <div class="pet"><img src="assets/06-logo-1792194370190.svg" alt="Logo Mars" data-zoom></div>
+   <div class="pet"><img src="assets/07-logo-1791736485264.png" alt="Logo Purina" data-zoom></div>
+   <div class="pet"><span class="nm">Kelco</span></div>
+   <div class="pet"><span class="nm">Ourofino Pet</span></div>
+   <div><span class="nm">Lactalis</span></div>
+   <div><span class="nm">Seara</span></div>
+   <div><img src="assets/08-logo-1792194369965.png" alt="Logo Panco" data-zoom></div>
+   <div><span class="nm">Savencia</span></div>
+   <div><img src="assets/09-logo-1791767888845.png" alt="Logo FTW" data-zoom></div>
+   <div><img src="assets/10-logo-1791767888918.png" alt="Logo Nutrify" data-zoom></div>
+   <div><span class="nm">Nutrata</span></div>
+   <div><span class="nm">Cacau Show</span></div>
+  </div>
+ </div>
+ <div class="fonte">Fonte: carteira de marcas atendidas pela 75 LAB em 2025 e 2026. Em destaque, as marcas do segmento pet.</div>
+ <aside class="roteiro" hidden>Nosso diferencial cabe em quatro frases. Quem desenha a peça já teve de aprová-la, instalá-la e cobrar o resultado. Falamos a língua de quem decide: margem, giro e positivação. Trabalhamos em escopo fechado e em ondas, e o projeto vira ativo da marca. E o PDV fica mensurável, com os planos One Shot e On Timing, que explicamos mais adiante. À direita, marcas que já confiaram na 75 LAB. As de moldura amarela são do universo pet, que é o assunto da próxima tela.</aside>
+</section>
+
+<!-- 4 PET -->
+<section class="slide s4" data-t="Pet">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">01 · Quem somos</span></div>
+ <span class="k rv" style="--i:0">Presença no pet</span>
+ <h2 class="rv" style="--i:1">No pet a gente já tem casa: ração, petisco, saúde animal e varejo.</h2>
+ <div class="grid">
+  <div class="cs rv" style="--i:2"><div class="lgo"><img src="assets/06-logo-1792194370190.svg" alt="Logo Mars"></div><div class="num" data-conta="5">5</div><div class="u">projetos</div><p>Pedigree e Whiskas: kit de materiais para o corredor pet.</p></div>
+  <div class="cs rv" style="--i:3"><div class="lgo"><img src="assets/07-logo-1791736485264.png" alt="Logo Purina"></div><div class="num" data-conta="2">2</div><div class="u">projetos</div><p>Pro Plan: um sistema modular de PDV para o pet shop, não só um display.</p></div>
+  <div class="cs rv" style="--i:4"><div class="lgo"><span class="nm">Kelco</span></div><div class="num" data-conta="60">60</div><div class="u">anos do Grupo Bun</div><p>Artes da festa de 60 anos e materiais de ponto de venda do Meu Bifinho.</p></div>
+  <div class="cs rv" style="--i:5"><div class="lgo"><span class="nm">Ourofino Pet</span></div><div class="num" data-conta="15">15</div><div class="u">capítulos</div><p>Manual interativo de execução em PDV para a saúde animal em pet shop.</p></div>
+ </div>
+ <div class="fonte">Fonte: registro de projetos da 75 LAB, consulta em 20/10/2026. Kelco e Ourofino Pet: projetos desenvolvidos pela 75 LAB.</div>
+ <aside class="roteiro" hidden>No segmento pet a 75 LAB não está começando. Para a Mars, trabalhamos o kit de materiais de Pedigree e Whiskas. Para a Purina, desenhamos o conceito de um sistema modular de PDV para o Pro Plan, pensado para pet shop. Para a Kelco, as artes da festa de sessenta anos do grupo e os materiais de ponto de venda do Meu Bifinho. E para a Ourofino Pet, um manual interativo de quinze capítulos de execução em ponto de venda. Tudo isso rodou nos mesmos corredores onde a Petz vende. Na próxima parte, a nossa história com a própria Petz.</aside>
+</section>
+
+<!-- DIV 1 -->
+<section class="slide k-divisor dv blue dk" data-titulo="Nossa história com a Petz" data-capitulo="2" data-t="Capítulo 2">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 02</span></div>
+ <div class="big">02</div>
+ <span class="k rv" style="--i:0">Capítulo 02</span>
+ <h2 class="rv" style="--i:1">Nossa história com a Petz.</h2>
+ <p class="ap rv" style="--i:2">Treze projetos. Dentro da loja, com a cara da marca.</p>
+ <div class="trl rv" style="--i:3"><span>01 Quem somos</span><span class="a">02 História</span><span>03 Momento</span><span>04 Parceria</span></div>
+ <aside class="roteiro" hidden>Vamos ao que mais importa para esta conversa: o que já construímos com a Petz. Esta parte mostra, de forma direta, as frentes em que trabalhamos juntos e o que cada uma deixou de aprendizado. A ideia é que, ao fim dela, fique claro que a 75 LAB não é uma agência nova para a Petz. É um time que já conhece a loja, os materiais e o jeito de decidir da casa.</aside>
+</section>
+
+<!-- 5 HISTÓRIA -->
+<section class="slide s5" data-t="Projetos">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">02 · História juntos</span></div>
+ <div style="display:flex;gap:56px;align-items:flex-end">
+  <div class="num rv" style="--i:0;font-size:190px;color:var(--blue)"><span data-conta="13">13</span></div>
+  <div><span class="k rv" style="--i:1">Nossa história juntos</span><h2 class="rv" style="--i:2" >projetos depois, a 75 LAB conhece a loja da Petz por dentro.</h2></div>
+ </div>
+ <div class="jr">
+  <div class="st rv" style="--i:3"><i>1</i>Seres Saúde: MPDVs</div>
+  <div class="st rv" style="--i:4"><i>2</i>Etiqueta chamariz</div>
+  <div class="st rv" style="--i:5"><i>3</i>Parcelamento</div>
+  <div class="st rv" style="--i:6"><i>4</i>Display de prateleira</div>
+  <div class="st rv" style="--i:7"><i>5</i>Porta panfleto</div>
+  <div class="st rv" style="--i:8"><i>6</i>Revitalização de loja</div>
+  <div class="st rv" style="--i:9"><i>7</i>Wellness</div>
+  <div class="st rv" style="--i:10"><i>8</i>Loja promo</div>
+  <div class="st rv" style="--i:11"><i>9</i>Projeto Vidas</div>
+ </div>
+ <div class="strip rv" style="--i:6">
+  <img src="assets/11-foto-outra-1-1792504453077.jpg" alt="Fachada amarela de uma loja Petz com letreiro azul" data-zoom>
+  <img src="assets/12-foto-outra-3-1792504455806.jpg" alt="Loja Petz com fachada azul e amarela sob céu aberto" data-zoom>
+  <img src="assets/13-foto-outra-4-1792504457218.jpg" alt="Loja Petz com fachada amarela e estrutura azul" data-zoom>
+ </div>
+ <div class="fonte">Fonte: registro de projetos da 75 LAB para a Petz, consulta em 20/10/2026. Fotos das lojas: petz.com.br/lojas.</div>
+ <aside class="roteiro" hidden>Treze projetos registrados com a Petz. Eles passam pelos materiais de ponto de venda de Seres Saúde, pela etiqueta chamariz, pelo parcelamento comunicado na loja, pelo display de prateleira e pelo porta panfleto. Passam também por revitalização de loja, pelas frentes de Wellness e Loja promo, e pelo Projeto Vidas, que vem na próxima tela. O que une tudo isso é uma ideia só: levar a estratégia da Petz até a prateleira, com peça que chega, que se instala e que dá para conferir.</aside>
+</section>
+
+<!-- 6 VIDAS -->
+<section class="slide s6 dk" data-t="Projeto Vidas">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">02 · História juntos</span></div>
+ <img class="rimg" src="assets/14-foto-outra-7-1792504461146.jpg" alt="Loja Petz com fachada azul e amarela e rampa de acesso" data-zoom><span class="k rv" style="--i:0">Projeto Vidas · Encantamento</span>
+ <h2 class="rv" style="--i:1">O Projeto Vidas deixou um saldo de R$ 72.517,50. Vamos devolver em valor.</h2>
+ <div class="tri">
+  <div class="rv" style="--i:2"><div class="num"><span data-conta="33">33</span></div><span>lojas no projeto aprovado em dezembro de 2025</span></div>
+  <div class="rv" style="--i:3"><div class="num"><span data-conta="4395" data-sep="1">4.395</span></div><span>chaveiros personalizados de encantamento</span></div>
+  <div class="rv" style="--i:4"><div class="num"><small>R$</small> <span data-conta="72517.5" data-dec="2">72.517,50</span></div><span>de saldo da Petz com a 75 LAB</span></div>
+ </div>
+ <div class="fonte">Fonte: aprovação do pedido do Projeto Vidas pela Petz, e-mail de 05/12/2025.</div>
+ <aside class="roteiro" hidden>O Projeto Vidas foi aprovado pela Petz em dezembro de 2025, para trinta e três lojas, com quatro mil trezentos e noventa e cinco chaveiros personalizados e entrega no centro de distribuição de Embu das Artes. O valor aprovado foi de setenta e dois mil quinhentos e dezessete reais e cinquenta centavos. Hoje esse valor existe como saldo entre as duas empresas. A nossa proposta é simples: em vez de deixá-lo parado, transformá-lo em trabalho que a Petz usa, de forma contínua.</aside>
+</section>
+
+<!-- DIV 2 -->
+<section class="slide k-divisor dv yel" data-titulo="O momento da Petz" data-capitulo="3" data-t="Capítulo 3">
+ <div class="hdr"><div class="lg"><img src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 03</span></div>
+ <div class="big">03</div>
+ <span class="k rv" style="--i:0;color:var(--navy)">Capítulo 03</span>
+ <h2 class="rv" style="--i:1">O momento da Petz.</h2>
+ <p class="ap rv" style="--i:2">Com a fusão aprovada, a escala muda. A execução também precisa mudar.</p>
+ <div class="trl rv" style="--i:3"><span>01 Quem somos</span><span>02 História</span><span class="a">03 Momento</span><span>04 Parceria</span></div>
+ <aside class="roteiro" hidden>Agora, o momento da Petz. A aprovação do Cade em dezembro de 2025 deu o sinal verde para uma das maiores operações do varejo pet do país. Isso não é só uma notícia de mercado. Para quem trabalha dentro da loja, significa mais lojas, mais marcas, mais parceiros na indústria e um desafio novo: manter uma única cara de execução em escala muito maior. É sobre isso que falamos nas próximas duas telas.</aside>
+</section>
+
+<!-- 7 MOMENTO -->
+<section class="slide s7" data-t="Momento">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">03 · Momento</span></div>
+ <span class="k rv" style="--i:0">Cliente estratégico</span>
+ <h2 class="rv" style="--i:1">Com a fusão aprovada pelo Cade, a Petz é o maior varejo pet do Brasil.</h2>
+ <div class="cols">
+  <div class="st3">
+   <div class="rv" style="--i:2"><div class="num">R$ <span data-conta="7">7</span> bi</div><span>de receita anual combinada, cerca de</span></div>
+   <div class="rv" style="--i:3"><div class="num"><span data-conta="480">480</span>+</div><span>lojas físicas, em quase 20 estados</span></div>
+   <div class="rv" style="--i:4"><div class="num"><span data-conta="26">26</span></div><span>lojas em São Paulo a vender, condição do Cade</span></div>
+  </div>
+  <div class="mos rv" style="--i:3">
+   <img class="w3" src="assets/15-foto-outra-2-1792504454502.jpg" alt="Loja Petz com fachada amarela e letreiro azul ao lado de prédios" data-zoom>
+   <img class="w3" src="assets/16-foto-outra-6-1792504459797.jpg" alt="Entrada de loja Petz com arco azul e fachada amarela" data-zoom>
+  </div>
+ </div>
+ <div class="fonte">Fontes: Agência Brasil, 10/12/2025 (aprovação do Cade, 26 lojas, mais de 480 lojas, cerca de R$ 7 bi); Suno Notícias, dezembro de 2025. Consulta em 20/10/2026.</div>
+ <aside class="roteiro" hidden>Em dezembro de 2025 o Cade aprovou a fusão entre Petz e Cobasi, com a venda de vinte e seis lojas em São Paulo. O grupo reúne cerca de sete bilhões de reais de receita anual combinada e mais de quatrocentas e oitenta lojas em quase vinte estados. Para a 75 LAB, isso faz da Petz uma cliente estratégica no sentido mais direto: é a conta onde o nosso trabalho encontra a maior escala do varejo pet. Por isso queremos uma parceria à altura, não projetos soltos.</aside>
+</section>
+
+<!-- 8 LEITURA -->
+<section class="slide s8" data-t="Leitura">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">03 · Momento</span></div>
+ <span class="k rv" style="--i:0">Nossa leitura</span>
+ <h2 class="rv" style="--i:1">Quanto maior a rede, mais caro sai cada loja fora do padrão.</h2>
+ <div class="flow">
+  <div class="bx rv" style="--i:2"><svg class="ico" viewBox="0 0 56 56"><path d="M8 24l20-14 20 14v22H8z"/><path d="M22 46V32h12v14"/></svg><b>Escala</b>Mais de 480 lojas, formatos e marcas diferentes sob o mesmo teto.</div>
+  <div class="arw"><svg viewBox="0 0 60 30"><path d="M4 15h50M42 5l12 10-12 10"/></svg></div>
+  <div class="bx rv" style="--i:3"><svg class="ico" viewBox="0 0 56 56"><path d="M10 12h36v32H10z"/><path d="M10 24h36M24 12v32"/></svg><b>Execução desigual</b>Peça que chega em uma loja e não em outra. Campanha que atrasa.</div>
+  <div class="arw"><svg viewBox="0 0 60 30"><path d="M4 15h50M42 5l12 10-12 10"/></svg></div>
+  <div class="bx hot rv" style="--i:4"><svg class="ico" viewBox="0 0 56 56"><path d="M8 44l14-16 10 8 16-22"/><path d="M36 14h12v12"/></svg><b>Venda perdida</b>A indústria paga a ativação e o shopper não vê.</div>
+ </div>
+ <div class="opp">
+  <div class="rv" style="--i:5"><span>OPORTUNIDADE 1</span>Um kit modular de peças que se repete em todas as lojas.</div>
+  <div class="rv" style="--i:6"><span>OPORTUNIDADE 2</span>A indústria dentro da loja, com calendário e peça prontos.</div>
+  <div class="rv" style="--i:7"><span>OPORTUNIDADE 3</span>Prova de instalação, loja a loja, antes de a campanha rodar.</div>
+ </div>
+ <div class="fonte">Fonte: leitura da 75 LAB a partir do porte da operação (Agência Brasil, 10/12/2025) e da experiência dos 13 projetos com a Petz.</div>
+ <aside class="roteiro" hidden>Esta é a nossa leitura. Quando uma rede cresce, o risco muda de lugar. Antes, o desafio era vender mais por loja. Agora, é fazer cada loja executar do mesmo jeito. Escala sem padrão vira execução desigual, e execução desigual vira venda perdida: a indústria paga a ativação e o shopper não vê. Daí vêm três oportunidades: um kit modular que se repete, a indústria entrando na loja com calendário pronto, e prova de instalação loja a loja. É exatamente o que a 75 LAB faz.</aside>
+</section>
+
+<!-- DIV 3 -->
+<section class="slide k-divisor dv blue dk" data-titulo="A parceria em fee" data-capitulo="4" data-t="Capítulo 4">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Capítulo 04</span></div>
+ <div class="big">04</div>
+ <span class="k rv" style="--i:0">Capítulo 04</span>
+ <h2 class="rv" style="--i:1">A parceria em fee.</h2>
+ <p class="ap rv" style="--i:2">Um time 75 LAB trabalhando com a Petz todo mês, pelo saldo que já existe.</p>
+ <div class="trl rv" style="--i:3"><span>01 Quem somos</span><span>02 História</span><span>03 Momento</span><span class="a">04 Parceria</span></div>
+ <aside class="roteiro" hidden>Chegamos à proposta. Em vez de pensar em um projeto por vez, o que sugerimos é um formato de fee: um time da 75 LAB à disposição da Petz todo mês, com estratégia, design e acompanhamento de produção. E o ponto de partida é prático: o saldo que a Petz já tem conosco. Nas próximas telas, mostramos como ele vira meses de trabalho, o que está incluído, como medimos e quando começa.</aside>
+</section>
+
+<!-- 9 FEE -->
+<section class="slide s9" data-t="Saldo em fee">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+ <span class="k rv" style="--i:0">Como o saldo vira fee</span>
+ <h2 class="rv" style="--i:1">O saldo vira 6 meses de time 75 LAB dentro da Petz.</h2>
+ <div class="tabs" data-k="grafico" style="margin-top:22px"><button class="on" data-tab="1">Saldo mês a mês</button><button data-tab="2">O que chega todo mês</button></div>
+ <div class="tp on" data-p="1">
+ <div class="cols">
+  <div>
+   <div class="bars">
+    <div class="bar" style="--i:0;--h:100%"><b>72,5 mil</b><i></i></div>
+    <div class="bar" style="--i:1;--h:83%"><b>60,4 mil</b><i></i></div>
+    <div class="bar" style="--i:2;--h:67%"><b>48,3 mil</b><i></i></div>
+    <div class="bar" style="--i:3;--h:50%"><b>36,3 mil</b><i></i></div>
+    <div class="bar" style="--i:4;--h:33%"><b>24,2 mil</b><i></i></div>
+    <div class="bar" style="--i:5;--h:17%"><b>12,1 mil</b><i></i></div>
+    <div class="bar z" style="--i:6;--h:5%"><b>zero</b><i></i></div>
+   </div>
+   <div class="lbl"><span>INÍCIO</span><span>MÊS 1</span><span>MÊS 2</span><span>MÊS 3</span><span>MÊS 4</span><span>MÊS 5</span><span>MÊS 6</span></div>
+  </div>
+  <div class="big1 rv" style="--i:3">
+   <div class="num">R$ <span data-conta="12086.25" data-dec="2">12.086,25</span></div>
+   <span>por mês de fee, durante 6 meses</span>
+   <hr>
+   <span>No mês 6 o saldo se encerra e a Petz decide se renova.</span>
+  </div>
+ </div>
+ </div>
+ <div class="tp" data-p="2">
+  <div class="sm">
+   <div><b>TODO MÊS</b>1 reunião de planejamento<p>Calendário, lojas e prioridades.</p></div>
+   <div><b>TODO MÊS</b>1 pauta de peças desenhada<p>Pronta para aprovar e produzir.</p></div>
+   <div><b>TODO MÊS</b>1 relatório de execução<p>Instalação e resultado, loja a loja.</p></div>
+  </div>
+  <div class="kn">Produção, frete e instalação: orçados à parte, só do que a Petz aprovar.</div>
+ </div>
+ <div class="fonte">Conta: R$ 72.517,50 dividido em 6 ciclos mensais iguais. O fee cobre estratégia, design e gestão.</div>
+ <aside class="roteiro" hidden>Esta é a conta. O saldo de setenta e dois mil quinhentos e dezessete reais e cinquenta centavos, dividido em seis ciclos mensais iguais, dá doze mil oitenta e seis reais e vinte e cinco centavos por mês. A cada mês, o saldo desce e o trabalho entra. No sexto mês o saldo se encerra, e a Petz decide, com os resultados na mão, se renova. Importante: o fee cobre estratégia, design e gestão. A produção das peças, o frete e a instalação são orçados à parte, projeto a projeto.</aside>
+</section>
+
+<!-- 10 ESCOPO -->
+<section class="slide s10" data-t="Escopo">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+ <span class="k rv" style="--i:0">O que o fee entrega</span>
+ <h2 class="rv" style="--i:1">O fee cobre pensar, desenhar e acompanhar. Produzir é orçado à parte.</h2>
+ <div class="fr rv" style="--i:2"><span>Estratégia de trade</span><span>Design e desenvolvimento</span><span>Gestão e acompanhamento</span><span class="o">Produção e logística: por projeto</span></div>
+ <div class="m6">
+  <div class="rv" style="--i:3"><em>01</em><b>Imersão</b>Loja, canal, produto e shopper da Petz e da Cobasi.</div>
+  <div class="rv" style="--i:4"><em>02</em><b>Laboratório</b>Caminhos desenhados e validados antes de produzir.</div>
+  <div class="rv" style="--i:5"><em>03</em><b>Especialistas</b>O time certo entra no momento certo.</div>
+  <div class="rv" style="--i:6"><em>04</em><b>Estratégia + design</b>Estética a serviço da conversão.</div>
+  <div class="rv" style="--i:7"><em>05</em><b>Produção</b>Cotação, material e logística como estratégia.</div>
+  <div class="rv" style="--i:8"><em>06</em><b>Execução</b>Peça instalada e com impacto medido.</div>
+ </div>
+ <div class="fonte">Fonte: Método 75 da 75 LAB. Produção, frete e instalação orçados à parte por projeto aprovado.</div>
+ <aside class="roteiro" hidden>O fee cobre o que vem antes e depois da fábrica: estratégia de trade, design e desenvolvimento das peças, e gestão e acompanhamento. A produção e a logística são orçadas projeto a projeto, para a Petz só pagar pelo que aprovar. Tudo segue o nosso Método 75, em seis passos: imersão, laboratório, especialistas, estratégia com design, produção e execução. E todo mês a Petz recebe três coisas certas: uma reunião de planejamento, uma pauta de peças desenhada e um relatório de execução.</aside>
+</section>
+
+<!-- 11 RASTREAMENTO -->
+<section class="slide s11" data-t="Rastreamento">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+ <span class="k rv" style="--i:0">Plano de rastreamento 75 LAB</span>
+ <h2 class="rv" style="--i:1">Cada peça com prova de instalação e acompanhamento ao vivo.</h2>
+ <div class="cols">
+  <div class="vf rv" style="--i:2">
+   <div><i>1</i>Peça ou ativação na loja</div><div class="dn"></div>
+   <div><i>2</i>Captação: QR, foto, tag</div><div class="dn"></div>
+   <div><i>3</i>Transmissão ao painel</div><div class="dn"></div>
+   <div><i>4</i>Plataforma e dados</div><div class="dn"></div>
+   <div><i>5</i>Insight e decisão</div>
+  </div>
+  <div><div class="tabs" data-k="grafico"><button class="on" data-tab="1">One Shot</button><button data-tab="2">On Timing</button></div><div class="two one">
+   <div class="tw tp on rv" data-p="1" style="--i:3"><svg class="ico" viewBox="0 0 56 56"><rect x="10" y="10" width="14" height="14"/><rect x="32" y="10" width="14" height="14"/><rect x="10" y="32" width="14" height="14"/><path d="M32 32h6v6h-6zM42 42h4M42 32h4"/></svg><h3>One Shot</h3>
+    <p><b>O que é</b>O registro da instalação de cada peça, pelo QR Code da própria peça.</p>
+    <p><b>Como funciona</b>Quem instala escaneia o QR, fotografa a peça montada e o sistema grava loja, data, hora e GPS no painel.</p>
+    <p><b>Benefício</b>A Petz sabe, loja a loja, que a peça foi instalada, sem auditoria presencial.</p></div>
+   <div class="tw y tp rv" data-p="2" style="--i:4"><svg class="ico" viewBox="0 0 56 56"><path d="M28 8a14 14 0 0 1 14 14c0 10-14 26-14 26S14 32 14 22A14 14 0 0 1 28 8z"/><circle cx="28" cy="22" r="5" class="pulse"/></svg><h3>On Timing</h3>
+    <p><b>O que é</b>O acompanhamento ao vivo da peça durante toda a campanha. Inclui o One Shot.</p>
+    <p><b>Como funciona</b>Tag de localização e, onde houver sensor Códice, a reposição mandam sinal ao painel, que mostra onde a peça está e avisa se saiu do lugar.</p>
+    <p><b>Benefício</b>A peça não some nem fica vazia sem ninguém saber.</p></div>
+  </div></div>
+ </div>
+ <div class="fonte">Fonte: planos One Shot e On Timing da 75 LAB. Sensor Códice conforme a peça e a loja escolhidas na pauta do mês.</div>
+ <aside class="roteiro" hidden>Um ponto que muda o jogo em uma rede deste tamanho: provar a execução. O One Shot é o registro da instalação: quem instala escaneia o QR da própria peça, fotografa, e o painel grava loja, data, hora e localização. A Petz sabe que a peça chegou, sem auditoria presencial. O On Timing é o acompanhamento ao vivo durante a campanha: uma tag, e onde houver sensor Códice, a reposição, avisam se a peça saiu do lugar ou se o produto acabou. Nada some sem ninguém saber.</aside>
+</section>
+
+<!-- 12 CRONOGRAMA -->
+<section class="slide s12" data-t="Cronograma">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+ <span class="k rv" style="--i:0">Cronograma de 6 meses</span>
+ <h2 class="rv" style="--i:1">Em 30 dias a Petz já tem calendário, pauta e as primeiras lojas de prova.</h2>
+ <div class="gt">
+  <div class="hd mm"><span></span><span>MÊS 1</span><span>MÊS 2</span><span>MÊS 3</span><span>MÊS 4</span><span>MÊS 5</span><span>MÊS 6</span></div>
+  <div class="row"><b>Imersão e calendário</b><div class="bar2 n" style="--i:0;grid-column:2/3">Lojas e metas</div></div>
+  <div class="row"><b>Desenho do kit modular</b><div class="bar2" style="--i:1;grid-column:2/4">Kit e primeiras peças</div></div>
+  <div class="row"><b>Produção e instalação</b><div class="bar2 y" style="--i:2;grid-column:3/6">Ondas por campanha</div></div>
+  <div class="row"><b>One Shot e On Timing</b><div class="bar2 n" style="--i:3;grid-column:3/7">Prova de execução loja a loja</div></div>
+  <div class="row"><b>Relatório e decisão</b><div class="bar2" style="--i:4;grid-column:7/8">Balanço</div></div>
+ </div>
+ <div class="mk rv" style="--i:6"><span>Mês 1: aprovação do escopo</span><span>Mês 2: primeira onda instalada</span><span>Mês 6: balanço e renovação</span></div>
+ <div class="fonte">Cronograma em meses a partir da aprovação. As datas de cada onda saem do calendário promocional definido na imersão.</div>
+ <aside class="roteiro" hidden>Seis meses, lidos da esquerda para a direita. No primeiro mês fazemos a imersão, fechamos o calendário promocional e definimos as lojas e as metas. Ainda no mês um e dois, desenhamos o kit modular e as primeiras peças. A produção e a instalação entram em ondas, uma por campanha, a partir do segundo mês. O One Shot e o On Timing acompanham tudo, loja a loja. E no sexto mês fazemos o balanço, com a prova de execução, para a Petz decidir se renova. As datas exatas de cada onda saem do calendário promocional.</aside>
+</section>
+
+<!-- 13 KPIs -->
+<section class="slide s13" data-t="Indicadores">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+ <span class="k rv" style="--i:0">Indicadores</span>
+ <h2 class="rv" style="--i:1">O que a gente vai acompanhar, com meta combinada no primeiro mês.</h2>
+ <table class="kp rv" style="--i:2">
+  <thead><tr><th>Indicador</th><th>Como medimos</th></tr></thead>
+  <tbody>
+   <tr><td>Lojas com peça instalada</td><td>One Shot: foto, loja, data e GPS</td></tr>
+   <tr><td>Dias entre aprovação e instalação</td><td>Datas do painel de instalações</td></tr>
+   <tr><td>Execução conforme o padrão</td><td>Foto da peça montada</td></tr>
+   <tr><td>Peça no lugar e abastecida</td><td>On Timing: tag e sensor Códice</td></tr>
+   <tr><td>Peças reaproveitadas no kit</td><td>Peças usadas em mais de uma campanha</td></tr>
+  </tbody>
+ </table>
+ <div class="kn rv" style="--i:4">Linha de base e meta de cada um: a combinar com a Petz até o fim do mês 1.</div>
+ <div class="fonte">Resultado esperado, não resultado real. Quem define as metas: trade da Petz com a 75 LAB, até o fim do mês 1. Sensor Códice onde houver.</div>
+ <aside class="roteiro" hidden>Aqui está o que vamos acompanhar. Cinco indicadores: quantas lojas receberam a peça, quantos dias passam entre a aprovação e a instalação, quanto da execução está conforme o padrão, se a peça está no lugar e abastecida, e quantas peças foram reaproveitadas no kit. Ainda não existe linha de base, então não vamos prometer número. A meta de cada um sai de uma conversa com o trade da Petz até o fim do primeiro mês. O que prometemos é medir.</aside>
+</section>
+
+<!-- 14 PRÓXIMOS -->
+<section class="slide s14" data-t="Próximos passos">
+ <div class="hdr"><div class="lg"><img src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/04-oficina-1792504821922-l75-black.png" alt="Logo 75 LAB"></div><span class="ch">04 · Parceria</span></div>
+ <span class="k rv" style="--i:0;color:var(--navy)">Fechamento</span>
+ <h1 class="rv" style="--i:1">Maior do Brasil não é só tamanho. É estar igual em cada loja.</h1>
+ <div class="st">
+  <div class="rv" style="--i:2"><span>PASSO 1</span>Validar com a Petz o escopo de 6 meses e a divisão do saldo.</div>
+  <div class="rv" style="--i:3"><span>PASSO 2</span>Escolher a primeira campanha e as lojas de prova.</div>
+  <div class="rv" style="--i:4"><span>PASSO 3</span>Kick-off do mês 1: imersão, calendário e metas.</div>
+ </div>
+ <img class="band" src="assets/17-foto-outra-8-1792504462443.jpg" alt="Loja Petz com cobertura amarela e painel vazado" data-zoom><aside class="roteiro" hidden>Voltando à ideia do começo. Ser o maior varejo pet do Brasil não é só uma questão de tamanho. É conseguir estar igual em cada loja, na campanha certa, no prazo. A 75 LAB quer ser o time que garante isso, e a Petz é, para nós, uma conta estratégica de verdade. Os próximos passos são três: validar o escopo de seis meses e a divisão do saldo, escolher a primeira campanha e as lojas de prova, e marcar o kick-off do mês um.</aside>
+</section>
+
+<!-- 15 INSTITUCIONAL -->
+<section class="slide s15 dk" data-t="Institucional">
+ <div class="hdr"><div class="lg"><img class="pz" src="assets/02-logo-1791747187168.svg" alt="Logo Petz"><span class="x">×</span><img src="assets/03-oficina-1792504822472-l75-lime.png" alt="Logo 75 LAB"></div><span class="ch">Fale com a gente</span></div>
+ <div class="cols">
+  <div>
+   <span class="k rv" style="--i:0">Ideia boa é a que acontece</span>
+   <h2 class="rv" style="--i:1">Vamos fazer a nova Petz acontecer em cada loja.</h2>
+   <p class="pre rv" style="--i:2">Quer ajustar escopo, lojas ou o primeiro mês? Chame a gente.</p>
+   <a class="wa rv" style="--i:3" href="https://wa.me/5511986765634?text=Ol%C3%A1!%20Vi%20a%20proposta%20da%2075%20LAB%20para%20a%20Petz%20e%20quero%20conversar." target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp">Fale conosco no WhatsApp</a>
+  </div>
+  <dl class="rv" style="--i:2">
+   <dt>Apresentador</dt><dd>Caique Becker, cofundador e Head de Trade<br>caique.becker@75lab.com.br</dd>
+   <dt>Empresa</dt><dd>75 LAB ESTRATÉGIA, DESIGN E PRODUÇÃO LTDA<br>CNPJ 55.470.982/0001-77</dd>
+   <dt>Endereço</dt><dd>CENU · Centro Empresarial das Nações Unidas, Torre Norte, Av. das Nações Unidas, 12.901, Brooklin, São Paulo, SP, CEP 04578-910</dd>
+   <dt>Contato</dt><dd>(11) 8864-8434 · WhatsApp (11) 98676-5634<br>contato@75lab.com.br</dd>
+   <dt>Online</dt><dd>75lab.com.br · Instagram @setecincolab</dd>
+  </dl>
+ </div>
+ <aside class="roteiro" hidden>Para fechar: obrigado pela confiança de todos esses projetos. A 75 LAB quer continuar sendo o time que leva a estratégia da Petz até a prateleira, agora na escala do maior varejo pet do Brasil. Aqui estão os nossos dados e o botão do WhatsApp, para ajustarmos escopo, lojas ou o primeiro mês na hora que fizer sentido para vocês. Ideia boa é a que acontece, e queremos fazer a nova Petz acontecer em cada loja.</aside>
+</section>
+
+</main>
+
+<div id="nav"><button id="pv" aria-label="Tela anterior">‹</button><span id="ct">01 / 18</span><button id="nx" aria-label="Próxima tela">›</button><button id="rb" class="rt" aria-label="Mostrar roteiro de fala">ROTEIRO</button></div>
+<div id="rot" role="region" aria-label="Roteiro de fala"></div>
+<div id="lb" role="dialog" aria-label="Imagem ampliada"><img alt=""></div>
+
+<script>
+(function(){
+var stage=document.getElementById('stage'),sl=[].slice.call(document.querySelectorAll('.slide')),cur=0,N=sl.length;
+var mob=function(){return Math.min(window.innerWidth,screen.width)<900};
+var cnt=document.getElementById('ct'),pg=document.getElementById('pg'),rot=document.getElementById('rot');
+function fmt(v,dec,sep){return v.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec})}
+function count(s){[].forEach.call(s.querySelectorAll('[data-conta]'),function(e){var f=parseFloat(e.dataset.conta),d=parseInt(e.dataset.dec||'0',10),fin=fmt(f,d);if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||mob()){e.textContent=fin;return}var t0=null;function st(t){if(!t0)t0=t;var p=Math.min((t-t0)/1400,1),q=1-Math.pow(1-p,3);e.textContent=fmt(f*q,d);if(p<1)requestAnimationFrame(st);else e.textContent=fin}requestAnimationFrame(st)})}
+function pad(n){return (n<10?'0':'')+n}
+function show(n){if(n<0||n>=N)return;if(!mob()){sl[cur].classList.remove('on');sl[cur].classList.add('out');var o=sl[cur];setTimeout(function(){o.classList.remove('out')},600);cur=n;sl.forEach(function(s,i){if(i!==n)s.classList.remove('on')});sl[n].classList.remove('out');sl[n].classList.add('on');count(sl[n]);}
+ cnt.textContent=pad(n+1)+' / '+N;pg.style.width=((n+1)/N*100)+'%';if(rot.classList.contains('on'))setRot()}
+function setRot(){var a=sl[cur].querySelector('.roteiro');rot.innerHTML='<b>ROTEIRO · '+(sl[cur].dataset.t||'')+'</b>'+(a?a.innerHTML:'')}
+function fit(){if(mob()){document.body.classList.add('mob');sl.forEach(function(s){s.classList.add('on');count(s)});}else{document.body.classList.remove('mob');var k=Math.min(window.innerWidth/1600,window.innerHeight/900);stage.style.transform='translate(-50%,-50%) scale('+k+')';sl.forEach(function(s,i){if(i!==cur)s.classList.remove('on')});sl[cur].classList.add('on')}}
+window.addEventListener('resize',fit);window.addEventListener('orientationchange',fit);fit();show(0);
+document.getElementById('nx').onclick=function(){show(cur+1)};document.getElementById('pv').onclick=function(){show(cur-1)};
+document.getElementById('rb').onclick=function(){rot.classList.toggle('on');setRot()};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){lb.classList.remove('on');rot.classList.remove('on');return}if(mob())return;
+ if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();show(cur+1)}else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();show(cur-1)}else if(e.key==='r'||e.key==='R'){rot.classList.toggle('on');setRot()}});
+var wl=0;window.addEventListener('wheel',function(e){if(mob()||Date.now()-wl<800||Math.abs(e.deltaY)<30)return;wl=Date.now();show(cur+(e.deltaY>0?1:-1))},{passive:true});
+var tx=null;window.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});window.addEventListener('touchend',function(e){if(mob()||tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)show(cur+(d<0?1:-1));tx=null},{passive:true});
+[].forEach.call(document.querySelectorAll('.tabs button'),function(b){b.addEventListener('click',function(){var s=b.closest('.slide');[].forEach.call(b.parentNode.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b)});[].forEach.call(s.querySelectorAll('.tp'),function(p){p.classList.toggle('on',p.dataset.p===b.dataset.tab)})})});
+var lb=document.getElementById('lb'),li=lb.querySelector('img');
+[].forEach.call(document.querySelectorAll('img[data-zoom]'),function(i){i.addEventListener('click',function(){li.src=i.src;li.alt=i.alt;lb.classList.add('on')})});
+lb.addEventListener('click',function(){lb.classList.remove('on')});
+var c1=document.getElementById('cur'),c2=document.getElementById('cur2'),mx=0,my=0,x2=0,y2=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c1.style.left=mx+'px';c1.style.top=my+'px';var z=e.target.closest&&e.target.closest('img[data-zoom]');c2.classList.toggle('z',!!z);c2.textContent=z?'EXPANDIR':''});
+(function lp(){x2+=(mx-x2)*.18;y2+=(my-y2)*.18;c2.style.left=x2+'px';c2.style.top=y2+'px';requestAnimationFrame(lp)})();
+if(mob()){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=sl.indexOf(e.target);cnt.textContent=pad(i+1)+' / '+N}})},{threshold:.4});sl.forEach(function(s){io.observe(s)})}
+})();
+</script>
+<div id="painel-roteiro" data-modo-apresentador hidden style="position:fixed;left:16px;right:16px;bottom:16px;max-height:38vh;overflow:auto;z-index:99999;background:rgba(17,17,17,.94);color:#f4f4f0;font:16px/1.5 'Space Grotesk',Arial,sans-serif;padding:16px 20px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.35)"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:6px"><b id="painel-roteiro-t" style="font:700 13px 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#C0EE4E">Roteiro</b><button type="button" onclick="document.getElementById('painel-roteiro').hidden=true" aria-label="Fechar roteiro" style="min-width:44px;min-height:44px;background:none;border:1px solid #555;color:#fff;border-radius:8px;cursor:pointer">×</button></div><div id="painel-roteiro-x"></div></div>
+<button type="button" id="botao-roteiro" aria-label="Abrir o roteiro de fala" style="position:fixed;right:16px;top:16px;z-index:99998;min-width:44px;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid rgba(0,0,0,.15);background:rgba(255,255,255,.85);font:600 13px 'Space Grotesk',Arial,sans-serif;cursor:pointer;opacity:.55">Roteiro</button>
+<script>(function(){var P=document.getElementById('painel-roteiro'),X=document.getElementById('painel-roteiro-x'),T=document.getElementById('painel-roteiro-t');function atual(){var s=[].slice.call(document.querySelectorAll('.slide, section.tela, [data-slide]'));var v=s.filter(function(e){var c=getComputedStyle(e),r=e.getBoundingClientRect();return c.display!=='none'&&c.visibility!=='hidden'&&parseFloat(c.opacity||'1')>.3&&r.bottom>0&&r.top<innerHeight})[0];return {s:v,i:s.indexOf(v)}}function abrir(){var a=atual();if(!a.s)return;var r=a.s.querySelector('.roteiro');X.textContent=r?r.textContent.replace(/\s+/g,' ').trim():'Sem roteiro nesta tela.';T.textContent='Roteiro · tela '+(a.i+1);P.hidden=false}document.getElementById('botao-roteiro').onclick=function(){P.hidden?abrir():P.hidden=true};addEventListener('keydown',function(e){if((e.key==='r'||e.key==='R')&&!e.metaKey&&!e.ctrlKey){P.hidden?abrir():P.hidden=true}else if(!P.hidden&&/Arrow|Page| /.test(e.key)){setTimeout(abrir,60)}});})();</script>
+<style data-base-deck="1.0.0">
+/* Base de deck da agência 75 LAB: modo celular (html.bc-cel). No computador nada muda: todas as regras ficam presas a
+   html.bc-cel, ligado pelo deck-base.cliente.js só abaixo de 900 px de largura (ou quando o próprio deck entrou no modo
+   celular dele). No celular cada tela vira uma seção empilhada, fundo claro, tipografia por papel e navegação na margem. */
+html.bc-cel{--bc-papel:#F2F1E9;--bc-papel2:#FAF9F4;--bc-tinta:#111110;--bc-tinta2:#3a3a36;--bc-suave:#66665f;--bc-linha:rgba(17,17,16,.12);--bc-cartao:#FFFFFF;--bc-acento:#01A290;--bc-mx:22px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.bc-cel,html.bc-cel body{width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;overflow-x:hidden!important;overflow-y:auto!important;position:static!important;background:var(--bc-papel)!important;cursor:auto!important;touch-action:pan-y pinch-zoom!important;overscroll-behavior:auto!important;zoom:1!important}
+@supports (overflow:clip){html.bc-cel,html.bc-cel body{overflow-x:clip!important}}
+html.bc-cel body{margin:0!important;padding:0!important;user-select:auto!important;-webkit-user-select:auto!important}
+html.bc-cel *{cursor:auto!important}
+html.bc-cel *,html.bc-cel *::before,html.bc-cel *::after{touch-action:auto!important}
+/* palco do deck (stage e quem estiver entre o body e as telas) */
+html.bc-cel [data-bc-palco]{position:static!important;transform:none!important;scale:none!important;translate:none!important;width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;inset:auto!important;overflow:visible!important;display:block!important;background:transparent!important;zoom:1!important;opacity:1!important;visibility:visible!important;filter:none!important;clip-path:none!important}
+/* cromo do deck (setas, pontos, contador, cursor, cabeçalho fixo, botão de roteiro): some no celular */
+html.bc-cel [data-bc-cromo],html.bc-cel [data-bc-deco],html.bc-cel [data-bc-oculto]{display:none!important}
+html.bc-cel [data-bc-tela] [data-bc-oculto][data-bc-oculto][data-bc-oculto],html.bc-cel [data-bc-tela] [data-bc-deco][data-bc-deco][data-bc-deco]{display:none!important}
+html.bc-cel .bc-rodape{display:flex!important;justify-content:center;padding:28px 22px 44px;background:var(--bc-papel)}
+html.bc-cel .bc-rodape #botao-roteiro{position:static!important;opacity:.8!important;min-height:44px}
+html.bc-cel #painel-roteiro{left:12px!important;right:12px!important;bottom:12px!important;max-height:50svh!important}
+/* cada tela vira uma seção */
+html.bc-cel [data-bc-tela]{position:relative!important;inset:auto!important;display:block!important;float:none!important;width:auto!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:60px max(var(--bc-mx),calc((100vw - 660px)/2)) 52px!important;opacity:1!important;visibility:visible!important;transform:none!important;scale:none!important;translate:none!important;filter:none!important;clip-path:none!important;overflow:hidden!important;background:var(--bc-papel)!important;background-image:none!important;color:var(--bc-tinta)!important;pointer-events:auto!important;transition:none!important;animation:none!important;content-visibility:visible!important;scroll-snap-align:start;scroll-margin-top:0;border-top:1px solid var(--bc-linha)!important;box-shadow:none!important;z-index:auto!important;text-align:left!important}
+html.bc-cel [data-bc-tela][data-bc-par]{background:var(--bc-papel2)!important}
+html.bc-cel [data-bc-tela]:first-of-type,html.bc-cel [data-bc-tela="1"]{border-top:0!important}
+html.bc-cel [data-bc-tela]::before,html.bc-cel [data-bc-tela]::after{display:none!important}
+/* tudo dentro da tela entra no fluxo: sem posição absoluta, sem transformação, nada mais largo que a tela */
+html.bc-cel [data-bc-tela] *:not(svg):not(svg *):not([data-bc-manter]):not([data-bc-manter] *){position:static!important;inset:auto!important;float:none!important;transform:none!important;scale:none!important;translate:none!important;rotate:none!important;min-width:0!important;max-width:100%!important;transition:none!important;clip-path:none!important;writing-mode:horizontal-tb!important;column-count:auto!important;columns:auto!important;z-index:auto!important;mix-blend-mode:normal!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.bc-cel [data-bc-tela] *::before,html.bc-cel [data-bc-tela] *::after{max-width:100%!important}
+html.bc-cel [data-bc-tela] [data-bc-c]{width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 1 auto!important;align-self:stretch!important;justify-self:stretch!important;margin-left:0!important;margin-right:0!important;text-overflow:clip!important}
+html.bc-cel [data-bc-tela] [data-bc-c][data-bc-c="inline"]{width:fit-content!important;max-width:100%!important;align-self:flex-start!important;justify-self:start!important}
+html.bc-cel [data-bc-tela] svg{max-width:100%!important;transform:none!important;rotate:none!important;position:static!important;inset:auto!important}
+html.bc-cel [data-bc-tela] svg *{stroke-dashoffset:0!important;animation:none!important;transition:none!important}
+html.bc-cel [data-bc-tela] svg[data-bc-svg="grafico"]{width:100%!important;height:auto!important;display:block!important}
+html.bc-cel [data-bc-tela] svg[data-bc-svg="icone"]{max-width:44px!important;max-height:44px!important}
+html.bc-cel [data-bc-tela] [data-bc-ancora]{position:relative!important}
+html.bc-cel [data-bc-tela] [data-bc-ancora]::before,html.bc-cel [data-bc-tela] [data-bc-ancora]::after{max-height:100%!important;max-width:100%!important}
+/* grades e linhas */
+html.bc-cel [data-bc-tela] [data-bc-grade]{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-template-areas:none!important;grid-auto-flow:row!important;grid-auto-rows:auto!important;gap:14px!important;align-items:stretch!important;justify-items:stretch!important;align-content:start!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="2"]{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="logos"]{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;align-items:center!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="galeria"]{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="galeria"] img{width:100%!important;height:auto!important;aspect-ratio:4/3!important;object-fit:cover!important;margin:0!important;max-height:none!important}
+html.bc-cel [data-bc-tela] [data-bc-grade]>*{grid-column:auto!important;grid-row:auto!important;grid-area:auto!important}
+html.bc-cel [data-bc-tela] [data-bc-linha="coluna"]{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;justify-content:flex-start!important;gap:14px!important}
+html.bc-cel [data-bc-tela] [data-bc-linha="fica"]{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;justify-content:flex-start!important;gap:10px 14px!important}
+html.bc-cel [data-bc-tela] [data-bc-linha="fica"]>*{flex:0 1 auto!important;width:auto!important}
+html.bc-cel [data-bc-tela] [data-bc-tabela]{display:block!important}
+/* cartões */
+html.bc-cel [data-bc-tela] [data-bc-cartao]{border-radius:inherit;padding:18px 18px!important;box-shadow:none!important}
+html.bc-cel [data-bc-tela] [data-bc-cartao="claro"]{background:var(--bc-cartao)!important;border:1px solid var(--bc-linha)!important;color:var(--bc-tinta)!important}
+html.bc-cel [data-bc-tela] [data-bc-camada]{background:transparent!important;background-image:none!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
+/* imagens */
+html.bc-cel [data-bc-tela] img,html.bc-cel [data-bc-tela] video,html.bc-cel [data-bc-tela] picture,html.bc-cel [data-bc-tela] canvas{max-width:100%!important;height:auto!important;opacity:1!important;filter:none!important}
+html.bc-cel [data-bc-tela] [data-bc-img="foto"]{display:block!important;width:100%!important;height:auto!important;max-height:72svh!important;object-fit:cover!important;object-position:center!important;margin:6px 0 18px!important;border-radius:0!important;aspect-ratio:auto!important}
+html.bc-cel [data-bc-tela] [data-bc-img="foto"][data-bc-alta]{width:auto!important;max-width:100%!important;max-height:60svh!important;margin-left:auto!important;margin-right:auto!important;object-fit:contain!important}
+html.bc-cel [data-bc-tela] [data-bc-img="capa"]{display:block!important;width:calc(100% + 2 * max(var(--bc-mx),calc((100vw - 660px)/2)))!important;max-width:none!important;margin:-60px calc(-1 * max(var(--bc-mx),calc((100vw - 660px)/2))) 26px!important;height:auto!important;aspect-ratio:4/3!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
+html.bc-cel [data-bc-tela] [data-bc-img="logo"]{display:inline-block!important;width:auto!important;height:auto!important;max-width:150px!important;max-height:42px!important;object-fit:contain!important;margin:0!important;vertical-align:middle}
+html.bc-cel [data-bc-tela] [data-bc-grade="logos"] [data-bc-img="logo"]{max-width:100%!important;max-height:40px!important;margin:0 auto!important;display:block!important}
+html.bc-cel [data-bc-tela] [data-bc-img="icone"]{display:inline-block!important;width:auto!important;height:auto!important;max-width:44px!important;max-height:44px!important;object-fit:contain!important;margin:0 0 8px!important}
+html.bc-cel [data-bc-tela] [data-bc-fundo]{display:block!important;width:calc(100% + 2 * max(var(--bc-mx),calc((100vw - 660px)/2)))!important;max-width:none!important;height:auto!important;aspect-ratio:4/3;margin:-60px calc(-1 * max(var(--bc-mx),calc((100vw - 660px)/2))) 26px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;opacity:1!important;filter:none!important;border-radius:0!important}
+html.bc-cel [data-bc-tela] [data-bc-fundo="meio"]{width:100%!important;margin:6px 0 18px!important;aspect-ratio:16/10}
+html.bc-cel [data-bc-tela] iframe{width:100%!important;height:70svh!important;border:0}
+html.bc-cel [data-bc-tela] [data-bc-mapa]>img{width:100%!important;height:auto!important;max-height:none!important;margin:0!important}
+html.bc-cel [data-bc-tela] model-viewer{width:100%!important;height:56svh!important}
+/* texto por papel */
+html.bc-cel [data-bc-tela] [data-bc-papel]{white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;hyphens:manual;text-overflow:clip!important;max-width:100%!important;-webkit-line-clamp:unset!important;line-clamp:none!important;text-indent:0!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="capa"]{font-size:clamp(38px,11.2vw,54px)!important;line-height:1.04!important;letter-spacing:-.01em!important;margin:0 0 16px!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="titulo"]{font-size:clamp(29px,8.4vw,40px)!important;line-height:1.06!important;letter-spacing:-.005em!important;margin:0 0 16px!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="titulo3"]{font-size:28px!important;line-height:1.1!important;letter-spacing:0!important;margin:0 0 8px!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="subtitulo"]{font-size:clamp(19px,5.4vw,23px)!important;line-height:1.28!important;letter-spacing:0!important;margin:0 0 8px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="corpo"]{font-size:clamp(16px,4.4vw,18px)!important;line-height:1.5!important;letter-spacing:0!important;margin:0 0 12px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="apoio"]{font-size:16px!important;line-height:1.45!important;letter-spacing:0!important;margin:0 0 8px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="rotulo"]{font-size:13px!important;line-height:1.4!important;letter-spacing:.1em!important;margin:0 0 10px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="numero"]{white-space:nowrap!important;line-height:1!important;letter-spacing:-.01em!important;margin:4px 0 6px!important;overflow:visible!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="numero"][data-bc-quebra]{white-space:normal!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="fonte"]{font-size:12px!important;line-height:1.4!important;letter-spacing:0!important;margin:18px 0 0!important;color:var(--bc-suave)!important;opacity:1!important;text-transform:none!important;font-weight:400!important}
+html.bc-cel [data-bc-tela] [data-bc-papel] *{font-size:inherit;line-height:inherit!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important}
+html.bc-cel [data-bc-tela] [data-bc-papel] [data-bc-papel]{font-size:inherit!important}
+html.bc-cel [data-bc-tela] [data-bc-acao]{min-height:44px!important;display:inline-flex!important;align-items:center!important;justify-content:center;padding:10px 16px!important;margin:6px 0!important;width:auto!important}
+html.bc-cel [data-bc-tela] li[data-bc-papel]{margin-bottom:8px!important}
+html.bc-cel [data-bc-tela] ul,html.bc-cel [data-bc-tela] ol{padding-left:20px!important;margin:0 0 12px!important}
+html.bc-cel [data-bc-tela] [data-bc-c="lista-limpa"]{padding-left:0!important}
+/* créditos de foto que eram legenda: vão para o pé da tela, pequenos */
+html.bc-cel [data-bc-tela] .bc-fonte{display:block!important;font:400 12px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif!important;color:var(--bc-suave)!important;margin:20px 0 0!important;letter-spacing:0!important;text-transform:none!important}
+/* capa */
+html.bc-cel [data-bc-tela="1"]{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;padding-bottom:56px!important}
+html.bc-cel [data-bc-tela="1"][data-bc-temcapa]{min-height:100svh!important}
+html.bc-cel [data-bc-tela="1"][data-bc-temcapa]{justify-content:flex-start!important}
+html.bc-cel [data-bc-tela="1"]>*{flex:0 0 auto!important}
+html.bc-cel [data-bc-tela="1"] .bc-marcas{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;margin:-60px calc(-1 * max(var(--bc-mx),calc((100vw - 660px)/2))) 22px!important;padding:16px max(var(--bc-mx),calc((100vw - 660px)/2))!important;width:auto!important;max-width:none!important}
+html.bc-cel [data-bc-tela="1"] .bc-marcas img,html.bc-cel [data-bc-tela="1"] .bc-marcas svg{height:28px!important;width:auto!important;max-width:44%!important;object-fit:contain!important;display:block!important}
+html.bc-cel [data-bc-tela="1"][data-bc-temcapa] .bc-marcas{margin-bottom:0!important}
+html.bc-cel [data-bc-tela="1"]:not([data-bc-temcapa]) .bc-marcas+*{margin-top:28px!important}
+/* navegação na margem direita: nunca encosta no texto */
+#bc-nav{display:none}
+html.bc-cel #bc-nav{display:flex;position:fixed;right:7px;top:50%;transform:translateY(-50%);flex-direction:column;align-items:center;gap:6px;z-index:2147483000;pointer-events:none;opacity:0;transition:opacity .35s ease}
+html.bc-cel #bc-nav.bc-rolando{opacity:1}
+html.bc-cel #bc-nav i{display:block;width:5px;height:5px;border-radius:3px;background:rgba(17,17,16,.22);transition:height .25s ease,background .25s ease}
+html.bc-cel #bc-nav i.bc-agora{height:16px;background:var(--bc-acento)}
+html.bc-cel #bc-nav.bc-trilho{width:3px;height:34vh;border-radius:2px;background:rgba(17,17,16,.14);gap:0;justify-content:flex-start}
+html.bc-cel #bc-nav.bc-trilho b{display:block;width:3px;border-radius:2px;background:var(--bc-acento);height:0}
+@media (prefers-reduced-motion:reduce){html.bc-cel #bc-nav i{transition:none}}
+/* componente que o deck pede para manter como está no celular (data-bc-manter): só não pode passar da largura */
+html.bc-cel [data-bc-tela] [data-bc-manter]{max-width:100%!important;overflow-x:auto}
+</style>
+<script data-base-deck="1.0.0">
+/* Base de deck da agência 75 LAB (lado do navegador). Injetada pelo motor em todo deck e one-pager (deck-base.ts).
+   No computador não faz nada. No celular (largura abaixo de 900 px, ou quando o próprio deck entrou no modo celular dele)
+   transforma cada tela numa seção empilhada e desenhada para o telefone: fundo claro, tipografia por papel, números que
+   cabem, imagens na largura certa, legenda vira crédito no pé, navegação discreta na margem direita. ?bc=0 desliga. */
+(function () {
+  'use strict';
+  var D = document, H = D.documentElement, W = window;
+  if (W.__bcBase) return; W.__bcBase = 1;
+  var q = {}; try { q = Object.fromEntries(new URLSearchParams(location.search)); } catch (e) {}
+  if (q.bc === '0') return;
+  if (D.querySelector('meta[name="perfil-conferencia"][content="loja-simulada"]')) return;
+  var FORCAR = q.bc === '1';
+  var ATIVAS = ['on', 'active', 'ativa', 'ativo', 'act', 'atual', 'current', 'is-active', 'show', 'visivel', 'in', 'cur', 'atv'];
+  var CREDITO = /^(foto|fotos|imagem|imagens|ilustra[cç][aã]o|ilustrativ|cr[eé]dito|reprodu[cç][aã]o|divulga[cç][aã]o|simula[cç][aã]o|render|mockup|montagem|composi[cç][aã]o|©|\(c\))|foto real|imagem ilustrativa|ilustra[cç][aã]o institucional|meramente ilustrativ|composi[cç][aã]o ilustrativa|\bilustrativ[ao]s?\b|\(simula[cç][aã]o\)/i;
+  var LOGO = /logo|wordmark|brandmark/i;
+  var FONTE = /^\s*(fonte|fontes|source|sources|dados|refer[eê]ncias?)\s*[:·.]/i;
+  function arr(x) { return Array.prototype.slice.call(x || []); }
+  function cs(el, ps) { return W.getComputedStyle(el, ps || null); }
+  function direto(el) { var t = ''; for (var i = 0; i < el.childNodes.length; i++) { var c = el.childNodes[i]; if (c.nodeType === 3) t += c.textContent; } return t.replace(/\s+/g, ' ').trim(); }
+  function texto(el) { return (el.textContent || '').replace(/\s+/g, ' ').trim(); }
+  function rgb(c) { var m = String(c || '').match(/rgba?\(([^)]+)\)/); if (!m) return null; var v = m[1].split(/[ ,/]+/).filter(Boolean).map(parseFloat); return { r: v[0], g: v[1], b: v[2], a: v.length > 3 ? v[3] : 1 }; }
+  function lum(c) { function f(x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); } return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b); }
+  function razao(a, b) { var l1 = lum(a), l2 = lum(b); return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05); }
+  function imp(el, p, v) { el.style.setProperty(p, v, 'important'); }
+  var PAPEL = { r: 242, g: 241, b: 233, a: 1 }, PAPEL2 = { r: 250, g: 249, b: 244, a: 1 }, BRANCO = { r: 255, g: 255, b: 255, a: 1 };
+
+  function deckEmModoCelular() { return /(^|\s)(mob|mobile|celular|is-mobile)(\s|$)/.test(H.className + ' ' + (D.body ? D.body.className : '')); }
+  // largura do aparelho: conteúdo largo demais aumenta o innerWidth no celular, então vale o menor entre janela e tela
+  function largura() { return Math.min(W.innerWidth, (W.screen && W.screen.width) || W.innerWidth); }
+  function querCelular() { if (FORCAR) return true; if (q.bc === 'desk') return false; return largura() < 900 || deckEmModoCelular(); }
+
+  // ---------- telas ----------
+  function acharTelas() {
+    var c = arr(D.querySelectorAll('.slide, section.tela, [data-slide], section.s, .s[data-ch], .s[data-t]'));
+    c = c.filter(function (el) { return !c.some(function (o) { return o !== el && o.contains(el); }); });
+    if (c.length >= 2) return c;
+    // palco de uma tela só (one-pager 1600x900)
+    var st = D.querySelector('#stage, .stage, #palco, .palco, [data-palco], #deck, .deck');
+    if (st) {
+      var filhos = arr(st.children).filter(function (x) { return !/^(script|style|template)$/i.test(x.tagName); });
+      if (filhos.length === 1 && filhos[0].querySelector('h1,h2,h3,p')) return [filhos[0]];
+      return [st];
+    }
+    // página com largura fixa de palco no body (1600, 1440, 1280...)
+    var b = D.body; if (!b) return [];
+    var fixo = arr(b.children).filter(function (x) { if (/^(script|style|template|noscript)$/i.test(x.tagName)) return false; var w = parseFloat(cs(x).width); return w >= 1100 && x.querySelector('h1,h2,h3,p'); });
+    if (fixo.length) return fixo;
+    return [];
+  }
+
+  function classeAtiva(telas) {
+    var vis = telas.filter(function (t) { var s = cs(t); return s.visibility !== 'hidden' && s.display !== 'none' && parseFloat(s.opacity) > 0.5; });
+    for (var i = 0; i < vis.length; i++) {
+      var cand = arr(vis[i].classList).filter(function (k) { return telas.filter(function (o) { return o.classList.contains(k); }).length < telas.length; });
+      for (var j = 0; j < ATIVAS.length; j++) if (cand.indexOf(ATIVAS[j]) >= 0) return ATIVAS[j];
+      if (cand.length === 1 && cand[0].length <= 8) return cand[0];
+    }
+    return 'on';
+  }
+
+  // ---------- fase 1: lê o deck como ele foi desenhado ----------
+  function opacidadeEfetiva(el, ate) { var o = 1; for (var e = el; e && e !== ate && e !== D.body; e = e.parentElement) o *= parseFloat(cs(e).opacity || '1'); return o; }
+  function midiaDentro(el) { return /^(IMG|VIDEO|PICTURE|IFRAME|MODEL-VIEWER)$/.test(el.tagName) || !!el.querySelector('img,video,picture,iframe,model-viewer'); }
+
+  function analisar(telas, ativa) {
+    var fundos = [];
+    telas.forEach(function (t, i) {
+      var rt = t.getBoundingClientRect(), areaT = Math.max(1, rt.width * rt.height);
+      var st = cs(t);
+      t.__bcFundoOriginal = st.backgroundColor;
+      if (/url\(/.test(st.backgroundImage)) fundos.push({ tela: t, el: t, bg: st.backgroundImage, pos: st.backgroundPosition });
+      arr(t.querySelectorAll('*')).forEach(function (el) {
+        var tag = el.tagName;
+        if (el.closest('svg') && tag.toLowerCase() !== 'svg') return;
+        if (el.closest('[data-bc-manter]')) return;
+        if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT|BR|WBR)$/.test(tag)) return;
+        if (el.closest('.roteiro,[data-roteiro],aside[hidden]')) return;
+        var s = cs(el);
+        if (s.display === 'none') return;
+        var abs = s.position === 'absolute' || s.position === 'fixed';
+        var tx = texto(el);
+        var midia = midiaDentro(el);
+        var bgUrl = /url\(/.test(s.backgroundImage);
+        var r = el.getBoundingClientRect(), area = r.width * r.height;
+        if (tag === 'CANVAS' && (abs || area / areaT > 0.4)) { el.setAttribute('data-bc-deco', ''); return; }
+        var stl = el.getAttribute('style') || '';
+        var pb = cs(el, '::before'), pa = cs(el, '::after');
+        if ((pb.content !== 'none' && /absolute|fixed/.test(pb.position)) || (pa.content !== 'none' && /absolute|fixed/.test(pa.position))) el.setAttribute('data-bc-ancora', '');
+        if (abs && el.parentElement && /(left|right)\s*:\s*[\d.]+%/.test(stl) && /(top|bottom)\s*:\s*[\d.]+%/.test(stl) && arr(el.parentElement.children).some(function (x) { return x.tagName === 'IMG' || x.tagName === 'PICTURE'; }) && r.width < 160) {
+          el.setAttribute('data-bc-ponto', ''); el.parentElement.setAttribute('data-bc-mapa', '');
+          el.__bcPos = { left: el.style.left, top: el.style.top, right: el.style.right, bottom: el.style.bottom };
+          return;
+        }
+        if (el.closest('[data-bc-ponto]')) return;
+        // barra de gráfico (preenchimento absoluto dentro de um trilho baixo): fica no trilho, na mesma proporção
+        var pr = el.parentElement ? el.parentElement.getBoundingClientRect() : null, cbg = rgb(s.backgroundColor);
+        if (abs && !tx && !midia && pr && pr.height > 0 && pr.height <= 56 && r.height >= pr.height * 0.4 && ((cbg && cbg.a > 0.3) || /gradient/.test(s.backgroundImage)) && el.parentElement !== t) {
+          el.setAttribute('data-bc-barra', ''); el.parentElement.setAttribute('data-bc-trilho', '');
+          el.__bcBarra = { left: ((r.left - pr.left) / pr.width * 100).toFixed(2) + '%', top: ((r.top - pr.top) / pr.height * 100).toFixed(2) + '%', width: (r.width / pr.width * 100).toFixed(2) + '%', height: (r.height / pr.height * 100).toFixed(2) + '%' };
+          return;
+        }
+        // galeria que troca de foto (uma visível, as outras com opacidade 0 no mesmo lugar): fica só a visível
+        if (abs && parseFloat(s.opacity) < 0.05 && el.parentElement && arr(el.parentElement.children).some(function (x) { if (x === el || x.tagName !== el.tagName) return false; var sx = cs(x); return (sx.position === 'absolute' || sx.position === 'relative') && parseFloat(sx.opacity) > 0.5; })) { el.setAttribute('data-bc-oculto', ''); return; }
+        if (abs && !tx && !midia) {
+          if (bgUrl && area / areaT > 0.1) { el.setAttribute('data-bc-fundo', area / areaT > 0.45 ? 'capa' : 'meio'); fundos.push({ tela: t, el: el }); }
+          else el.setAttribute('data-bc-deco', '');
+          return;
+        }
+        if (abs && tx) {
+          var op = opacidadeEfetiva(el, t), fs = parseFloat(s.fontSize);
+          if ((op > 0.01 && op < 0.3) || fs >= 180 || el.getAttribute('aria-hidden') === 'true') { el.setAttribute('data-bc-deco', ''); return; }
+        }
+        if (!abs && !tx && !midia && bgUrl && area / areaT > 0.25 && !el.children.length) { el.setAttribute('data-bc-fundo', 'meio'); fundos.push({ tela: t, el: el }); }
+        if (abs && midia && !tx && area / areaT > 0.4) el.setAttribute('data-bc-capa-midia', '');
+        if (el.getAttribute('aria-hidden') === 'true' && !tx && !midia && (tag !== 'svg' || (r.width > 120 && !el.querySelector('text')))) el.setAttribute('data-bc-deco', '');
+      });
+    });
+    return fundos;
+  }
+
+  // cabeçalho e navegação do deck que ficam fora das telas (fixos): saem; os logos do cabeçalho vão para a capa
+  function cromo(telas) {
+    var logos = [];
+    var tudo = arr(D.body.querySelectorAll('*'));
+    tudo.forEach(function (el) {
+      if (el.closest('[data-bc-tela]') || el.id === 'bc-nav' || el.closest('#bc-nav')) return;
+      if (telas.some(function (t) { return el.contains(t); })) return;
+      if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT|LINK|META)$/.test(el.tagName)) return;
+      var s = cs(el);
+      var ancestralMarcado = el.parentElement && el.parentElement.closest('[data-bc-cromo]');
+      if (ancestralMarcado) return;
+      if (s.position === 'fixed' || s.position === 'sticky' || (s.position === 'absolute' && el.parentElement && el.parentElement.hasAttribute('data-bc-palco')) || (s.position === 'absolute' && el.parentElement === D.body)) {
+        arr(el.querySelectorAll('img, svg')).forEach(function (im) {
+          if (im.parentElement.closest('svg') || im.closest('button')) return;
+          var rr = im.getBoundingClientRect(); var sv = cs(im);
+          var visivel = rr.width > 24 && rr.height > 10 && sv.display !== 'none' && sv.visibility !== 'hidden' && parseFloat(sv.opacity) > 0.2;
+          var arq = im.tagName === 'IMG' ? decodeURIComponent((im.getAttribute('src') || '').split('?')[0]).toLowerCase() : '';
+          if (visivel || (arq && LOGO.test(arq))) logos.push({ el: im, visivel: visivel, arq: arq });
+        });
+        el.setAttribute('data-bc-cromo', '');
+      }
+    });
+    var saida = logos.filter(function (x) { return !ehCasa(x.el); }).map(function (x) { return x.el; });
+    return saida;
+  }
+
+  // Logos da capa no celular (Caique/coordenação, 13/10/2026: logo da PANCO, da faixa de clientes da casa, apareceu no topo
+  // da proposta da Catupiry). Regra: só o CABEÇALHO do deck (barra fixa ou cabeçalho repetido no topo das telas, antes do
+  // título), só a marca do trabalho e a 75 LAB, nunca marcas-casa nem logo de faixa de clientes. Sem certeza: sem faixa.
+  var MARCA_JOB = (function () { var sc = D.currentScript || D.querySelector('script[data-base-deck]'); return sc ? (sc.getAttribute('data-marca') || '') : ''; })();
+  function semAcento(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  var TOKENS_MARCA = semAcento(MARCA_JOB).replace(/\b(grupo|marca|da|de|do|das|dos|e|the|ltda|sa|s\/a|industria|alimentos|brasil)\b/g, ' ').split(/[^a-z0-9]+/).filter(function (x) { return x.length >= 3; });
+  function caminhoDe(x) { return x && x.tagName === 'IMG' ? semAcento(decodeURIComponent((x.getAttribute('src') || '').split('?')[0])) : ''; }
+  // nome do arquivo + alt (sem a pasta: a pasta do trabalho tem o nome do cliente e casaria com qualquer foto)
+  function nomeLogo(x) { return x && x.tagName === 'IMG' ? semAcento(caminhoDe(x).split('/').pop() + ' ' + (x.getAttribute('alt') || '') + ' ' + (x.getAttribute('class') || '')) : semAcento(x && x.getAttribute ? (x.getAttribute('aria-label') || '') : ''); }
+  function eh75lab(x) { return /75\s?lab|setenta e cinco/.test(nomeLogo(x)) || /marca-75lab/.test(caminhoDe(x)); }
+  function ehCasa(x) { return /marcas-casa|clientes-casa|marcas_atendidas|\/cases\//.test(caminhoDe(x)); }
+  function ehLogo(x) { return LOGO.test(nomeLogo(x)) || eh75lab(x); }
+  function ehDaMarca(x) { var n = nomeLogo(x); return TOKENS_MARCA.length ? TOKENS_MARCA.some(function (t) { return n.indexOf(t) >= 0; }) : false; }
+  function cabecalhosDasTelas(telas) {
+    var porClasse = {}, cands = [];
+    telas.forEach(function (t, i) {
+      var titulo = t.querySelector('h1, h2');
+      arr(t.querySelectorAll('*')).forEach(function (el) {
+        // só logos (aceita um separador como "×" entre eles)
+        if (el.closest('svg') || texto(el).replace(/[×x+|·•\/\s-]/gi, '').length) return;
+        // cabeçalho é filho da tela (ou do primeiro invólucro) e vem antes do título
+        if (!(el.parentElement === t || (el.parentElement && el.parentElement.parentElement === t))) return;
+        var ims = arr(el.querySelectorAll('img')).concat(el.tagName === 'IMG' ? [el] : []);
+        var parDeMarcas = ims.length >= 2 && ims.some(eh75lab);
+        if (titulo && !parDeMarcas && !(el.compareDocumentPosition(titulo) & Node.DOCUMENT_POSITION_FOLLOWING)) return;
+        if (!ims.length || ims.length > 3) return;
+        if (ims.some(ehCasa)) return;
+        if (!ims.every(ehLogo)) return;
+        // faixa de marcas: irmãos com logos de outras empresas = não é cabeçalho
+        var irmaosComLogo = el.parentElement ? arr(el.parentElement.children).filter(function (x) { return x !== el && !texto(x).replace(/[×x+|·•\/\s-]/gi, '').length && x.querySelector && x.querySelector('img'); }).length : 0;
+        if (irmaosComLogo >= 2) return;
+        var chave = el.tagName + '.' + String(el.className || '').trim().split(/\s+/).sort().join('.');
+        porClasse[chave] = (porClasse[chave] || 0) + 1;
+        cands.push({ el: el, tela: i, chave: chave, ims: ims });
+      });
+    });
+    var pool = [];
+    cands.forEach(function (c) {
+      // par de logos (marca + 75 LAB) antes do título é cabeçalho em qualquer tela, mesmo com classe diferente
+      if (porClasse[c.chave] < 2 && c.tela !== 0 && !(c.ims.length >= 2 && c.ims.some(eh75lab))) return;
+      c.ims.forEach(function (x) { pool.push(x); });
+      c.el.setAttribute('data-bc-oculto', '');
+    });
+    return pool;
+  }
+  // escolhe no máximo 2 logos: a marca do trabalho e a 75 LAB, na versão para fundo claro quando existir
+  function logosDaCapa(pool) {
+    var CLARO = /branc|white|negativ|lime|light|inverse|claro/;
+    var vistos = {}, unicos = [];
+    pool.forEach(function (x) { if (ehCasa(x) || !ehLogo(x)) return; var k = nomeLogo(x).split(' ')[0] || x.outerHTML.slice(0, 120); if (!vistos[k]) { vistos[k] = 1; unicos.push(x); } });
+    function melhor(lista) { var escuro = lista.filter(function (x) { return !CLARO.test(nomeLogo(x)); }); return (escuro.length ? escuro : lista)[0] || null; }
+    var lab = melhor(unicos.filter(eh75lab));
+    var cliLista = unicos.filter(function (x) { return !eh75lab(x); });
+    if (TOKENS_MARCA.length) cliLista = cliLista.filter(ehDaMarca);
+    else if (cliLista.length > 1) cliLista = [];
+    var cli = melhor(cliLista);
+    var saida = [cli, lab].filter(Boolean);
+    saida.__claro = saida.length && saida.every(function (x) { return !CLARO.test(nomeLogo(x)); });
+    return saida;
+  }
+
+  // ---------- fase 2: desenha para o celular ----------
+  function papelDoTexto(el, base, ehCapa) {
+    var s = cs(el), tag = el.tagName, tx = texto(el), fs = parseFloat(s.fontSize), r = fs / base;
+    var palavras = tx.split(' ').length;
+    var cls = String(el.className && el.className.baseVal !== undefined ? el.className.baseVal : el.className || '');
+    if (/^\d{1,2}\s*\/\s*\d{1,2}$/.test(tx)) return 'contador';
+    if (tx.length <= 70 && /(setas do teclado|use as setas|deslize para|arraste para|toque para avan|clique para avan|swipe|tecla [a-z]\b|aperte f\b|tela cheia com)/i.test(tx)) return 'contador';
+    if (FONTE.test(tx) || /(^|[\s_-])(fonte|fontes|source|rodape-fonte)([\s_-]|$)/i.test(cls)) return 'fonte';
+    var digitos = /\d/.test(tx) && (tx.replace(/\D/g, '').length >= 2 || /[%+$×x]/.test(tx) || r >= 3.2), curto = tx.length <= 16;
+    if ((r >= 1.9 || /(^|[\s_-])(num|numero|kpi|stat|big|cnt|count|valor)([\s_-]|$)/i.test(cls)) && digitos && curto && !/^H[1-3]$/.test(tag)) return 'numero';
+    var pesado = parseInt(s.fontWeight, 10) >= 600 || /shoulders|anton|oswald|bebas|condensed|display|impact|archivo black|league gothic/i.test(s.fontFamily);
+    if (!/^H[1-3]$/.test(tag) && tx.length <= 11 && pesado && digitos && /^[\s+\-~≈R$€%x×.,:\/\d]+(\s?(mi|bi|mil|k|%|x|anos?|pp|p\.p\.))?\+?$/i.test(tx) && /\d/.test(tx) && !/^\d{1,2}\s*\/\s*\d{1,2}$/.test(tx)) return 'numero';
+    if (tag === 'H1') return ehCapa ? 'capa' : 'titulo';
+    if (tag === 'H2') return ehCapa && r >= 2.4 ? 'capa' : 'titulo';
+    if (tag === 'H3' || /titulo|title|headline/i.test(cls)) return r >= 2.4 ? 'titulo' : 'titulo3';
+    if (r >= 2.4) return ehCapa ? 'capa' : 'titulo';
+    if (tag === 'H4' || tag === 'H5' || r >= 1.32) return 'subtitulo';
+    var mono = /mono|courier|code/i.test(s.fontFamily);
+
+    if (mono && palavras > 12 && r <= 1.0 && tag !== 'P' || mono && palavras > 18 && r < 0.95) return 'fonte';
+    if (/(^|[\s_-])(src|nota|notas|obs|disclaimer|rodape)([\s_-]|$)/i.test(cls) && r < 0.95 && palavras > 3) return 'fonte';
+    if ((s.textTransform === 'uppercase' || mono) && palavras <= 12 && tx.length <= 90) return 'rotulo';
+    if (r < 0.86 && palavras <= 8) return 'apoio';
+    return 'corpo';
+  }
+
+  function corEfetivaDeFundo(el, tela) {
+    for (var e = el; e && e !== tela; e = e.parentElement) {
+      if (e.hasAttribute('data-bc-camada')) continue;
+      var s = cs(e);
+      if (/url\(/.test(s.backgroundImage) && !e.hasAttribute('data-bc-fundo')) return null;
+      var c = rgb(s.backgroundColor);
+      if (c && c.a > 0.55) return c;
+    }
+    return tela.hasAttribute('data-bc-par') ? PAPEL2 : PAPEL;
+  }
+
+  function escurecer(c, fundo, alvo) {
+    var r = c.r, g = c.g, b = c.b;
+    for (var i = 0; i < 24 && razao({ r: r, g: g, b: b }, fundo) < alvo; i++) { r *= 0.86; g *= 0.86; b *= 0.86; }
+    return 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ')';
+  }
+
+  function classificarImagem(im) {
+    if (im.hasAttribute('data-bc-img') && !im.hasAttribute('data-bc-provisoria')) return;
+    im.removeAttribute('data-bc-provisoria');
+    var nw = im.naturalWidth, nh = im.naturalHeight;
+    if (!nw || !nh) { im.setAttribute('data-bc-img', LOGO.test((im.getAttribute('alt') || '') + ' ' + (im.getAttribute('src') || '').split('?')[0]) ? 'logo' : 'foto'); im.setAttribute('data-bc-provisoria', ''); return; }
+    var arq = decodeURIComponent((im.getAttribute('src') || '').split('?')[0]).split('/').pop().toLowerCase();
+    var dica = ((im.getAttribute('alt') || '') + ' ' + arq + ' ' + (im.className || '') + ' ' + (im.parentElement ? im.parentElement.className : '')).toLowerCase();
+    var asp = nw / nh;
+    var tipo;
+    var ehLogo = /logo|wordmark|brandmark/.test(arq + ' ' + (im.className || '')) || /^(logo|logotipo|marca)\b/.test((im.getAttribute('alt') || '').toLowerCase()) || /\blogo(tipo)?\b/.test((im.getAttribute('alt') || '').toLowerCase());
+    if (ehLogo || (asp >= 2.4 && nh <= 360 && !/foto|kv|hero|banner|capa|gondola|loja|render/.test(dica))) tipo = 'logo';
+    else if (Math.max(nw, nh) <= 180 || /icone|icon|ico[-_]/.test(dica)) tipo = 'icone';
+    else tipo = im.hasAttribute('data-bc-capa-midia') || (im.closest('[data-bc-capa-midia]') && im.closest('[data-bc-tela="1"]')) ? 'capa' : 'foto';
+    im.setAttribute('data-bc-img', tipo);
+    if (tipo === 'foto' && asp < 0.8) im.setAttribute('data-bc-alta', '');
+  }
+
+  function ajustarNumero(el) {
+    el.removeAttribute('data-bc-quebra');
+    var pai = el.parentElement; var disp = Math.max(120, (pai ? pai.clientWidth - parseFloat(cs(pai).paddingLeft) - parseFloat(cs(pai).paddingRight) : W.innerWidth - 44));
+    disp = Math.min(disp, W.innerWidth - 44);
+    var max = Math.min(68, Math.round(W.innerWidth * 0.165)), min = 30;
+    imp(el, 'font-size', max + 'px');
+    imp(el, 'display', 'block');
+    var w = el.scrollWidth;
+    if (w > disp) {
+      var novo = Math.max(min, Math.floor(max * disp / w) - 1);
+      imp(el, 'font-size', novo + 'px');
+      if (el.scrollWidth > disp + 1) el.setAttribute('data-bc-quebra', '');
+    }
+  }
+
+  function legendas(tela) {
+    var achadas = [];
+    arr(tela.querySelectorAll('figcaption, [class*=legenda], [class*=caption], [class*=credito], [class*=credit]')).forEach(function (c) { if (texto(c)) achadas.push(c); });
+    // texto curto de crédito colado a uma imagem (embaixo ou por cima dela)
+    arr(tela.querySelectorAll('img, [data-bc-fundo], picture')).forEach(function (im) {
+      var cont = im.parentElement; if (!cont) return;
+      var cands = arr(cont.children).concat(cont.parentElement ? arr(cont.parentElement.children) : []);
+      cands.forEach(function (c) {
+        if (c === im || c.contains(im) || achadas.indexOf(c) >= 0 || c.hasAttribute('data-bc-proprio')) return;
+        var t = texto(c);
+        if (!t || t.length > 140 || c.querySelector('img, h1, h2, h3, h4') || /^H[1-4]$/.test(c.tagName)) return;
+        var logoPerto = im.tagName === 'IMG' && LOGO.test((im.getAttribute('alt') || '') + (im.getAttribute('src') || '').split('?')[0]);
+        // texto curto logo depois da foto (irmão seguinte) e menor que o corpo também é legenda
+        var colado = (c === im.nextElementSibling || c === (im.parentElement && im.parentElement.nextElementSibling)) && parseFloat(cs(c).fontSize) <= 15 && t.length >= 6 && t.length <= 90 && /[a-zà-ú]{3}/i.test(t) && !FONTE.test(t);
+        var depois = c === im.nextElementSibling || c === (im.parentElement && im.parentElement.nextElementSibling);
+        var creditoColado = depois && t.length <= 140 && /ilustra|simula|\bfoto|imagem|render|montagem|mockup/i.test(t);
+        if ((CREDITO.test(t) || colado || creditoColado) && !logoPerto) achadas.push(c);
+      });
+    });
+    // legenda e crédito de imagem SOMEM (Caique, 13/10/2026): só a fonte de DADO fica, pequena, no pé da tela
+    achadas.forEach(function (c) { c.setAttribute('data-bc-oculto', ''); });
+  }
+
+  // tira de linhas de fonte e de rótulos os trechos que são crédito de imagem ("Fotos: ...", "imagem ilustrativa")
+  var TRECHO_CREDITO = /^(fotos?|imagens?|ilustra[cç][aã]o|ilustra[cç][oõ]es|ilustrativ\w*|cr[eé]ditos?|reprodu[cç][aã]o|divulga[cç][aã]o|render|mockup|montagem|composi[cç][aã]o ilustrativa|simula[cç][aã]o)\b|imagem ilustrativa|imagens ilustrativas|foto real|fotos reais|ilustra[cç][aã]o institucional|meramente ilustrativ|imagem de fundo|\(simula[cç][aã]o\)/i;
+  function semCreditoDeImagem(tela) {
+    arr(tela.querySelectorAll('[data-bc-papel="fonte"], [data-bc-papel="rotulo"], [data-bc-papel="apoio"], [data-bc-papel="corpo"]')).forEach(function (el) {
+      var papel = el.getAttribute('data-bc-papel');
+      arr(el.childNodes).forEach(function (n) {
+        if (n.nodeType !== 3 || !n.textContent.trim()) return;
+        var partes = n.textContent.split(/(\s*[·|]\s*|(?<=[.;])\s+)/);
+        var saida = [], mudou = false;
+        for (var k = 0; k < partes.length; k += 2) {
+          var seg = partes[k], sep = partes[k + 1] || '';
+          var forte = /^(imagens? ilustrativas?|foto real|fotos reais|ilustra[cç][aã]o institucional|simula[cç][aã]o|imagem de fundo ilustrativa)\.?$/i.test(seg.trim());
+          if (seg.trim() && TRECHO_CREDITO.test(seg.trim()) && (papel === 'fonte' || (papel === 'corpo' ? forte : /imagem ilustrativa|foto real|ilustra[cç][aã]o|simula[cç][aã]o|^fotos?\s*:|^imagens?\s*:|cr[eé]dito/i.test(seg.trim())))) { mudou = true; continue; }
+          saida.push(seg + sep);
+        }
+        if (mudou) n.textContent = saida.join('').replace(/[\s·|,;]+$/, '').replace(/^[\s·|,;]+/, '');
+      });
+      var tx = texto(el).replace(/^(fontes?|sources?)\s*[:·.]\s*$/i, '');
+      if (!tx || !/[a-z0-9]{2}/i.test(tx)) el.setAttribute('data-bc-oculto', '');
+    });
+  }
+
+  function tabelas(tela) {
+    arr(tela.querySelectorAll('table')).forEach(function (tb) {
+      var linhas = arr(tb.rows); if (!linhas.length) return;
+      var cab = arr((tb.tHead && tb.tHead.rows[0] ? tb.tHead.rows[0] : linhas[0]).cells).map(texto);
+      if (cab.length <= 2) return;
+      var temCab = !!(tb.tHead && tb.tHead.rows[0]) || arr(linhas[0].cells).every(function (c) { return c.tagName === 'TH'; });
+      var box = D.createElement('div'); box.setAttribute('data-bc-proprio', ''); box.setAttribute('data-bc-grade', '');
+      linhas.slice(temCab ? 1 : 0).forEach(function (tr) {
+        if (tr.parentElement && tr.parentElement.tagName === 'THEAD') return;
+        var card = D.createElement('div'); card.setAttribute('data-bc-cartao', 'claro'); card.setAttribute('data-bc-c', '');
+        arr(tr.cells).forEach(function (td, i) {
+          var l = D.createElement('div'); l.setAttribute('data-bc-c', '');
+          var rot = cab[i] && temCab ? cab[i] : '';
+          var tt = (td.innerText || td.textContent || '').replace(/\s+/g, ' ').trim();
+          if (i === 0) { l.setAttribute('data-bc-papel', 'subtitulo'); l.textContent = tt; }
+          else { l.setAttribute('data-bc-papel', 'apoio'); l.textContent = (rot ? rot + ': ' : '') + tt; }
+          card.appendChild(l);
+        });
+        box.appendChild(card);
+      });
+      tb.setAttribute('data-bc-oculto', '');
+      tb.parentElement.insertBefore(box, tb.nextSibling);
+    });
+  }
+
+  function aplicar(telas, ativa, fundos, logos) {
+    H.classList.add('bc-cel');
+    var corpoTamanhos = [];
+    telas.forEach(function (t, i) {
+      if (i % 2 === 1) t.setAttribute('data-bc-par', '');
+      if (ativa) t.classList.add(ativa);
+      arr(t.querySelectorAll('p, li')).forEach(function (p) { var tx = texto(p); if (tx.length > 40) corpoTamanhos.push(parseFloat(cs(p).fontSize)); });
+    });
+    // tamanho de corpo do deck (mediana): referência para saber o que é título, número, apoio
+    corpoTamanhos.sort(function (a, b) { return a - b; });
+    var base = corpoTamanhos.length ? corpoTamanhos[Math.floor(corpoTamanhos.length / 2)] : 18;
+    if (!(base > 6)) base = 18;
+
+    telas.forEach(function (t, i) {
+      var ehCapa = i === 0;
+      // foto que era fundo da tela vira bloco no topo
+      fundos.filter(function (f) { return f.tela === t && f.el === t; }).forEach(function (f) {
+        var d = D.createElement('div'); d.setAttribute('data-bc-fundo', 'capa'); d.setAttribute('data-bc-proprio', '');
+        d.style.backgroundImage = f.bg; t.insertBefore(d, t.firstChild);
+      });
+      var els = arr(t.querySelectorAll('*'));
+      // contêineres, grades e linhas
+      els.forEach(function (el) {
+        if (el.closest('svg') && el.tagName.toLowerCase() !== 'svg') return;
+        if (el.hasAttribute('data-bc-deco') || el.closest('[data-bc-deco]') || el.closest('[data-bc-ponto]') || el.closest('[data-bc-manter]')) return;
+        var s = cs(el), tag = el.tagName;
+        if (tag === 'svg' || tag === 'SVG') {
+          var rs = el.getBoundingClientRect(); var vb = el.getAttribute('viewBox');
+          var grande = rs.width > 150 || el.querySelector('text') || (vb && parseFloat(vb.split(/[ ,]+/)[2]) > 200);
+          if (!vb && el.getAttribute('width') && el.getAttribute('height') && grande) el.setAttribute('viewBox', '0 0 ' + parseFloat(el.getAttribute('width')) + ' ' + parseFloat(el.getAttribute('height')));
+          el.setAttribute('data-bc-svg', grande ? 'grafico' : 'icone');
+          return;
+        }
+        if (/^(IMG|VIDEO|CANVAS|IFRAME|PICTURE|SOURCE|MODEL-VIEWER|INPUT|SELECT|TEXTAREA|BR|HR)$/.test(tag)) return;
+        var tx = texto(el);
+        var cfx = rgb(s.backgroundColor), selo = tx.length <= 24 && !midiaDentro(el) && el.children.length <= 2 && ((cfx && cfx.a > 0.3) || (parseFloat(s.borderTopWidth) > 0 && s.borderTopStyle !== 'none' && parseFloat(s.borderLeftWidth) > 0)) && !/^H[1-4]$/.test(tag);
+        if (tx || midiaDentro(el) || el.querySelector('svg')) el.setAttribute('data-bc-c', selo || (s.display.indexOf('inline') === 0 && !el.children.length) ? 'inline' : '');
+        if (/^(UL|OL)$/.test(tag) && s.listStyleType === 'none') el.setAttribute('data-bc-c', 'lista-limpa');
+        if (s.display === 'grid' || s.display === 'inline-grid') {
+          var filhos = arr(el.children).filter(function (c) { return cs(c).display !== 'none' && !c.hasAttribute('data-bc-deco'); });
+          var soLogos = filhos.length >= 3 && filhos.every(function (c) { return !texto(c) && c.querySelector('img, svg') || c.tagName === 'IMG'; });
+          if (soLogos && !filhos.some(function (c) { var im = c.tagName === 'IMG' ? c : c.querySelector('img'); return im && LOGO.test(nomeLogo(im)); })) { el.setAttribute('data-bc-grade', 'galeria'); return; }
+          var curtos = filhos.length >= 2 && filhos.length <= 4 && filhos.every(function (c) { var tt = texto(c); return tt.length <= 18 && !c.querySelector('img'); }) && filhos.some(function (c) { return /\d/.test(texto(c)); });
+          var poucosLogos = filhos.length >= 2 && filhos.length <= 3 && filhos.every(function (c) { var im = c.tagName === 'IMG' ? c : c.querySelector('img'); return !texto(c) && im && LOGO.test((im.getAttribute('alt') || '') + ' ' + (im.getAttribute('src') || '').split('?')[0]); });
+          var chips = filhos.length >= 3 && filhos.every(function (c) { var tt = texto(c); return tt.length > 0 && tt.length <= 24 && !/\d/.test(tt) && !c.querySelector('img, p, h1, h2, h3, h4, li'); });
+          if (poucosLogos || chips) el.setAttribute('data-bc-linha', 'fica');
+          else el.setAttribute('data-bc-grade', soLogos ? 'logos' : curtos && filhos.length % 2 === 0 ? '2' : '');
+        } else if ((s.display === 'flex' || s.display === 'inline-flex') && /row/.test(s.flexDirection)) {
+          var fl = arr(el.children).filter(function (c) { return cs(c).display !== 'none' && !c.hasAttribute('data-bc-deco'); });
+          var soLog = fl.length >= 3 && fl.every(function (c) { return !texto(c) && (c.tagName === 'IMG' || c.querySelector('img, svg')); });
+          var galeria = soLog && !fl.some(function (c) { var im = c.tagName === 'IMG' ? c : c.querySelector('img'); return im && LOGO.test(nomeLogo(im)); });
+          if (galeria) { el.setAttribute('data-bc-grade', 'galeria'); return; }
+          var somaTexto = fl.reduce(function (a, c) { return a + texto(c).length; }, 0);
+          var iconeComTexto = fl.some(function (c) { return texto(c) && c.querySelector('svg, img'); });
+          var pequenos = !iconeComTexto && fl.length <= 4 && somaTexto <= 48 && fl.every(function (c) { var tt = texto(c); var img = c.tagName === 'IMG' ? c : (!tt ? c.querySelector('img') : null); return tt.length <= 28 && !c.querySelector('p, h1, h2, h3, h4, li') && !(img && !LOGO.test((img.getAttribute('alt') || '') + (img.getAttribute('src') || '').split('?')[0]) && (img.naturalWidth > 260 || !img.naturalWidth)); });
+          el.setAttribute('data-bc-linha', soLog ? 'fica' : pequenos ? 'fica' : 'coluna');
+          if (soLog) el.setAttribute('data-bc-grade', 'logos');
+        } else if (/^table/.test(s.display) && tag !== 'TABLE') { el.setAttribute('data-bc-linha', 'coluna'); }
+      });
+      tabelas(t);
+      // papéis do texto
+      var marcados = [];
+      els.forEach(function (el) {
+        if (el.closest('svg') || el.closest('[data-bc-deco]') || el.closest('[data-bc-oculto]') || el.closest('[data-bc-ponto]') || el.closest('[data-bc-manter]') || el.closest('.roteiro,[data-roteiro],aside[hidden]')) return;
+        if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT|OPTION|SELECT|TEXTAREA)$/.test(el.tagName)) return;
+        if (!direto(el)) return;
+        var s = cs(el);
+        if (s.display === 'none') return;
+        var dentro = marcados.some(function (m) { return m.contains(el); });
+        if (dentro && s.display.indexOf('inline') === 0) return;
+        // título montado com palavras em <span> (animação por palavra): quem recebe o papel é o bloco inteiro
+        var sobe = el;
+        while (sobe.parentElement && sobe.parentElement !== t && cs(sobe.parentElement).display.indexOf('inline') === 0 && !direto(sobe.parentElement)) sobe = sobe.parentElement;
+        var pai = sobe.parentElement;
+        var titulo = pai && /^H[1-4]$/.test(pai.tagName) && !direto(pai);
+        if (pai && pai !== t && !pai.hasAttribute('data-bc-papel') && texto(pai).length <= 220 && (titulo || (cs(sobe).display.indexOf('inline') === 0 && cs(pai).display.indexOf('inline') !== 0 && arr(pai.children).every(function (c) { return cs(c).display.indexOf('inline') === 0 || c.tagName === 'BR'; })))) {
+          el = pai; s = cs(el);
+        }
+        // linhas de um título (cada linha num bloco): o papel vai para o título inteiro
+        while (el.parentElement && el.parentElement !== t && /^H[1-4]$/.test(el.parentElement.tagName) && !direto(el.parentElement) && !el.parentElement.hasAttribute('data-bc-papel')) { el = el.parentElement; s = cs(el); }
+        if (marcados.indexOf(el) >= 0 || el.hasAttribute('data-bc-papel')) return;
+        var papel = papelDoTexto(el, base, ehCapa);
+        if (papel === 'contador') { el.setAttribute('data-bc-oculto', ''); return; }
+        el.setAttribute('data-bc-papel', papel);
+        if (papel === 'rotulo' && s.textTransform !== 'uppercase') imp(el, 'font-size', '14px');
+        marcados.push(el);
+      });
+      // ações (links e botões soltos) com área de toque de 44 px
+      arr(t.querySelectorAll('a[href], button, [role=button]')).forEach(function (a) {
+        if (a.closest('[data-bc-deco]') || a.closest('[data-bc-oculto]') || a.closest('[data-bc-ponto]')) return;
+        var p = a.parentElement && a.parentElement.closest('[data-bc-papel="corpo"], [data-bc-papel="apoio"], [data-bc-papel="fonte"]');
+        if (!p && texto(a).length <= 60) a.setAttribute('data-bc-acao', '');
+      });
+      // cartões e camadas de fundo
+      var rt = t.getBoundingClientRect(), areaT = Math.max(1, rt.width * rt.height);
+      els.forEach(function (el) {
+        if (!el.hasAttribute('data-bc-c') || el.hasAttribute('data-bc-papel') && !el.children.length) return;
+        var s = cs(el); var c = rgb(s.backgroundColor); var r = el.getBoundingClientRect();
+        var temBorda = parseFloat(s.borderTopWidth) > 0 && s.borderTopStyle !== 'none' || parseFloat(s.borderLeftWidth) > 0 && s.borderLeftStyle !== 'none';
+        var corBorda = rgb(s.borderTopColor) || rgb(s.borderLeftColor);
+        if (c && c.a > 0.55 && (r.width * r.height) / areaT > 0.62 && el.parentElement && (el.parentElement === t || el.parentElement.closest('[data-bc-tela]') === t && (r.width >= rt.width - 2))) { el.setAttribute('data-bc-camada', ''); return; }
+        if (c && c.a > 0.02 && c.a <= 0.55 || (temBorda && corBorda && lum(corBorda) > 0.6 && (!c || c.a <= 0.55))) {
+          if (texto(el).length > 6 && r.height > 40) el.setAttribute('data-bc-cartao', 'claro');
+        } else if (c && c.a > 0.55 && texto(el).length > 6 && r.height > 40) el.setAttribute('data-bc-cartao', '');
+      });
+      // espaços grandes do desenho de 1600 px viram o ritmo do celular
+      els.forEach(function (el) {
+        if (!el.hasAttribute('data-bc-c')) return;
+        if (el.hasAttribute('data-bc-papel') || el.hasAttribute('data-bc-img') || el.hasAttribute('data-bc-acao')) return;
+        var s = cs(el);
+        var mt = parseFloat(s.marginTop), mb = parseFloat(s.marginBottom);
+        if (mt > 22 || mt < 0) imp(el, 'margin-top', mt < 0 ? '0px' : '20px');
+        if (mb > 22 || mb < 0) imp(el, 'margin-bottom', mb < 0 ? '0px' : '20px');
+        if (!el.hasAttribute('data-bc-cartao')) {
+          var cf = rgb(s.backgroundColor), comFundo = cf && cf.a > 0.05 || /url\(|gradient/.test(s.backgroundImage);
+          ['left', 'right', 'top', 'bottom'].forEach(function (lado) {
+            var pv = parseFloat(s.getPropertyValue('padding-' + lado)), borda = parseFloat(s.getPropertyValue('border-' + lado + '-width')) > 0 && s.getPropertyValue('border-' + lado + '-style') !== 'none';
+            if (borda || comFundo) { if (pv > 22) imp(el, 'padding-' + lado, '16px'); }
+            else if (pv > (lado === 'left' || lado === 'right' ? 24 : 16)) imp(el, 'padding-' + lado, '0px');
+          });
+        }
+        var g = parseFloat(s.rowGap); if (g > 18) imp(el, 'row-gap', '14px');
+        var cg = parseFloat(s.columnGap); if (cg > 18) imp(el, 'column-gap', '14px');
+        if (s.whiteSpace === 'nowrap' && texto(el).length > 18) imp(el, 'white-space', 'normal');
+      });
+      arr(t.querySelectorAll('[data-bc-mapa]')).forEach(function (m) { imp(m, 'position', 'relative'); imp(m, 'width', '100%'); });
+      arr(t.querySelectorAll('[data-bc-trilho]')).forEach(function (m) { imp(m, 'position', 'relative'); });
+      arr(t.querySelectorAll('[data-bc-barra]')).forEach(function (b) { var o = b.__bcBarra || {}; imp(b, 'position', 'absolute'); imp(b, 'inset', 'auto'); ['left', 'top', 'width', 'height'].forEach(function (k) { if (o[k]) imp(b, k, o[k]); }); });
+      arr(t.querySelectorAll('[data-bc-ponto]')).forEach(function (pt) {
+        var o = pt.__bcPos || {}; imp(pt, 'position', 'absolute'); imp(pt, 'inset', 'auto');
+        ['left', 'top', 'right', 'bottom'].forEach(function (k) { if (o[k]) imp(pt, k, o[k]); });
+        imp(pt, 'min-width', '44px'); imp(pt, 'min-height', '44px'); imp(pt, 'transform', 'translate(-50%,-50%)'); imp(pt, 'z-index', '2');
+      });
+      arr(t.querySelectorAll('iframe')).forEach(function (f) {
+        if (!f.getAttribute('src')) { var u = f.getAttribute('data-src') || f.getAttribute('data-depois') || f.getAttribute('data-url') || f.getAttribute('data-antes'); if (u) f.setAttribute('src', u); }
+        f.setAttribute('loading', 'eager');
+      });
+      legendas(t);
+      semCreditoDeImagem(t);
+      // fonte de dado vai para o pé da tela
+      arr(t.querySelectorAll('[data-bc-papel="fonte"]')).forEach(function (f) {
+        var dono = f.parentElement && f.parentElement.closest('[data-bc-cartao]');
+        if (!dono && f.parentElement !== t) t.appendChild(f);
+      });
+    });
+    cores(telas);
+    // capa: logos do cabeçalho do deck
+    var capa = telas[0];
+    // a capa já mostra os logos no próprio conteúdo (antes do título): não repete numa faixa
+    var tituloCapa = capa && capa.querySelector('h1, h2');
+    var logosNaCapa = capa ? arr(capa.querySelectorAll('img')).filter(function (im) { return ehLogo(im) && !ehCasa(im) && !im.closest('[data-bc-oculto],[data-bc-deco],[data-bc-cromo]') && (!tituloCapa || (im.compareDocumentPosition(tituloCapa) & Node.DOCUMENT_POSITION_FOLLOWING)); }) : [];
+    if (logosNaCapa.length) logos = [];
+    // cabeçalho repetido: na capa ele aparece no lugar da faixa (só logos da marca e da 75 LAB)
+    if (!logosNaCapa.length && capa) arr(capa.querySelectorAll('[data-bc-oculto]')).forEach(function (h) { if (h.querySelector('img') && arr(h.querySelectorAll('img')).every(function (im) { return ehLogo(im) && !ehCasa(im) && (eh75lab(im) || ehDaMarca(im) || !TOKENS_MARCA.length); }) && !h.closest('[data-bc-deco]') && !arr(h.querySelectorAll('img')).some(function (im) { return /branc|white|negativ|lime|light|inverse|claro/.test(nomeLogo(im)); })) { h.removeAttribute('data-bc-oculto'); logos = []; } });
+    if (capa && logos.length && !capa.querySelector('.bc-marcas')) {
+      var barra = D.createElement('div'); barra.className = 'bc-marcas'; barra.setAttribute('data-bc-proprio', '');
+      var vistos = [];
+      logos.slice(0, 2).forEach(function (im) { var k = im.tagName === 'IMG' ? im.currentSrc || im.src : im.outerHTML.slice(0, 200); if (vistos.indexOf(k) >= 0) return; vistos.push(k); var c = im.cloneNode(true); arr(c.attributes).map(function (a) { return a.name; }).forEach(function (n) { if (/^(id|class|style|loading|data-bc-)/.test(n) || n.indexOf('data-bc-') === 0) c.removeAttribute(n); }); c.setAttribute('data-bc-proprio', ''); barra.appendChild(c); });
+      var fundoCapa = rgb(capa.__bcFundoOriginal);
+      var foto = capa.querySelector('[data-bc-fundo="capa"], [data-bc-img="capa"], [data-bc-capa-midia]');
+      var algumClaro = logos.some(function (x) { return /branc|white|negativ|lime|light|inverse|claro/.test(nomeLogo(x)); });
+      if (logos.__claro && !algumClaro) barra.style.background = 'transparent';
+      else if (algumClaro) barra.style.background = fundoCapa && fundoCapa.a > 0.5 && lum(fundoCapa) < 0.35 ? capa.__bcFundoOriginal : '#111110';
+      else if (fundoCapa && fundoCapa.a > 0.5 && lum(fundoCapa) < 0.35) barra.style.background = capa.__bcFundoOriginal;
+      else if (foto) barra.style.background = '#111110';
+      else barra.style.background = 'transparent';
+      capa.insertBefore(barra, capa.firstChild);
+      if (foto) imp(foto, 'margin-top', '0px');
+    }
+    if (capa && capa.querySelector('[data-bc-fundo="capa"], [data-bc-capa-midia]')) capa.setAttribute('data-bc-temcapa', '');
+  }
+
+  // cores: fundo claro e contraste garantido no texto que ficou sobre o papel (roda de novo no acabamento)
+  function cores(telas) {
+    telas.forEach(function (t) {
+      arr(t.querySelectorAll('[data-bc-papel], [data-bc-acao], .bc-fonte')).forEach(function (el) {
+        if (el.getAttribute('data-bc-papel') === 'fonte' || el.classList.contains('bc-fonte')) return;
+        var fundo = corEfetivaDeFundo(el, t); if (!fundo) return;
+        var c = rgb(cs(el).color); if (!c) return;
+        var grande = parseFloat(cs(el).fontSize) >= 24 || (parseFloat(cs(el).fontSize) >= 18.5 && parseInt(cs(el).fontWeight, 10) >= 700);
+        var alvo = grande ? 3.2 : 4.6;
+        if (razao(c, fundo) >= alvo) return;
+        var claroNoClaro = lum(fundo) > 0.5;
+        if (claroNoClaro && lum(c) > 0.55) {
+          // texto claro (era sobre fundo escuro): tinta, ou a cor escurecida quando é cor de destaque
+          var sat = Math.max(c.r, c.g, c.b) - Math.min(c.r, c.g, c.b);
+          imp(el, 'color', sat > 60 ? escurecer(c, fundo, alvo) : '#111110');
+        } else if (claroNoClaro) imp(el, 'color', escurecer(c, fundo, alvo));
+        else if (lum(c) < 0.3) imp(el, 'color', razao({ r: 242, g: 241, b: 233, a: 1 }, fundo) >= alvo ? '#F2F1E9' : '#FFFFFF'); // texto escuro sobre cartão escuro (estado de animação que não rodou)
+        arr(el.querySelectorAll('*')).forEach(function (f) { if (f.hasAttribute('data-bc-papel')) return; var cf = rgb(cs(f).color); if (cf && razao(cf, fundo) < alvo) imp(f, 'color', lum(cf) > 0.55 && Math.max(cf.r, cf.g, cf.b) - Math.min(cf.r, cf.g, cf.b) <= 60 ? '#111110' : escurecer(cf, fundo, alvo)); });
+      });
+      // bordas claras de cartões sobre o papel
+      arr(t.querySelectorAll('[data-bc-acao]')).forEach(function (a) { var s = cs(a); var b = rgb(s.borderTopColor); if (b && parseFloat(s.borderTopWidth) > 0 && lum(b) > 0.6) imp(a, 'border-color', 'rgba(17,17,16,.35)'); });
+      // ícones svg claros
+      arr(t.querySelectorAll('svg[data-bc-svg="icone"]')).forEach(function (v) { var fundo = corEfetivaDeFundo(v, t); var c = rgb(cs(v).color); if (fundo && c && razao(c, fundo) < 2.2) imp(v, 'color', escurecer(c, fundo, 3)); });
+    });
+  }
+
+  // ---------- depois que imagens e fontes chegam ----------
+  function acabamento(telas) {
+    arr(D.querySelectorAll('[data-bc-tela] img[loading="lazy"]')).forEach(function (im) { im.loading = 'eager'; });
+    arr(D.querySelectorAll('[data-bc-tela] img')).forEach(function (im) {
+      if (im.closest('[data-bc-deco]') || im.closest('.bc-marcas')) return;
+      if (im.complete) classificarImagem(im); else im.addEventListener('load', function () { classificarImagem(im); }, { once: true });
+    });
+    // contadores que ficaram no zero (o deck anima ao abrir a tela; no celular a tela não "abre")
+    arr(D.querySelectorAll('[data-bc-tela] [data-to], [data-bc-tela] [data-count], [data-bc-tela] [data-alvo], [data-bc-tela] [data-target]')).forEach(function (el) {
+      var alvo = el.getAttribute('data-to') || el.getAttribute('data-count') || el.getAttribute('data-alvo') || el.getAttribute('data-target');
+      var v = parseFloat(String(alvo).replace(',', '.')); if (!isFinite(v)) return;
+      var atual = (el.textContent || '').match(/[\d.,]+/);
+      var num = atual ? parseFloat(atual[0].replace(/\./g, '').replace(',', '.')) : NaN;
+      if (atual && num !== 0 && Math.abs(num - v) / Math.max(1, Math.abs(v)) < 0.02) return;
+      var dec = (String(alvo).split(/[.,]/)[1] || '').length; if (el.getAttribute('data-dec')) dec = +el.getAttribute('data-dec');
+      var fmt = v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+      if (atual) el.textContent = el.textContent.replace(atual[0], fmt); else el.textContent = (el.getAttribute('data-pre') || '') + fmt + (el.getAttribute('data-suf') || el.getAttribute('data-suffix') || '');
+    });
+    // texto que ficou invisível esperando a animação da tela
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-c], [data-bc-tela] [data-bc-papel], [data-bc-tela] img')).forEach(function (el) {
+      if (el.closest('[data-bc-deco]') || el.closest('[data-bc-oculto]')) return;
+      var s = cs(el);
+      if (parseFloat(s.opacity) < 0.05) imp(el, 'opacity', '1');
+      if (s.visibility === 'hidden') imp(el, 'visibility', 'visible');
+    });
+    // palavras e trechos em linha dentro de um bloco com papel seguem o tamanho do bloco
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel] *')).forEach(function (f) {
+      if (f.closest('svg') || f.hasAttribute('data-bc-papel')) return;
+      var dono = f.parentElement && f.parentElement.closest('[data-bc-papel]');
+      if (cs(f).display.indexOf('inline') !== 0 && !(dono && /^H[1-4]$/.test(dono.tagName))) return;
+      if (f.tagName === 'IMG' || f.tagName === 'svg') return;
+      imp(f, 'font-size', 'inherit'); imp(f, 'line-height', 'inherit');
+    });
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel] *')).forEach(function (f) {
+      if (f.closest('svg') || f.closest('[data-bc-papel="fonte"]') || !direto(f)) return;
+      if (parseFloat(cs(f).fontSize) < 14.5) imp(f, 'font-size', 'max(.5em, 15px)');
+    });
+    telas.forEach(function (t) {
+      var vistas = {};
+      arr(t.querySelectorAll('img')).forEach(function (im) {
+        if (im.closest('[data-bc-oculto],[data-bc-deco],.bc-marcas') || /logo|icone|icon/.test(im.getAttribute('data-bc-img') || '') || cs(im).display === 'none') return;
+        var k = (im.currentSrc || im.src || '').split('?')[0]; if (!k) return;
+        if (vistas[k]) im.setAttribute('data-bc-oculto', ''); else vistas[k] = 1;
+      });
+    });
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel="numero"]')).forEach(ajustarNumero);
+    cores(telas);
+    // título com palavra longa: diminui até caber
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel="capa"], [data-bc-tela] [data-bc-papel="titulo"], [data-bc-tela] [data-bc-papel="titulo3"], [data-bc-tela] [data-bc-papel="subtitulo"]')).forEach(function (el) {
+      var lim = el.clientWidth; var tam = parseFloat(cs(el).fontSize); var n = 0;
+      while (el.scrollWidth > lim + 1 && n < 10) { tam = tam * 0.93; imp(el, 'font-size', tam.toFixed(1) + 'px'); n++; }
+      if (el.scrollWidth > lim + 1) imp(el, 'overflow-wrap', 'anywhere');
+    });
+    // o que ainda vaza para o lado: quebra, vira coluna ou encolhe
+    arr(D.querySelectorAll('[data-bc-tela] *')).forEach(function (el) {
+      if (el.closest('svg') || el.closest('[data-bc-deco]') || el.closest('[data-bc-oculto]')) return;
+      var r = el.getBoundingClientRect(); if (!r.width) return;
+      if (r.right > W.innerWidth + 1 || r.left < -1) {
+        var s = cs(el);
+        if (/flex/.test(s.display)) { el.setAttribute('data-bc-linha', 'coluna'); }
+        else if (/grid/.test(s.display)) { el.setAttribute('data-bc-grade', ''); }
+        else if (el.tagName === 'IMG' || el.tagName === 'VIDEO') { imp(el, 'width', '100%'); imp(el, 'height', 'auto'); }
+        else if (direto(el)) { imp(el, 'overflow-wrap', 'anywhere'); imp(el, 'white-space', 'normal'); }
+        else imp(el, 'width', 'auto');
+      }
+    });
+  }
+
+  // ---------- navegação ----------
+  function navegacao(telas) {
+    if (telas.length < 2 || D.getElementById('bc-nav')) return;
+    var nav = D.createElement('div'); nav.id = 'bc-nav'; nav.setAttribute('aria-hidden', 'true'); nav.setAttribute('data-bc-proprio', '');
+    var trilho = telas.length > 18;
+    if (trilho) { nav.className = 'bc-trilho'; nav.appendChild(D.createElement('b')); }
+    else telas.forEach(function () { nav.appendChild(D.createElement('i')); });
+    D.body.appendChild(nav);
+    var atual = -1;
+    function marcar() {
+      var meio = W.innerHeight * 0.42, idx = 0;
+      for (var i = 0; i < telas.length; i++) { if (telas[i].getBoundingClientRect().top <= meio) idx = i; }
+      if (idx === atual) return; atual = idx;
+      if (trilho) nav.firstChild.style.height = Math.round(((idx + 1) / telas.length) * 100) + '%';
+      else arr(nav.children).forEach(function (d, i) { d.className = i === idx ? 'bc-agora' : ''; });
+    }
+    var parado = null;
+    W.addEventListener('scroll', function () { marcar(); nav.classList.add('bc-rolando'); clearTimeout(parado); parado = setTimeout(function () { nav.classList.remove('bc-rolando'); }, 1400); }, { passive: true });
+    marcar();
+  }
+
+  // botão "Roteiro" do modo apresentador: no celular sai do canto fixo (cobriria o texto) e vai para o fim da página
+  function roteiroNoFim(telas) {
+    var b = D.getElementById('botao-roteiro'); if (!b || !telas.length) return;
+    var ult = telas[telas.length - 1];
+    var box = D.createElement('div'); box.className = 'bc-rodape'; box.setAttribute('data-bc-proprio', '');
+    ult.parentElement.insertBefore(box, ult.nextSibling);
+    box.appendChild(b);
+    b.removeAttribute('data-bc-cromo');
+    ['position', 'top', 'right', 'left', 'bottom', 'opacity', 'z-index'].forEach(function (k) { b.style.removeProperty(k); });
+  }
+
+  // o deck não pode mais passar tela por gesto, roda ou tecla no celular: a página rola
+  function travarGestosDoDeck() {
+    ['touchstart', 'touchmove', 'touchend', 'wheel', 'keydown', 'pointerdown', 'pointermove', 'pointerup', 'mousemove'].forEach(function (ev) {
+      W.addEventListener(ev, function (e) {
+        if (!H.classList.contains('bc-cel')) return;
+        if (ev === 'keydown' && !/^(Arrow|Page|Home|End| |Spacebar)/.test(e.key || '')) return;
+        if (/^pointer/.test(ev) && e.target && e.target.closest && e.target.closest('a,button,input,select,textarea,[role=button],[onclick]')) return;
+        e.stopImmediatePropagation();
+      }, { capture: true, passive: true });
+    });
+  }
+
+  function manterTelasAtivas(telas, ativa) {
+    if (!ativa || !W.MutationObserver) return;
+    var mo = new MutationObserver(function () { telas.forEach(function (t) { if (!t.classList.contains(ativa)) t.classList.add(ativa); }); });
+    telas.forEach(function (t) { mo.observe(t, { attributes: true, attributeFilter: ['class'] }); });
+  }
+
+  // página responsiva (one-pager sem telas): não redesenha, só tira o que vaza para o lado
+  function consertarPagina() {
+    var largo = function () { return Math.max(H.scrollWidth, D.body.scrollWidth) > largura() + 1; };
+    if (!largo()) return;
+    // 1) mídia nunca mais larga que a tela
+    arr(D.body.querySelectorAll('img, video, iframe, canvas, svg, table, pre')).forEach(function (el) { var r = el.getBoundingClientRect(); if (r.right > largura() + 1 && !/fixed/.test(cs(el).position)) { imp(el, 'max-width', '100%'); if (el.tagName !== 'TABLE' && el.tagName !== 'PRE') imp(el, 'height', 'auto'); } });
+    // 2) sobra pequena (até 24 px, sombra ou borda): corta na página; maior que isso fica para a conferência apontar
+    if (largo() && Math.max(H.scrollWidth, D.body.scrollWidth) - largura() <= 24) { imp(H, 'overflow-x', 'hidden'); imp(D.body, 'overflow-x', 'hidden'); }
+  }
+
+  var feito = false;
+  function iniciar() {
+    if (feito || !D.body) return;
+    if (!querCelular()) return;
+    var telas = acharTelas();
+    if (!telas.length) { if (!H.hasAttribute('data-bc-pronto')) H.setAttribute('data-bc-pronto', '0'); consertarPagina(); return; }
+    feito = true;
+    try {
+      telas.forEach(function (t, i) {
+        t.setAttribute('data-bc-tela', String(i + 1));
+        for (var p = t.parentElement; p && p !== D.body && p !== H; p = p.parentElement) p.setAttribute('data-bc-palco', '');
+      });
+      var ativa = classeAtiva(telas);
+      // lê o desenho com todas as telas abertas e sem animação
+      var trava = D.createElement('style'); trava.textContent = '*,*::before,*::after{transition:none!important;animation-play-state:paused!important}';
+      D.head.appendChild(trava);
+      telas.forEach(function (t) { if (ativa) t.classList.add(ativa); });
+      void D.body.offsetHeight;
+      var fundos = analisar(telas, ativa);
+      var logos = logosDaCapa(cabecalhosDasTelas(telas).concat(cromo(telas)));
+      aplicar(telas, ativa, fundos, logos);
+      trava.remove();
+      travarGestosDoDeck();
+      manterTelasAtivas(telas, ativa);
+      navegacao(telas);
+      roteiroNoFim(telas);
+      acabamento(telas);
+      W.addEventListener('load', function () { acabamento(telas); });
+      if (D.fonts && D.fonts.ready) D.fonts.ready.then(function () { acabamento(telas); });
+      setTimeout(function () { acabamento(telas); }, 1600);
+      setTimeout(function () { acabamento(telas); W.scrollTo(0, 0); }, 3200);
+      H.setAttribute('data-bc-pronto', String(telas.length));
+    } catch (e) {
+      // qualquer falha: volta ao deck original, sem a base
+      H.classList.remove('bc-cel');
+      H.setAttribute('data-bc-erro', String(e && e.message || e).slice(0, 160));
+    }
+  }
+
+  // troca de tamanho que cruza o limite: recarrega (desfazer o desenho do celular não vale o risco)
+  var larguraInicial = largura(), estadoInicial = null;
+  W.addEventListener('resize', function () {
+    if (Math.abs(largura() - larguraInicial) < 40) return;
+    clearTimeout(W.__bcRz);
+    W.__bcRz = setTimeout(function () { var agora = largura() < 900; if (estadoInicial !== null && agora !== estadoInicial && !FORCAR) location.reload(); }, 350);
+  });
+  function comecar() { estadoInicial = largura() < 900; iniciar(); }
+  if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', comecar); else comecar();
+  W.addEventListener('load', function () { setTimeout(iniciar, 60); });
+  setTimeout(iniciar, 900);
+})();
+</script>
+</body>
+</html>
