@@ -275,6 +275,17 @@ body.k-hov.k-rot #k-cur span{opacity:1}
 .k-peca-benef span{font-size:14px;line-height:1.4}
 
 /* conceito explicado (One Shot, On Timing, Códice, ClickLab...): o que é, como funciona e benefício, com fluxo de ícones */
+/* 11. solução em cartões (deck enxuto, 20/10/2026) */
+.k-solucao{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:26px;margin-top:34px}
+.k-sol-peca{display:flex;flex-direction:column;gap:12px;min-width:0}
+.k-sol-peca figure{position:relative;margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--k-papel-2)}
+.k-sol-peca figure>img[data-img="cena"]{display:block;width:100%;height:100%;object-fit:cover}
+.k-sol-peca .k-sol-recorte{position:absolute;right:12px;bottom:12px;width:26%;aspect-ratio:1;object-fit:contain;background:#fff;padding:8px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.k-resolve{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;background:var(--k-marca);color:var(--k-marca-txt);font:700 13px/1 'Space Mono',monospace;text-transform:uppercase;letter-spacing:.04em}
+.k-resolve svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.k-sol-peca h3{margin:4px 0 0;font-size:28px;line-height:1.05}
+.k-sol-peca p{margin:0;font-size:18px;line-height:1.4;opacity:.85}
+@media (max-width:820px){.k-solucao{grid-template-columns:1fr}}
 .k-conceito{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .k-conceito>div{padding:22px 22px 24px;border-top:4px solid var(--k-marca-2)}
 .k-escuro .k-conceito>div{border-top-color:var(--k-marca)}
@@ -845,6 +856,20 @@ body.mob .n4 .vpan .num{font-size:110px}body.mob .n4 .vpan p{font-size:19px}
 
 </style>
 <style id="v11fix">@media (min-width:901px){#k-ind,#k-ant,#k-prox{display:none!important}#nav{display:flex!important;flex-direction:column;left:auto;right:8px;top:50%;bottom:auto;transform:translateY(-50%);border-radius:22px;padding:8px 6px;gap:6px}#nav .rt{display:none}}.s9 .fonte,.s12 .fonte{display:none}</style>
+<style id="v13">
+/* v13: acabamento visual (elementos duplicados removidos, cursor nas cores da Petz) */
+@media (min-width:901px){
+ #k-topo,#k-pe,.k-ui,#k-prog,#k-grao,#k-cineT,#k-cineB,#k-varre,#k-cur,#k-dot{display:none!important}
+ #botao-roteiro,#painel-roteiro{display:none!important}
+ #nav{display:flex!important;flex-direction:row;left:50%;right:auto;top:12px;bottom:auto;transform:translateX(-50%);border-radius:30px;padding:2px 8px;gap:4px;z-index:70}
+ #nav .rt{display:block!important}
+}
+@media (min-width:901px){.n3 .k-titulo,.n4 .k-titulo,.n7 .k-titulo,.n11 .k-titulo{font-size:58px!important;line-height:1.05!important}
+ #nav{top:58px!important;right:16px!important;left:auto!important;transform:none!important;padding:0 6px!important}}
+#cur{width:14px;height:14px;background:#FFC62B;border:2px solid #123F6D;box-shadow:0 0 0 2px #fff}
+#cur2{border:3px solid #175EA8;box-shadow:0 0 0 2px rgba(255,255,255,.92)}
+#cur2.z{background:#FFC62B;border-color:#123F6D;color:#0E1B2B}
+</style>
 </head>
 <body>
 <div id="pg"></div>
